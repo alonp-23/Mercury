@@ -1,5 +1,6 @@
 <template>
   <div class="login-wrap">
+      <div class = "hr topLogo"></div>
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
@@ -46,7 +47,7 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:700px;
+	max-width:650px;
 	min-height:800px;
 	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.30),0 17px 50px 0 rgba(0,0,0,.40);
@@ -180,6 +181,14 @@ a{color:inherit;text-decoration:none}
 	height:2px;
 	margin:60px 0 50px 0;
 	background:rgba(255,255,255,.2);
+}
+
+.topLogo{
+    width: 100px;
+    height: 100px;
+	text-align:center;
+    background:url(../assets/Logo.png) no-repeat center;
+    background-size: contain;
 }
 .foot-lnk{
     width: 100%;
