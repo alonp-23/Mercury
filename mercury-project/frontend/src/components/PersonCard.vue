@@ -2,7 +2,7 @@
     <md-list-item>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <md-avatar>
-          <img src={{prson.img}} alt="People">
+          <img :src="prson.img" alt="People">
         </md-avatar>
 
         <div class="md-list-item-text">
@@ -18,6 +18,7 @@
 
 <script>
 export default {
+    name: 'PersonCard',
     props: {
     person: {
       type: Object,
