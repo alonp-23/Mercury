@@ -1,6 +1,5 @@
 <template>
 <div>
-    <h1>hi</h1>
      <v-card max-width="500" class="mx-auto">
     <v-toolbar color="indigo" dark>
       <v-toolbar-title>ציר מודיעיני</v-toolbar-title>
