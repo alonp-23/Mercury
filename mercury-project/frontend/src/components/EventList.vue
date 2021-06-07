@@ -133,7 +133,7 @@ export default {
               eventTime: '12:34',
               criminalName: 'רוני דניאל',
               eventType: 'גניבה',
-              description: 'גנב רכב שחנה מחוץ לביתו'
+              description: 'גנב רכב שחנה מחוץ לביתו',
               lat: '',
               long: ''
               },
@@ -142,14 +142,18 @@ export default {
               eventTime: '12:37',
               criminalName: 'ארנולד וייס',
               eventType: 'רצח',
-              description: 'רצח אדם שתפס את חנייתו'              
+              description: 'רצח אדם שתפס את חנייתו' ,   
+              lat: '',
+              long: ''          
               },
               {
               eventId: 3,               
               eventTime: '12:34',
               criminalName: 'אנה לוי',
               eventType: 'שוחד',
-              description: 'ניסתה לשחד שופט כשנשפט על העלמת מס'              
+              description: 'ניסתה לשחד שופט כשנשפט על העלמת מס',     
+              lat: '',
+              long: ''       
               },
           ],
           filteredEvents: null,
