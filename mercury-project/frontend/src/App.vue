@@ -1,0 +1,28 @@
+<template>
+<<<<<<< HEAD
+  <v-app>
+    <Home></Home>
+  </v-app>
+</template>
+
+<script>
+import Home from './views/Home'
+
+export default {
+  name: 'App',
+  components: {
+    Home
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
+=======
+    <router-view/>
+</template>
+
+<style scoped>
+</style>
+>>>>>>> origin
