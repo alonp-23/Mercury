@@ -4,8 +4,8 @@
         v-model="date1"
         :events="arrayEvents"
         event-color="green lighten-1"
-      ></v-date-picker></div>
-    
+      ></v-date-picker>
+</div>    
 </template>
 
 <script>
@@ -18,24 +18,25 @@ export default {
       date1: new Date().toISOString().substr(0, 10),
     }),
 
-    // mounted () {
-    //    var holidaysILArr = holidaysIL.map((holiday) => {
-    //        console.log(holiday.date)
-    //        holiday.date;
-    //    })
-    //    this.arrayEvents = holidaysILArr.toISOString().substr(0, 10)
-    // },
+    mounted () {
+       this.arrayEvents = holidaysIL.map(holiday => {
+            var date = new Date(holiday.date);
+            date.setDate(date.getDate() + 1);
+            return date.toISOString().substr(0, 10);
+       })
+        console.log(holidaysILArr)
+    
+    },
 
-    // methods: {
-    //   functionEvents (date) {
-    //     const [,, day] = date.split('-')
-    //     if ([12, 17, 28].includes(parseInt(day, 10))) return true
-    //     if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
-    //     return false
-    //   },
-    // },
+    methods: {
+      functionEvents (date) {
+        const [,, day] = date.split('-')
+        if ([12, 17, 28].includes(parseInt(day, 10))) return true
+        if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
+        return false
+      },
+    },
 
-   
 }
 </script>
 <style >
