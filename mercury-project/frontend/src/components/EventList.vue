@@ -38,64 +38,91 @@
       <v-list-item 
       class="event-in-list" 
       v-for="(event, index) in events" 
-      :key="event.title"
+      :key="event.eventId"
       :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}"
-      @click.stop="dialog=true">
+      @click.stop="openDialog(event.description)">
         <v-list-item-content>
         <v-container>
             <v-row>  
 
               <v-col>
-              <v-list-item-title  class="white--text">{{event.title}}</v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{event.subtitle}}</v-list-item-subtitle>
+              <v-list-item-title  class="white--text">{{event.eventType}}</v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{event.criminalName}}</v-list-item-subtitle>
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text">{{event.time}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text">{{event.eventTime}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
         </v-container>
+
+<!---------- DIALOG ---------->
+        <div class="text-center">
+          <v-dialog
+            v-model="dialog.showDialog"
+            width="400"
+            >
+
+            <v-card>
+              <v-card-title class="text-t1 grey lighten-2">
+                מידע נוסף על האירוע
+              </v-card-title>
+              <v-card-text class="text-subtitle-1 mt-5">
+                {{ dialog.content }}
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </div>
+
         </v-list-item-content>
+
       </v-list-item>
       </v-list-item-group>
     </v-list>
-
-    <EventInfoDialog v-model="dialog"></EventInfoDialog>
   </v-card>
 </template>
     
 <script>
-import EventInfoDialog from './EventInfoDialog'
 export default {
   name: 'EventList',
-  components: {
-    EventInfoDialog
-  },
   data() {
       return {
           events: [
               {
-              time: '12:34',
-              subtitle: 'שם העבריין',
-              title: 'שם האירוע',
+              eventId: 1,
+              eventTime: '12:34',
+              criminalName: 'רוני דניאל',
+              eventType: 'גניבה',
+              description: 'גנב רכב שחנה מחוץ לביתו'
               },
               {
-                  time: '12:34',
-              subtitle: 'שם העבריין',
-              title: 'שם האירוע',
+              eventId: 2,
+              eventTime: '12:37',
+              criminalName: 'ארנולד וייס',
+              eventType: 'רצח',
+              description: 'רצח אדם שתפס את חנייתו'              
               },
               {
-                  time: '12:34',
-              subtitle: 'שם העבריין',
-              title: 'שם האירוע',
+              eventId: 3,               
+              eventTime: '12:34',
+              criminalName: 'אנה לוי',
+              eventType: 'שוחד',
+              description: 'ניסתה לשחד שופט כשנשפט על העלמת מס'              
               },
           ],
-          dialog: true
+          dialog: {
+            showDialog: false,
+            content: ''
+          }
       }
         //TODO: CALIBARI WHITE TEXT
   },
   methods: {
+    openDialog(description) {
+      this.dialog.showDialog = true,
+      this.dialog.content = description
+    }
   }
 }
 </script>
