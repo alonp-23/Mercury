@@ -12,22 +12,19 @@
         <v-column class="mr-15">
            <v-btn
               icon
-              color="white"
-            >
+              color="white">
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
              <v-btn
               icon
-              color="white"
-            >
+              color="white">
               <v-icon>mdi-calendar-month</v-icon>
             </v-btn>
 
              <v-btn
               icon
-              color="white"
-            >
+              color="white">
               <v-icon>mdi-filter</v-icon>
             </v-btn>
       </v-column>
@@ -37,62 +34,70 @@
     </v-toolbar>
 
     <v-list two-line>
-
       <v-list-item-group>
       <v-list-item 
       class="event-in-list" 
       v-for="(event, index) in events" 
       :key="event.title"
-      :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}">
+      :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}"
+      @click.stop="dialog=true">
         <v-list-item-content>
         <v-container>
-            <v-row>   
-           <v-col>
-          <v-list-item-title  class="white--text">{{event.title}}</v-list-item-title>
-          <v-list-item-subtitle class="white--text">{{event.subtitle}}</v-list-item-subtitle>
-          </v-col>
-          <v-col>
-              <v-list-item-subtitle class="white--text">{{event.time}}</v-list-item-subtitle>
-            </v-col>
+            <v-row>  
+
+              <v-col>
+              <v-list-item-title  class="white--text">{{event.title}}</v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{event.subtitle}}</v-list-item-subtitle>
+              </v-col>
+
+              <v-col>
+                <v-list-item-subtitle class="white--text">{{event.time}}</v-list-item-subtitle>
+              </v-col>
+
             </v-row>
         </v-container>
         </v-list-item-content>
       </v-list-item>
       </v-list-item-group>
-
     </v-list>
+
+    <EventInfoDialog v-model="dialog"></EventInfoDialog>
   </v-card>
 </template>
     
 <script>
+import EventInfoDialog from './EventInfoDialog'
 export default {
   name: 'EventList',
-  props: {
+  components: {
+    EventInfoDialog
   },
-    data() {
-        return {
-            events: [
-                {
-                time: '12:34',
-                subtitle: 'שם העבריין',
-                title: 'שם האירוע',
-                },
-                {
-                    time: '12:34',
-                subtitle: 'שם העבריין',
-                title: 'שם האירוע',
-                },
-                {
-                    time: '12:34',
-                subtitle: 'שם העבריין',
-                title: 'שם האירוע',
-                },
-            ]
-        }
-
+  data() {
+      return {
+          events: [
+              {
+              time: '12:34',
+              subtitle: 'שם העבריין',
+              title: 'שם האירוע',
+              },
+              {
+                  time: '12:34',
+              subtitle: 'שם העבריין',
+              title: 'שם האירוע',
+              },
+              {
+                  time: '12:34',
+              subtitle: 'שם העבריין',
+              title: 'שם האירוע',
+              },
+          ],
+          dialog: true
+      }
         //TODO: CALIBARI WHITE TEXT
-    }
+  },
+  methods: {
   }
+}
 </script>
 
 <style scoped>
