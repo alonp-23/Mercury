@@ -10,13 +10,13 @@
       </v-column>
 
         <v-column class="mr-15">
-           <v-btn
+           <v-btn disabled
               icon
               color="white">
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
-             <v-btn
+             <v-btn disabled
               icon
               color="white">
               <v-icon>mdi-calendar-month</v-icon>
@@ -24,9 +24,47 @@
 
              <v-btn
               icon
-              color="white">
+              color="white"
+              @click.stop="openFilterDialog('type')">
               <v-icon>mdi-filter</v-icon>
             </v-btn>
+
+            <!---------- FILTER DIALOG ---------->
+        <div class="text-center">
+          <v-dialog
+            v-model="filterDialog.showDialog"
+            width="400"
+            >
+
+            <v-card>
+              <v-card-title class="text-t1 grey lighten-2">
+                סינון אירועים
+              </v-card-title>
+
+              <v-select
+                v-model="filterDialog.selectedItem"
+                :items="filterDialog.filterItems"
+                filled
+                return-object
+                single-line
+                label="סוגי אירועים"
+              ></v-select>
+
+            <v-card-actions>
+                  <v-btn
+                    class="ml-2 mt-5"
+                    outlined
+                    rounded
+                    small
+                    @click="filterEvents('type')"
+                  >
+                    סנן
+                  </v-btn>
+            </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+
       </v-column>
 
       </v-row>
@@ -37,9 +75,9 @@
       <v-list-item-group>
       <v-list-item 
       class="event-in-list" 
-      v-for="(event, index) in events" 
+      v-for="(event, index) in filteredEvents" 
       :key="event.eventId"
-      :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}"
+      :class="{ 'light-color': (index % 2 === 0), 'dark-color': (index % 2 !== 0)}"
       @click.stop="openDialog(event.description)">
         <v-list-item-content>
         <v-container>
@@ -88,6 +126,7 @@ export default {
   name: 'EventList',
   data() {
       return {
+          eventTypes: ['הכל','גניבה','רצח','שוחד'],
           events: [
               {
               eventId: 1,
@@ -111,17 +150,47 @@ export default {
               description: 'ניסתה לשחד שופט כשנשפט על העלמת מס'              
               },
           ],
+          filteredEvents: null,
           dialog: {
             showDialog: false,
             content: ''
-          }
+          },
+          filterDialog: {
+            showDialog: false,
+            filterItems: [],
+            selectedItem: null
+          },
       }
         //TODO: CALIBARI WHITE TEXT
   },
+  mounted() {
+    this.filteredEvents = this.events;
+  },
+  computed: {
+    // filteredEvents() {
+    //   return this.events;
+    // }
+  },
   methods: {
+    openFilterDialog(filterBy) {
+      this.filterDialog.showDialog = true
+      if(filterBy === 'type') {
+        this.filterDialog.filterItems = this.eventTypes
+      }
+    },
     openDialog(description) {
       this.dialog.showDialog = true,
       this.dialog.content = description
+    },
+    filterEvents(filterBy) {
+      this.filterDialog.showDialog = false
+      if(filterBy === 'type') {
+        if(this.filterDialog.selectedItem === 'הכל') {
+          this.filteredEvents = this.events
+        } else {
+          this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem)
+        }
+      }
     }
   }
 }
@@ -137,11 +206,11 @@ v-toolbar {
     padding: 0;
 }
 
-.dark-blue {
-    background-color: #001a33;
+.dark-color {
+    background-color: #141d33	;
 }
 
-.light-blue {
-    background-color: #00264d;
+.light-color {
+    background-color:#1d2b4b
 }
 </style>
