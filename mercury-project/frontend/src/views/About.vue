@@ -1,16 +1,17 @@
 <template>
   <div class="about">
-    <InteList/>
+    
+    <pieChartCard :suspects="21" wanted="21"/>
   </div>
 </template>
 
 <script>
-import InteList from '@/components/InteList.vue';
+import pieChartCard from '@/components/pieChartCard.vue';
 
 export default {
   name: 'Home',
   components: {
-    InteList,
+    pieChartCard
   },
 };
 </script>
