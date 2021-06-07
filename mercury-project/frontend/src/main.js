@@ -11,7 +11,10 @@ Vue.use(Vuetify)
 const opts = {}
 
 export default new Vuetify(opts)
+import Chartkick from 'vue-chartkick'
+import {Chart} from 'chart.js'
 
+Vue.use(Chartkick.use(Chart))
 Vue.config.productionTip = false;
 
 new Vue({
