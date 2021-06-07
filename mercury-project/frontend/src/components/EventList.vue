@@ -47,7 +47,7 @@
                 :items="filterDialog.filterItems"
                 filled
                 return-object
-                label="סוגי אירועים"
+                label="ערך מבוקש"
               ></v-select>
 
             <v-card-actions>
@@ -75,21 +75,21 @@
       <v-list-item-group>
       <v-list-item 
       class="event-in-list" 
-      v-for="(event, index) in filteredEvents" 
-      :key="event.eventId"
+      v-for="(eventItem, index) in filteredEvents" 
+      :key="eventItem.eventId"
       :class="{ 'light-color': (index % 2 === 0), 'dark-color': (index % 2 !== 0)}"
-      @click.stop="openDialog(event.description)">
+      @click.stop="openDialog(eventItem)">
         <v-list-item-content>
         <v-container>
             <v-row>  
 
               <v-col>
-              <v-list-item-title  class="white--text">{{event.eventType}}</v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{event.criminalName}}</v-list-item-subtitle>
+              <v-list-item-title  class="white--text">{{eventItem.eventType}}</v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{eventItem.criminalName}}</v-list-item-subtitle>
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text">{{event.eventTime}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text">{{eventItem.eventTime}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
@@ -103,12 +103,14 @@
 
             <v-card>
               <v-card-title class="text-t1 grey lighten-2">
-                מידע נוסף על האירוע
+                פירוט האירוע
               </v-card-title>
-              <v-card-text class="text-subtitle-1 mt-5">
-                {{ dialog.content }}
+              <v-card-text class="text-h6 font-weight-bold mt-5">
+                {{ dialog.content.eventType}} ב{{ dialog.content.eventCounty}}
               </v-card-text>
-              <iframe src="http://map3-service-tmzmap3.apps.openforce.openforce.biz/#/brain"></iframe>
+              <v-card-text class="text-subtitle-1 mt-5">
+                {{ dialog.content.eventDescription }}
+              </v-card-text>
             </v-card>
           </v-dialog>
         </div>
@@ -144,7 +146,7 @@ export default {
                 eventTime: '12:37',
                 criminalName: 'ארנולד וייס',
                 eventType: 'רצח',
-                description: 'רצח אדם שתפס את חנייתו' ,
+                eventDescription: 'רצח אדם שתפס את חנייתו' ,
                 eventCounty: 'מנהטן',   
                 lat: '',
                 long: ''          
@@ -154,7 +156,7 @@ export default {
                 eventTime: '12:34',
                 criminalName: 'אנה לוי',
                 eventType: 'שוחד',
-                description: 'ניסתה לשחד שופט כשנשפט על העלמת מס',   
+                eventDescription: 'ניסתה לשחד שופט כשנשפט על העלמת מס',   
                 eventCounty: 'ברוקלין', 
                 lat: '',
                 long: ''
@@ -163,7 +165,13 @@ export default {
           filteredEvents: null,
           dialog: {
             showDialog: false,
-            content: ''
+            content: {
+              criminalName: '',
+              eventTime: '',
+              eventType: '',
+              eventDescription: '',
+              eventCounty: ''
+            }
           },
           filterDialog: {
             showDialog: false,
@@ -188,24 +196,24 @@ export default {
         break;
       }
     },
-    openDialog(description) {
+    openDialog(eventItem) {
       this.dialog.showDialog = true,
-      this.dialog.content = description
+      this.dialog.content.criminalName = eventItem.criminalName;
+      this.dialog.content.eventType = eventItem.eventType;
+      this.dialog.content.eventTime = eventItem.eventTime;
+      this.dialog.content.eventDescription = eventItem.eventDescription;
+      this.dialog.content.eventCounty = eventItem.eventCounty;
     },
     filterEvents(filterBy) {
       this.filterDialog.showDialog = false
-      if(filterBy === 'type') {
-        if(this.filterDialog.selectedItem === 'הכל') {
-          this.filteredEvents = this.events
-        } else {
-          this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem)
-        }
-      } else if(filterBy === 'county') {
-        if(this.filterDialog.selectedItem === 'הכל') {
-          this.filteredEvents = this.events
-        } else {
-          console.log(this.filterDialog.selectedItem)
-          this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem)
+      if(this.filterDialog.selectedItem === 'הכל') {
+        this.filteredEvents = this.events
+      } else {
+        switch(filterBy) {
+          case 'type': this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem)
+          break;
+          case 'county': this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem)
+          break;
         }
       }
     }
