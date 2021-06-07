@@ -1,15 +1,15 @@
 <template>
-  <Login/>
+  <Calendar/>
 </template>
 
 <script>
 // @ is an alias to /src
-import Login from '@/components/Login.vue';
+import Calendar from '@/components/Calendar.vue';
 
 export default {
   name: 'Home',
   components: {
-    Login,
+    Calendar,
   },
 };
 </script>
