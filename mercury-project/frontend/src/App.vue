@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <v-app>
     <Home></Home>
   </v-app>
@@ -13,16 +12,10 @@ export default {
   components: {
     Home
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>
-=======
     <router-view/>
 </template>
 
 <style scoped>
 </style>
->>>>>>> origin
