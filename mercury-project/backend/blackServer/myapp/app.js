@@ -112,12 +112,33 @@ app.listen(port, () => {
           console.log(error);
       });  
     }
+  
+    
+    const sendData = () => {
+      var weatherJson = require('./weather');
+      var holidaysILJson = require('./holidaysIL');
+      var holidaysUSJson = require('./holidaysUS');
+      var holidaysJOJson = require('./holidaysJO');
 
+      axios({
+        method: 'post',
+        url: '19.0.0.4/',
+        data: weatherJson
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
 
   setInterval((weather), 4000);
   setInterval((holidaysIL), 4000);
   setInterval((holidaysUS), 4000);
   setInterval((holidaysJO), 4000);
+  setInterval((sendData), 5000);
+
+
+
+    
 
 })
 
