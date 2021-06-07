@@ -40,17 +40,16 @@
       </template>
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          מידע נוסף
+          {{full_name(person.first_name,person.last_name)}}
         </v-card-title>
 
         <v-img 
-        contain
+            contain
             :src="avatar(person)"
-            height="150" />
-          
+            max-height="150" 
+            class="ma-3"/>          
 
-        <v-card-text>
-          שם: {{full_name(person.first_name,person.last_name)}} <br>
+        <v-card-text>          
           תעודת זהות: {{person.id}} <br>
           כתובת: {{person.address}} <br>
           טלפון: {{person.phone_number}}
@@ -86,7 +85,7 @@ export default {
   data: ()=> {
     return {
       pplOfIntrest: [{first_name: "ישראל", last_name:"ישראלי", id: 456346, 
-      person_img_url: "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg", 
+      person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
       is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
       {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
       is_wanted: true, phone_number:1234567, address:"דרדר 51, מצפה נשר"}],
