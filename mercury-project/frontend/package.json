@@ -13,16 +13,10 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "vue-material": "^1.0.0-beta-15",
-=======
-=======
     "vue-material": "^1.0.0-beta-15",
->>>>>>> 6033b8a33227e021b9da72d6cdcbd63ff55daab4
     "vue-chartjs": "^3.5.1",
     "vue-chartkick": "^0.6.1",
->>>>>>> origin
     "vue-router": "^3.2.0",
     "vuetify": "^2.5.3",
     "vuex": "^3.4.0"
@@ -33,7 +27,6 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
-<<<<<<< HEAD
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-vue": "^7.10.0",
@@ -42,9 +35,7 @@
     "vue-cli-plugin-vuetify": "~2.4.1",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
-=======
     "vue-template-compiler": "^2.6.11"
->>>>>>> origin
   },
   "eslintConfig": {
     "root": true,
