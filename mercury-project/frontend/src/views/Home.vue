@@ -1,5 +1,6 @@
 <template>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <EventList></EventList>
 </template>
 
@@ -14,6 +15,9 @@
     },
   }
 =======
+=======
+
+>>>>>>> 6033b8a33227e021b9da72d6cdcbd63ff55daab4
   <Login></Login>
 </template>
 

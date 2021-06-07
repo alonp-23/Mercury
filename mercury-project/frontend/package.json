@@ -14,8 +14,12 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "vue-material": "^1.0.0-beta-15",
 =======
+=======
+    "vue-material": "^1.0.0-beta-15",
+>>>>>>> 6033b8a33227e021b9da72d6cdcbd63ff55daab4
     "vue-chartjs": "^3.5.1",
     "vue-chartkick": "^0.6.1",
 >>>>>>> origin
