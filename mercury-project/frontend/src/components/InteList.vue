@@ -20,12 +20,12 @@
       :height=height
     >
       <template v-slot:default="{ item }">
-        <v-list-item>
+        <v-list-item id="list_item">
           <v-list-item-avatar>
                 <v-img :src="avatar(item)"></v-img>
             </v-list-item-avatar>
 
-          <v-list-item-content>
+          <v-list-item-content >
                 <v-list-item-title v-text="full_name(item.first_name,item.last_name)" ></v-list-item-title>
                 <v-list-item-subtitle v-text="item.id"></v-list-item-subtitle>
             </v-list-item-content>
@@ -117,7 +117,8 @@ export default {
 };
 </script>
 <style >
-div{
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-}
+    div{
+        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;    
+    }
+    
 </style>
