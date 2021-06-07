@@ -42,7 +42,7 @@ export default {
 	methods: {
 		requestLogin(){
 			console.log('request login with: ' + this.username +" | "+ this.password);
-			axios.post('http://localhost:1337/users/login', {
+			axios.post('http://backend-tmzde3.apps.openforce.openforce.biz/users/login', {
 				username: this.username,
 				password: this.password
 			},{'Content-Type': 'application/json;charset=UTF-8',
