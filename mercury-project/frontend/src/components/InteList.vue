@@ -6,8 +6,15 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-list>
+        <v-chip class="mr-2" @click="show_wanted = false" label> 
+                   
+        חשודים
+        </v-chip>
+        <v-chip class="mr-2" @click="show_wanted = true" label>
+        מבוקשים
+        </v-chip>      
       <v-list-item
-        v-for="person in pplOfIntrest"
+        v-for="person in pplList"
         :key="person.name"
       >
       <v-list-item-avatar>
@@ -25,7 +32,7 @@
           v-bind="attrs"
           v-on="on">
           <v-btn icon>
-            <v-icon color="grey lighten-1" >mdi-information</v-icon>
+            <v-icon color="grey lighten-1" >mdi-arrow-left</v-icon>
           </v-btn>
         </v-list-item-action>
       </template>
@@ -35,7 +42,7 @@
         </v-card-title>
 
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          מידע נוסף
         </v-card-text>
 
         <v-divider></v-divider>
@@ -63,13 +70,20 @@
 </template>
 
 <script>
+import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
 export default {
   name: 'InteList',
-  data: function () {
+  data: ()=> {
     return {
       pplOfIntrest: [{name: "ישראל ישראלי" , id: 456346, avatar: "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg", is_wanted: false},
-      {name: "שאול שאולה" , id: 3452345, avatar: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", is_wanted: false}],
+      {name: "שאול שאולה" , id: 3452345, avatar: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", is_wanted: true}],
       dialog: false,
+      show_wanted:false
+    }
+  },
+  computed: {    
+    pplList: function () {
+      return this.pplOfIntrest.filter(person=> person.is_wanted && this.show_wanted || !person.is_wanted && !this.show_wanted)
     }
   }
 };
