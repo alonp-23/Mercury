@@ -9,6 +9,11 @@
 import BarChart from '@/components/BarChart'
 
 export default {
+	name: 'BarPage',
+	data() {
+		return {
+		};
+	},
   components: {
     BarChart
   }
