@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <v-app>
     <Home></Home>
   </v-app>
@@ -18,3 +19,10 @@ export default {
   }),
 };
 </script>
+=======
+    <router-view/>
+</template>
+
+<style scoped>
+</style>
+>>>>>>> origin

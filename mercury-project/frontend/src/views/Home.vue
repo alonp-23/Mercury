@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <EventList></EventList>
 </template>
 
@@ -12,4 +13,23 @@
       EventList,
     },
   }
+=======
+  <Login></Login>
+</template>
+
+<script>
+// @ is an alias to /src
+import Login from '@/components/Login.vue';
+
+export default {
+  name: 'Home',
+  components: {
+    Login,
+  },
+};
+>>>>>>> origin
 </script>
+
+<style>
+
+</style>
