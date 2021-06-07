@@ -1,15 +1,20 @@
 <template>
-  <hello-world />
+
+  <Login></Login>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+// @ is an alias to /src
+import Login from '@/components/Login.vue';
 
-  export default {
-    name: 'Home',
-
-    components: {
-      HelloWorld,
-    },
-  }
+export default {
+  name: 'Home',
+  components: {
+    Login,
+  },
+};
 </script>
+
+<style>
+
+</style>

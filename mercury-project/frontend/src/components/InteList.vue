@@ -16,10 +16,11 @@
         </v-chip>  
     <v-virtual-scroll
       :items="pplList"
-      :item-height="50"
+      :item-height="50"      
       :height=height
+      id = "scroll"
     >
-      <template v-slot:default="{ item }">
+      <template v-slot:default="{ item }">          
         <v-list-item id="list_item" class="rounded-xl ma4" >
           <v-list-item-avatar>
                 <v-img :src="avatar(item)"></v-img>
@@ -127,10 +128,12 @@ export default {
         background-color: #f2f2f2
     }
     #list_item{
-        background-color: #141d33;  
-        margin: 4px              
+        background-color: #141d33;                   
     }
     #item_content{
-        color:white
+        color:white;
+    }
+    #scroll{
+        margin: 6px;
     }
 </style>
