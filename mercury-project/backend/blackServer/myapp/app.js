@@ -1,41 +1,125 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express')
+const app = express()
+const axios = require('axios');
+var fs = require('fs');
+const port = 4000
+app.set('port', port);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var app = express();
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  const weather = () => {
+    axios.get('https://api.tomorrow.io/v4/timelines?location=40.730610,-73.935242&fields=temperature&timesteps=1d&units=metric&apikey=c3u0Q33n6HGtev3zLW70APcW8P2U9DNZ')
+    .then(response => {
+        var dictstring = JSON.stringify(response.data);
+        fs.writeFile("weather.json", dictstring, function(err, result) {
+            if(err) {
+                console.log('error', err);
+            } else {
+                var jsonObj = fs.readFileSync('weather.json');
+                var jsonParse = JSON.parse(jsonObj);
+                var intervals = jsonParse.data.timelines[0].intervals;
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+                var weatherStr = intervals.map(interval => {
+                    return {
+                        startTime: interval.startTime,
+                        temperature: interval.values.temperature
+                    }
+                })
+                fs.writeFile("weather.json", JSON.stringify(weatherStr), err => {
+                        if(err) {
+                            console.log('error', err);
+                        }    
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+                    }) 
+            }
+        })
+    })
+    .catch(error => {
+        console.log(error);
+    });
+  }
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  const holidaysIL = () => {
+    axios.get('https://holidays.abstractapi.com/v1/?api_key=69a12df0be914759ab35f98b46c65e41&country=IL&year=2020')
+      .then(response => {
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+          var data = response.data;
+          var holidaysIL = data.map(obj => {
+              return {
+                  name: obj.name,
+                  date: obj.date
+              }
+          })
+          fs.writeFile("holidaysIL.json", JSON.stringify(holidaysIL), err => {
+              if (err) {
+                  console.log('error', err);
+              }
+
+          })
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  }
+  
+
+  const holidaysUS = () => {
+    axios.get('https://holidays.abstractapi.com/v1/?api_key=69a12df0be914759ab35f98b46c65e41&country=US&year=2020')
+      .then(response => {
+
+          var data = response.data;
+          var holidaysUS = data.map(obj => {
+              return {
+                  name: obj.name,
+                  date: obj.date
+              }
+          })
+          fs.writeFile("holidaysUS.json", JSON.stringify(holidaysUS), err => {
+              if (err) {
+                  console.log('error', err);
+              }
+
+          })
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  }
+
+  
+  const holidaysJO = () => {
+    axios.get('https://holidays.abstractapi.com/v1/?api_key=69a12df0be914759ab35f98b46c65e41&country=JO&year=2020')
+      .then(response => {
+
+          var data = response.data;
+          var holidaysJO = data.map(obj => {
+              return {
+                  name: obj.name,
+                  date: obj.date
+              }
+          })
+          fs.writeFile("holidaysJO.json", JSON.stringify(holidaysJO), err => {
+              if (err) {
+                  console.log('error', err);
+              }
+
+          })
+      })
+      .catch(error => {
+          console.log(error);
+      });  
+    }
+
+
+  setInterval((weather), 4000);
+  setInterval((holidaysIL), 4000);
+  setInterval((holidaysUS), 4000);
+  setInterval((holidaysJO), 4000);
+
+})
+
 
 module.exports = app;
