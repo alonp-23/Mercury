@@ -1,91 +1,69 @@
 <template>
-  <v-card max-width="300" class="mx-auto">
+  <v-card max-width="300">
 
     <v-toolbar dark dense>
-        <v-spacer></v-spacer>
-      <v-toolbar-title>אירועים</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-container>
+        <v-row>
+
+      <v-column>
+      <v-toolbar-title class="mt-2">אירועים</v-toolbar-title>
+      </v-column>
+
+        <v-column class="mr-15">
+           <v-btn
+              icon
+              color="white"
+            >
+              <v-icon>mdi-map-marker</v-icon>
+            </v-btn>
+
+             <v-btn
+              icon
+              color="white"
+            >
+              <v-icon>mdi-calendar-month</v-icon>
+            </v-btn>
+
+             <v-btn
+              icon
+              color="white"
+            >
+              <v-icon>mdi-filter</v-icon>
+            </v-btn>
+      </v-column>
+
+      </v-row>
+      </v-container>
     </v-toolbar>
 
     <v-list two-line>
 
-      <v-list-item class="event-in-list" v-for="(event, index) in events" :key="event.title" :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}">
+      <v-list-item-group>
+      <v-list-item 
+      class="event-in-list" 
+      v-for="(event, index) in events" 
+      :key="event.title"
+      :class="{ 'light-blue': (index % 2 === 0), 'dark-blue': (index % 2 !== 0)}">
         <v-list-item-content>
         <v-container>
             <v-row>   
-          <v-col>
-              <v-list-item-subtitle v-text="event.time"></v-list-item-subtitle>
-            </v-col>
-            <v-col>
-          <v-list-item-title v-text="event.title"></v-list-item-title>
-          <v-list-item-subtitle v-text="event.subtitle"></v-list-item-subtitle>
+           <v-col>
+          <v-list-item-title  class="white--text">{{event.title}}</v-list-item-title>
+          <v-list-item-subtitle class="white--text">{{event.subtitle}}</v-list-item-subtitle>
           </v-col>
+          <v-col>
+              <v-list-item-subtitle class="white--text">{{event.time}}</v-list-item-subtitle>
+            </v-col>
             </v-row>
         </v-container>
-
         </v-list-item-content>
-
       </v-list-item>
+      </v-list-item-group>
 
     </v-list>
   </v-card>
 </template>
-        <!-- <div class="event-list-header md-layout">
-        <div class="event-list-filters md-layout-item">
-                <md-button class="md-icon-button md-accent">
-        <md-icon>date_range</md-icon>
-        </md-button>
-                    <md-button class="md-icon-button md-accent">
-        <md-icon>filter_alt</md-icon>
-        </md-button>
-            <md-button class="md-icon-button md-accent">
-        <md-icon>place</md-icon>
-        </md-button>
-        </div>
-        <span class="event-list-title md-headline md-layout-item">אירועים</span>
-        </div>
-
-        <md-list class="md-double-line">
-        <md-list-item>
-            <div class="md-list-item-text">12:34</div>
-            <div class="md-list-item-text">
-            <span>שם האירוע</span>
-            <span>שם העבריין</span>
-            </div>
-        </md-list-item>
-
-        <md-list-item>
-            <div class="md-list-item-text">12:34</div>
-            <div class="md-list-item-text">
-            <span>שם האירוע</span>
-            <span>שם העבריין</span>
-            </div>
-        </md-list-item>
-
-        <md-list-item>
-            <div class="md-list-item-text">12:34</div>
-            <div class="md-list-item-text">
-            <span>שם האירוע</span>
-            <span>שם העבריין</span>
-            </div>
-        </md-list-item>
-
-        <md-list-item>
-            <div class="md-list-item-text">12:34</div>
-            <div class="md-list-item-text">
-            <span>שם האירוע</span>
-            <span>שם העבריין</span>
-            </div>
-        </md-list-item>
-
-        <md-list-item>
-            <div class="md-list-item-text">12:34</div>
-            <div class="md-list-item-text">
-            <span>שם האירוע</span>
-            <span>שם העבריין</span>
-            </div>
-        </md-list-item> -->
-
+    
 <script>
 export default {
   name: 'EventList',
@@ -111,6 +89,8 @@ export default {
                 },
             ]
         }
+
+        //TODO: CALIBARI WHITE TEXT
     }
   }
 </script>
