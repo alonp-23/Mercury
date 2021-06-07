@@ -1,21 +1,21 @@
 <template>
   <div class="login-wrap">
-      <div class = "hr topLogo"></div>
 	<div class="login-html">
+         <div class = "topLogo"></div>
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
 		<div class="login-form">
 			<div class="sign-in-htm">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text" class="input">
+					<input id="user" type="text" v-model="username" class="input">
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input id="pass" type="password" v-model="password" class="input" data-type="password">
 				</div>
 				<div class="group">
-					<input type="submit" class="button" value="Sign In">
+					<input type="submit" @click="requestLogin" class="button" value="Sign In">
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
@@ -27,8 +27,30 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-    
+	data(){
+		return {
+			username,
+			password,
+		}
+	},
+    computed:{
+
+	},
+	methods: {
+		requestLogin(){
+			console.log('request login with: ' + this.username +" | "+ this.password);
+			axios.post('http://localhost:1337/users/login', {
+				username: this.username,
+				password: this.password
+			},{'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*"}).then((res) => {
+				console.log(res);
+			})
+		}
+	}
 }
 </script>
 
@@ -179,14 +201,15 @@ a{color:inherit;text-decoration:none}
 
 .hr{
 	height:2px;
-	margin:60px 0 50px 0;
 	background:rgba(255,255,255,.2);
 }
 
 .topLogo{
-    width: 100px;
-    height: 100px;
-	text-align:center;
+    width: 30%;
+    height: 10%;
+    margin-bottom: 5%;
+    position: relative;
+	position: center;
     background:url(../assets/Logo.png) no-repeat center;
     background-size: contain;
 }
