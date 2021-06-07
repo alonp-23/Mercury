@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card class="mx-auto" :max-width=width>
+  <v-card class="mx-auto" :max-width=width id="list_card">
     <v-card-title class="white--text black">
       ציר מודיעיני
       <v-spacer></v-spacer>      
@@ -20,14 +20,14 @@
       :height=height
     >
       <template v-slot:default="{ item }">
-        <v-list-item id="list_item">
+        <v-list-item id="list_item" class="rounded-xl ma4" >
           <v-list-item-avatar>
                 <v-img :src="avatar(item)"></v-img>
             </v-list-item-avatar>
 
-          <v-list-item-content >
+          <v-list-item-content>
                 <v-list-item-title v-text="full_name(item.first_name,item.last_name)" ></v-list-item-title>
-                <v-list-item-subtitle v-text="item.id"></v-list-item-subtitle>
+                <v-list-item-subtitle id="item_content" v-text="item.id"></v-list-item-subtitle>
             </v-list-item-content>
 
           <v-dialog v-model="dialog" width="500">      
@@ -36,7 +36,7 @@
                         v-bind="attrs"
                         v-on="on">
                         <v-btn icon>
-                            <v-icon color="grey lighten-1" >mdi-arrow-left</v-icon>
+                            <v-icon color="white" >mdi-arrow-left</v-icon>
                         </v-btn>
                     </v-list-item-action>
                 </template>
@@ -97,6 +97,8 @@ export default {
       person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
       is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
       {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
+      is_wanted: true, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
+      {first_name: "דובים", last_name:"ביער" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
       is_wanted: true, phone_number:1234567, address:"דרדר 51, מצפה נשר"}],
       dialog: false,
       show_wanted:false,      
@@ -118,7 +120,17 @@ export default {
 </script>
 <style >
     div{
-        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;    
+        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+        color:white;    
     }
-    
+    #list_card{
+        background-color: #f2f2f2
+    }
+    #list_item{
+        background-color: #141d33;  
+        margin: 4px              
+    }
+    #item_content{
+        color:white
+    }
 </style>
