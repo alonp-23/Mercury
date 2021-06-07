@@ -134,6 +134,8 @@ export default {
               criminalName: 'רוני דניאל',
               eventType: 'גניבה',
               description: 'גנב רכב שחנה מחוץ לביתו'
+              lat: '',
+              long: ''
               },
               {
               eventId: 2,

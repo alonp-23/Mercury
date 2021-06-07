@@ -1,19 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <EventList></EventList>
-</template>
-
-<script>
-  import EventList from '../components/EventList'
-
-  export default {
-    name: 'Home',
-
-    components: {
-      EventList,
-    },
-  }
-=======
   <Login></Login>
 </template>
 
@@ -27,7 +12,6 @@ export default {
     Login,
   },
 };
->>>>>>> origin
 </script>
 
 <style>
