@@ -1,18 +1,19 @@
 <template>
-  <v-card max-width="300">
+  <v-card max-width="400">
 
     <v-toolbar dark dense>
       <v-container>
         <v-row>
 
-      <v-column>
+      <v-col>
       <v-toolbar-title class="mt-2">אירועים</v-toolbar-title>
-      </v-column>
+      </v-col>
 
-        <v-column class="mr-15">
-           <v-btn disabled
+        <v-col>
+           <v-btn
               icon
-              color="white">
+              color="white"
+              @click.stop="openFilterDialog('county')">
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
@@ -46,7 +47,6 @@
                 :items="filterDialog.filterItems"
                 filled
                 return-object
-                single-line
                 label="סוגי אירועים"
               ></v-select>
 
@@ -56,7 +56,7 @@
                     outlined
                     rounded
                     small
-                    @click="filterEvents('type')"
+                    @click="filterEvents(filterDialog.filterBy)"
                   >
                     סנן
                   </v-btn>
@@ -65,7 +65,7 @@
           </v-dialog>
         </div>
 
-      </v-column>
+      </v-col>
 
       </v-row>
       </v-container>
@@ -99,8 +99,7 @@
         <div class="text-center">
           <v-dialog
             v-model="dialog.showDialog"
-            width="400"
-            >
+            width="400">
 
             <v-card>
               <v-card-title class="text-t1 grey lighten-2">
@@ -109,6 +108,7 @@
               <v-card-text class="text-subtitle-1 mt-5">
                 {{ dialog.content }}
               </v-card-text>
+              <iframe src="http://map3-service-tmzmap3.apps.openforce.openforce.biz/#/brain"></iframe>
             </v-card>
           </v-dialog>
         </div>
@@ -127,34 +127,38 @@ export default {
   data() {
       return {
           eventTypes: ['הכל','גניבה','רצח','שוחד'],
-          events: [
+          eventCounties: ['הכל','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
+          events:[
               {
-              eventId: 1,
-              eventTime: '12:34',
-              criminalName: 'רוני דניאל',
-              eventType: 'גניבה',
-              description: 'גנב רכב שחנה מחוץ לביתו',
-              lat: '',
-              long: ''
+                eventId: 1,
+                eventTime: '12:34',
+                criminalName: 'רוני דניאל',
+                eventType: 'גניבה',
+                eventDescription: 'גנב רכב שחנה מחוץ לביתו',
+                eventCounty: 'ברוקלין',
+                lat: '',
+                long: ''
               },
               {
-              eventId: 2,
-              eventTime: '12:37',
-              criminalName: 'ארנולד וייס',
-              eventType: 'רצח',
-              description: 'רצח אדם שתפס את חנייתו' ,   
-              lat: '',
-              long: ''          
+                eventId: 2,
+                eventTime: '12:37',
+                criminalName: 'ארנולד וייס',
+                eventType: 'רצח',
+                description: 'רצח אדם שתפס את חנייתו' ,
+                eventCounty: 'מנהטן',   
+                lat: '',
+                long: ''          
               },
               {
-              eventId: 3,               
-              eventTime: '12:34',
-              criminalName: 'אנה לוי',
-              eventType: 'שוחד',
-              description: 'ניסתה לשחד שופט כשנשפט על העלמת מס',     
-              lat: '',
-              long: ''       
-              },
+                eventId: 3,               
+                eventTime: '12:34',
+                criminalName: 'אנה לוי',
+                eventType: 'שוחד',
+                description: 'ניסתה לשחד שופט כשנשפט על העלמת מס',   
+                eventCounty: 'ברוקלין', 
+                lat: '',
+                long: ''
+              }     
           ],
           filteredEvents: null,
           dialog: {
@@ -164,6 +168,7 @@ export default {
           filterDialog: {
             showDialog: false,
             filterItems: [],
+            filterBy: null,
             selectedItem: null
           },
       }
@@ -172,16 +177,15 @@ export default {
   mounted() {
     this.filteredEvents = this.events;
   },
-  computed: {
-    // filteredEvents() {
-    //   return this.events;
-    // }
-  },
   methods: {
     openFilterDialog(filterBy) {
       this.filterDialog.showDialog = true
-      if(filterBy === 'type') {
-        this.filterDialog.filterItems = this.eventTypes
+      this.filterDialog.filterBy = filterBy
+      switch(filterBy) {
+        case 'type': this.filterDialog.filterItems = this.eventTypes;
+        break;
+        case 'county': this.filterDialog.filterItems = this.eventCounties;
+        break;
       }
     },
     openDialog(description) {
@@ -195,6 +199,13 @@ export default {
           this.filteredEvents = this.events
         } else {
           this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem)
+        }
+      } else if(filterBy === 'county') {
+        if(this.filterDialog.selectedItem === 'הכל') {
+          this.filteredEvents = this.events
+        } else {
+          console.log(this.filterDialog.selectedItem)
+          this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem)
         }
       }
     }
