@@ -6,8 +6,12 @@ const getAll = async () => {
 
 const authenticateUser = async (name, pass) => {
     password = await pool.query(`SELECT users.password FROM users WHERE users.username = '${name}'`).then(res => { return res.rows; });
-    console.log(password);
-    return pass == password[0].password;
+
+    if(password[0] != undefined){
+        return pass == password[0].password;
+    } else {
+        return false;
+    }
 }
 
 module.exports = {
