@@ -8,12 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "chart.js": "^2.9.4",
     "chartjs-plugin-annotation": "^0.5.7",
-=======
     "axios": "^0.21.1",
->>>>>>> d597595dc9633ffdcf46f3aac8cc993786f02b6e
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
