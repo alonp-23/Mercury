@@ -1,5 +1,5 @@
-
 <template>
+
 <div>
   <Weather/>
 </div>
@@ -17,5 +17,11 @@ export default {
 };
 </script>
 
-<style>
-</style>
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld,
+    },
+  }
+</script>
