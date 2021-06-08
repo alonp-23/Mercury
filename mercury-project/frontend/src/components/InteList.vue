@@ -4,7 +4,7 @@
     <v-toolbar-title class="white--text" id="title">
       ציר מודיעיני
       <v-spacer></v-spacer>      
-    </v-toolbar-title>   
+    </v-card-title>   
     <v-divider></v-divider>
      <v-chip class="mr-2 ma-3" @click="show_wanted = false" label>
             <v-icon left v-if="!show_wanted">mdi-checkbox-marked-circle</v-icon>                       
