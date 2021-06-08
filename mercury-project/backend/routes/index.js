@@ -39,4 +39,24 @@ writeToJson(filename, content){
     }); 
 }
 
+/* GET home page. */
+router.get('/weather', function(req, res, next) {
+    
+});
+
+/* GET home page. */
+router.get('/holidaysIL', function(req, res, next) {
+  
+});
+
+/* GET home page. */
+router.get('/holidaysUS', function(req, res, next) {
+  
+});
+
+/* GET home page. */
+router.get('/holidaysJO', function(req, res, next) {
+  
+});
+
 module.exports = router;
