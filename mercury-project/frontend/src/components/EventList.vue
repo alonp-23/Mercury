@@ -1,13 +1,20 @@
 <template>
-  <v-card max-width="400">
+  <v-card width="700">
 
     <v-toolbar dark dense>
-      <v-container>
+      <v-container width="400">
         <v-row>
 
       <v-col>
       <v-toolbar-title class="mt-2">אירועים</v-toolbar-title>
       </v-col>
+
+      <v-col>
+      <v-toolbar-title class="text-subtitle-2 mt-3">{{dateToDisplay}} {{this.filterDialog.selectedItem}}</v-toolbar-title>
+            </v-col>
+      <!-- <v-col>
+      <v-toolbar-title class="mt-2">{{this.filterDialog.selectedDate}}</v-toolbar-title>
+      </v-col> -->
 
         <v-col>
            <v-btn
@@ -52,7 +59,7 @@
               ></v-select>
 
               <v-row v-else justify="center mt-5">
-                <v-date-picker v-model="filterDialog.selectedItem"></v-date-picker>
+                <v-date-picker v-model="filterDialog.selectedDate"></v-date-picker>
               </v-row>
 
             <v-card-actions>
@@ -88,12 +95,12 @@
             <v-row>  
 
               <v-col>
-              <v-list-item-title  class="white--text">{{eventItem.eventType}}</v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{eventItem.criminalName}}</v-list-item-subtitle>
+              <v-list-item-title  class="white--text">{{eventItem.eventName}}</v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{eventItem.criminal}}</v-list-item-subtitle>
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text">{{eventItem.eventTime}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text">{{convertDateToDayTime(eventItem.eventTime)}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
@@ -110,10 +117,10 @@
                 פירוט האירוע
               </v-card-title>
               <v-card-text class="text-h5 font-weight-bold mt-5">
-                {{ dialog.content.eventType}} ב{{ dialog.content.eventCounty}}
+                {{ dialog.content.eventName}} ב{{ dialog.content.eventCounty}}
               </v-card-text>
               <v-card-text class="text-h6 font-weight-medium mt-5">
-                האירוע התרחש ב{{ dialog.content.eventTime}} ע"י {{ dialog.content.criminalName}}
+                האירוע התרחש ב{{ convertDateToDayTime(dialog.content.eventTime) }} ע"י {{ dialog.content.criminal}}
               </v-card-text>
               <v-card-text class="text-subtitle-1">
                 {{ dialog.content.eventDescription }}
@@ -131,51 +138,24 @@
 </template>
     
 <script>
+import eventsData from '../data/events.json'
+
+
 export default {
   name: 'EventList',
   data() {
       return {
-          eventTypes: ['הכל','גניבה','רצח','שוחד'],
-          eventCounties: ['הכל','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
-          events:[
-              {
-                id: 1,
-                eventTime: '12:34',
-                criminalName: 'רוני דניאל',
-                eventType: 'גניבה',
-                eventDescription: 'גנב רכב שחנה מחוץ לביתו',
-                eventCounty: 'ברוקלין',
-                lat: '',
-                long: ''
-              },
-              {
-                id: 2,
-                eventTime: '12:37',
-                criminalName: 'ארנולד וייס',
-                eventType: 'רצח',
-                eventDescription: 'רצח אדם שתפס את חנייתו' ,
-                eventCounty: 'מנהטן',   
-                lat: '',
-                long: ''          
-              },
-              {
-                id: 3,               
-                eventTime: '12:34',
-                criminalName: 'אנה לוי',
-                eventType: 'שוחד',
-                eventDescription: 'ניסתה לשחד שופט כשנשפט על העלמת מס',   
-                eventCounty: 'ברוקלין', 
-                lat: '',
-                long: ''
-              }     
-          ],
+          eventTypes: ['כל האירועים','גניבה','רצח','שוחד'],
+          eventCounties: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
+          events: [],
           filteredEvents: null,
           dialog: {
             showDialog: false,
             content: {
-              criminalName: '',
+              criminal: '',
               eventTime: '',
               eventType: '',
+              eventName: '',
               eventDescription: '',
               eventCounty: ''
             }
@@ -184,13 +164,23 @@ export default {
             showDialog: false,
             filterItems: [],
             filterBy: null,
-            selectedItem: null
+            selectedItem: 'כל האירועים',
+            selectedDate: null
           },
       }
         //TODO: CALIBARI WHITE TEXT
   },
+  beforeMount() {
+    this.filterDialog.selectedDate = this.getCurrentISOString().replace(/T.*/,'');
+  },
   mounted() {
-    this.filteredEvents = this.events;
+    this.events = eventsData;
+    this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate);
+  },
+  computed: {
+    dateToDisplay() {
+      return this.filterDialog.selectedDate.split('-').reverse().join('/')
+    }
   },
   methods: {
     openFilterDialog(filterBy) {
@@ -205,7 +195,8 @@ export default {
     },
     openDialog(eventItem) {
       this.dialog.showDialog = true,
-      this.dialog.content.criminalName = eventItem.criminalName;
+      this.dialog.content.criminal= eventItem.criminal;
+      this.dialog.content.eventName = eventItem.eventName;
       this.dialog.content.eventType = eventItem.eventType;
       this.dialog.content.eventTime = eventItem.eventTime;
       this.dialog.content.eventDescription = eventItem.eventDescription;
@@ -213,17 +204,30 @@ export default {
     },
     filterEvents(filterBy) {
       this.filterDialog.showDialog = false
-      if(this.filterDialog.selectedItem === 'הכל') {
-        this.filteredEvents = this.events
+      if(this.filterDialog.selectedItem === 'כל האירועים') {
+        this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
       } else {
         switch(filterBy) {
-          case 'type': this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem)
+          case 'type': this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem && (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
-          case 'county': this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem)
+          case 'county': this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem && (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
-          case 'time': console.log(this.filterDialog.selectedItem)
+          case 'time': {
+            this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
+            this.filterDialog.selectedItem = 'כל האירועים'
+          }
         }
       }
+    },
+    convertDateToDayTime(date) {
+      return new Date(date).toLocaleTimeString('en',{ timeStyle: 'short', hour12: false, timeZone:'UTC' });
+    },
+    getCurrentISOString() {
+      var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+      return (new Date(Date.now() - tzoffset)).toISOString();
+    },
+    convertDateToDisplay(date) {
+      return date.toLocaleDateString('he-IL', {timeZone:'Asia/Jerusalem'}).replace(/\D/g,'/')
     }
   }
 }
