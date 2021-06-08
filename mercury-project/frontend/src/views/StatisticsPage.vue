@@ -19,9 +19,19 @@
 						<inte-list class="intelList"></inte-list>
 					</div>
 				</div>
-				<div class="graphBox">
-					<label class="graphTitle" for="graph">טבלת אירועים חריגים</label>
-					<bar-chart id="graph" class="crimesGraph"></bar-chart>
+				<div class="leftSide">
+					<div class="graphBox">
+						<div class="graphTitleCard">
+							<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
+						</div>
+						<bar-chart id="graph" class="crimesGraph"></bar-chart>
+					</div>
+					<div class="bottomLeft">
+						<div class="pieBox"></div>
+						<div class="dateBox">
+							<weather-box dir="ltr"></weather-box>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -32,6 +42,7 @@
 import BarChart from '@/components/BarChart';
 import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
+import WeatherBox from "@/components/WeatherCube.vue";
 
 export default {
 	name: 'StatisticsPage',
@@ -42,7 +53,8 @@ export default {
   components: {
 	BarChart,
 	EventList,
-	InteList
+	InteList,
+	WeatherBox
   }
 }
 </script>
@@ -77,10 +89,10 @@ export default {
 	}
 
 	.listStats {
-		width: 80%;
+		width: 50%;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-around;
+		justify-content: center;
 	}
 
 	.eventBox {
@@ -106,12 +118,13 @@ export default {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
+		margin-right: 20px
 	}
 
 	.kpiBox {
 		background: rgba(124, 127, 141, 0.7);
-		width: 100px;
-		height: 50px;
+		width: 160px;
+		height: 70px;
 		border-radius: 15px;
 		display: flex;
 		justify-content: center;
@@ -120,7 +133,8 @@ export default {
 
 	.intelList {
 		width: 90%;
-		margin: 3%;	
+		margin-right: 7%;
+		margin-top: 5%;	
 		height: 100%;
 	}
 
@@ -129,6 +143,26 @@ export default {
 		justify-content: flex-start;
 		margin-bottom: 1%;
 		margin-top: -1%
+	}
+
+	.leftSide {
+		margin-left: 55px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.bottomLeft {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.dateBox {
+
+	}
+
+	.pieBox {
+
 	}
 
 	.graphBox {
@@ -142,14 +176,22 @@ export default {
 		border-radius: 25px;
 	}
 
+	.graphTitleCard {
+		width: 100%;
+		background: #282828;
+		border-top-left-radius: 25px;
+		border-top-right-radius: 25px;
+		padding: 1%
+	}
+
 	.graphTitle {
-		margin-right: 5%; 
+		margin-right: 3%;
 	}
 
 	.statsPage {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: space-around;
 		margin: 2%;
 	}
 
@@ -160,7 +202,7 @@ export default {
 	.crimesGraph {
 		/* width: 50vh; */
 		height: 30vh;
-		width: 1000px;
+		width: 100%;
 
 	}
 </style>
