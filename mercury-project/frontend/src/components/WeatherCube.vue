@@ -32,6 +32,7 @@
             <tr>
                 <td v-for="items in weatherDataTop" :key=items>{{items.temperature}}°</td>
             </tr>
+            <br/>
             <tr>
                 <td v-for="items in weatherDataBottom" :key=items>
                     <div v-if="items.temperature > 15 && items.temperature < 25" class="sky">
@@ -227,22 +228,5 @@ tr:nth-child(3) {
 
 tr:nth-child(3) {
     color: #999;
-}
-
-@-webkit-keyframes up {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateY(15px);
-    }
-    50% {
-        opacity: 0;
-        -webkit-transform: translateY(15px);
-    }
-    99% {
-        -webkit-animation-play-state: paused;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 </style>
