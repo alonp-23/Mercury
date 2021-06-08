@@ -8,22 +8,35 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/weather', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    writeToJson('weather.json', req.body);
 });
 
 /* GET home page. */
 router.get('/holidaysIL', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  writeToJson('holidaysIL.json', req.body);
 });
 
 /* GET home page. */
 router.get('/holidaysUS', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  writeToJson('holidaysUS.json', req.body);
 });
 
 /* GET home page. */
 router.get('/holidaysJO', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  writeToJson('holidaysJO.json', req.body);
 });
+
+writeToJson(filename, content){
+   // convert JSON object to string
+  const data = JSON.stringify(content);
+
+  // write JSON string to a file
+  fs.writeFile(filename, data, (err) => {
+      if (err) {
+          throw err;
+      }
+      console.log("JSON data is saved.");
+    }); 
+}
 
 module.exports = router;
