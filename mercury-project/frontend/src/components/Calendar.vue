@@ -7,12 +7,13 @@
 <script>
 import holidaysUS from '../assets/holidaysUS.json'
 import holidaysIL from '../assets/holidaysIL.json'
+import holidaysJO from '../assets/holidaysJO.json'
 
     export default {
       data:() => ({
         usHolidays:[{}],
-        ilHolidays:[{}]
-        
+        ilHolidays:[{}],
+        joHolidays:[{}]
       }),
       mounted () {
         this.usHolidays = holidaysUS.map(holiday => {
@@ -26,8 +27,13 @@ import holidaysIL from '../assets/holidaysIL.json'
             date.setDate(date.getDate() + 1);
             holiday.date = date.toISOString().substr(0, 10)
             return holiday;
+       }),
+       this.joHolidays = holidaysJO.map(holiday => {
+            var date = new Date(holiday.date);
+            date.setDate(date.getDate() + 1);
+            holiday.date = date.toISOString().substr(0, 10)
+            return holiday;
        }) 
-
     },
       computed: {
         attributes() {
@@ -47,6 +53,17 @@ import holidaysIL from '../assets/holidaysIL.json'
               dates: holiday.date,
               dot: {
                 color: "blue",
+                class: '',
+              },
+              popover: {
+                label: holiday.name,
+              },
+              customData: holiday,
+            })),
+            ...this.joHolidays.map(holiday => ({
+              dates: holiday.date,
+              dot: {
+                color: "green",
                 class: '',
               },
               popover: {

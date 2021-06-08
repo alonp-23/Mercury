@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import Weather from '@/components/calendar-test.vue';
+import Weather from '@/components/Calendar.vue';
 
 export default {
   name: 'Home',
