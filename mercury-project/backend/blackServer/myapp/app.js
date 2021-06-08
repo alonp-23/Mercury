@@ -130,11 +130,11 @@ app.listen(port, () => {
         });
     }
 
-  setInterval((weather), 4000);
-  setInterval((holidaysIL), 4000);
-  setInterval((holidaysUS), 4000);
-  setInterval((holidaysJO), 4000);
-  setInterval((sendData), 5000);
+  setInterval((weather), 86400000);
+  setInterval((holidaysIL), 86400000);
+  setInterval((holidaysUS), 86400000);
+  setInterval((holidaysJO), 86400000);
+  setInterval((sendData), 86400000);
 
 
 
