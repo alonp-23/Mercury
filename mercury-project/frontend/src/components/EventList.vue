@@ -213,4 +213,8 @@ v-toolbar {
 .light-color {
     background-color:#1d2b4b
 }
+
+.eventCard {
+  color: #464b5e;
+}
 </style>
