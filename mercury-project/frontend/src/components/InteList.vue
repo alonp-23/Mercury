@@ -23,7 +23,7 @@
       <template v-slot:default="{ item }">          
         <v-list-item id="list_item" class="rounded-xl ma4" >
           <v-list-item-avatar>
-                <v-img :src="avatar(item.person.personImageURL)"></v-img>
+                <v-img :src="item.person.personImageURL"></v-img>
             </v-list-item-avatar>
 
           <v-list-item-content>
@@ -49,7 +49,7 @@
 
                     <v-img 
                         contain
-                        :src="avatar(item.person.personImageURL)"
+                        :src="item.person.personImageURL"
                         max-height="150" 
                         class="ma-3"/>          
 
@@ -108,8 +108,7 @@ export default {
     }      
   },
   methods: {
-      full_name: function(firstName,lastName){return `${firstName} ${lastName}`},
-      avatar: function(person){return person.person_img_url},
+      full_name: function(firstName,lastName){return `${firstName} ${lastName}`},      
      
   }  
 };
