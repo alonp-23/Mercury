@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-card class="mx-auto" :max-width=width id="list_card">
-    <v-card-title class="white--text black">
+    <v-card-title class="white--text" id="title">
       ציר מודיעיני
       <v-spacer></v-spacer>      
     </v-card-title>   
@@ -95,12 +95,12 @@ export default {
   data: ()=> {
     return {
       pplOfIntrest: [{first_name: "ישראל", last_name:"ישראלי", id: 456346, 
-      person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
-      is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
-      {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-      is_wanted: true, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
-      {first_name: "דובים", last_name:"ביער" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-      is_wanted: true, phone_number:1234567, address:"דרדר 51, מצפה נשר"}],
+                    person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
+                    is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
+                    {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
+                    is_wanted: true, phone_number:143234, address:"דרדר 51, מצפה נשר"},
+                    {first_name: "דובים", last_name:"ביער" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
+      is_wanted: true, phone_number:241324, address:"דרדר 51, מצפה נשר"}],
       dialog: false,
       show_wanted:false,      
     }
@@ -113,9 +113,7 @@ export default {
   methods: {
       full_name: function(first_name,last_name){return `${first_name} ${last_name}`},
       avatar: function(person){return person.person_img_url},
-      genRandomIndex (length) {
-        return Math.ceil(Math.random() * (length - 1))
-      }
+     
   }  
 };
 </script>
@@ -135,5 +133,8 @@ export default {
     }
     #scroll{
         margin: 6px;
+    }
+    #title{
+      background-color: #141d33
     }
 </style>
