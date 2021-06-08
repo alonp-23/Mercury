@@ -82,9 +82,18 @@
       </v-container>
     </v-toolbar>
 
-    <v-list two-line>
-      <v-list-item-group>
+    <!-- <v-list two-line>
+      <v-list-item-group> -->
+
+      <v-virtual-scroll
+        :items="events"
+        height="20%"
+        item-height="90">
+      <template v-slot:default="{ index, eventItem }">
+
+
       <v-list-item 
+      height=10%
       class="event-in-list" 
       v-for="(eventItem, index) in filteredEvents" 
       :key="eventItem.id"
@@ -131,10 +140,13 @@
         </div>
 
         </v-list-item-content>
-
       </v-list-item>
-      </v-list-item-group>
-    </v-list>
+
+      </template>
+      </v-virtual-scroll>
+
+      <!-- </v-list-item-group>
+    </v-list> -->
   </v-card>
 </template>
     
@@ -218,8 +230,7 @@ export default {
         this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
       } else {
         switch(filterBy) {
-          case 'type': this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem &&
-           (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+          case 'type': this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem && (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
           case 'county': this.filteredEvents = this.events.filter((event) => event.event_county === this.filterDialog.selectedItem &&
            (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
@@ -263,7 +274,6 @@ v-toolbar {
 
 .v-list {
     padding: 0;
-    overflow-y:auto;
 }
 
 .dark-color {
