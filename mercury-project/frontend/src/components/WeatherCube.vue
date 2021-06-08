@@ -5,7 +5,7 @@
         <h2>New York</h2>
         <table>
             <tr>
-                <td v-for="items in weatherData" :key=items>
+                <td v-for="items in weatherDataTop" :key=items>
                     <div v-if="items.temperature > 15 && items.temperature < 25" class="sky">
                         <div class="sun"></div>
                         <div class="cloud">
@@ -27,10 +27,38 @@
                 </td>
             </tr>
             <tr>
-                <td v-for="items in weatherData" :key=items>{{items.startTime.slice(0,10)}}</td>
+                <td v-for="items in weatherDataTop" :key=items>{{items.startTime.slice(5,10)}}</td>
             </tr>
             <tr>
-                <td v-for="items in weatherData" :key=items>{{items.temperature}}°</td>
+                <td v-for="items in weatherDataTop" :key=items>{{items.temperature}}°</td>
+            </tr>
+            <tr>
+                <td v-for="items in weatherDataBottom" :key=items>
+                    <div v-if="items.temperature > 15 && items.temperature < 25" class="sky">
+                        <div class="sun"></div>
+                        <div class="cloud">
+                            <div class="circle-small"></div>
+                            <div class="circle-tall"></div>
+                            <div class="circle-medium"></div>
+                        </div>
+                    </div>
+                    <div v-if="items.temperature > 25" class="sky">
+                        <div class="sun"></div>
+                    </div>
+                     <div v-if="items.temperature < 15" class="sky">
+                        <div class="cloud">
+                            <div class="circle-small"></div>
+                            <div class="circle-tall"></div>
+                            <div class="circle-medium"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td v-for="items in weatherDataBottom" :key=items>{{items.startTime.slice(5,10)}}</td>
+            </tr>
+            <tr>
+                <td v-for="items in weatherDataBottom" :key=items>{{items.temperature}}°</td>
             </tr>
         </table>
     </div>
@@ -43,11 +71,14 @@ import weather from '@/assets/weather.json';
 export default {
     data(){
 		return {
-			weatherData: weather,
+            weatherDataTop: weather,
+            weatherDataBottom: weather,
 		}
     },
     created(){
-        this.weatherData = this.weatherData.slice(0,13);
+        this.weatherDataTop = weather.slice(0,7);
+        this.weatherDataBottom = weather.slice(8,15);
+
     },
 }
 </script>
@@ -63,9 +94,9 @@ body {
 .card {
     position: fixed;
     bottom: 10px;
-    width: 100%;
-    height: 25%;
-    border-radius: 3px;
+    width: 35%;
+    height: 40%;
+    border-radius: 5%;
     background-color: #141d33;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
@@ -86,6 +117,7 @@ h1 {
 }
 
 h2 {
+    margin-left: 5%;
     font-weight: 300;
     font-size: 2.25em;
 }
