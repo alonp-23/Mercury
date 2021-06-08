@@ -53,7 +53,7 @@ export default {
 			},{'Content-Type': 'application/json;charset=UTF-8',
 		"Access-Control-Allow-Origin": "*"}).then((res) => {
 				if(res.status == 200){
-					router.push('Home')
+					router.push('Stats')
 				}
 			}).catch((err)=>{
 				console.log("Caught");
