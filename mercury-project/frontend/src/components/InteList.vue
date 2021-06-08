@@ -1,10 +1,10 @@
 <template>
 <div>
-  <v-card class="mx-auto" :max-width=width id="list_card">
-    <v-card-title class="white--text black">
+  <v-card class="mx-auto" :max-width=width id="list_card" dark>
+    <v-toolbar-title class="white--text intelTitle">
       ציר מודיעיני
       <v-spacer></v-spacer>      
-    </v-card-title>   
+    </v-toolbar-title>   
     <v-divider></v-divider>
      <v-chip class="mr-2 ma-3" @click="show_wanted = false" label>
             <v-icon left v-if="!show_wanted">mdi-checkbox-marked-circle</v-icon>                       
@@ -124,8 +124,12 @@ export default {
         font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
         color:white;    
     }
+    .intelTitle{
+      background: #282828; 
+    }
     #list_card{
-        background-color: #f2f2f2
+        background-color: rgba(124, 127, 141, 0.7);
+        border-radius: 5%;
     }
     #list_item{
         background-color: #141d33;                   
