@@ -2,20 +2,32 @@
 <div>
     <div class="card">
 
-        <h2>Brussels</h2>
-        <h3>Cloudy<span>Wind 10km/h <span class="dot">•</span> Precip 0%</span></h3>
-        <h1>23°</h1>
-        <div class="sky">
-            <div class="sun"></div>
-            <div class="cloud">
-                <div class="circle-small"></div>
-                <div class="circle-tall"></div>
-                <div class="circle-medium"></div>
-            </div>
-        </div>
+        <h2>New York</h2>
         <table>
             <tr>
-                <td v-for="items in weatherData" :key=items>{{items.startTime}}</td>
+                <td v-for="items in weatherData" :key=items>
+                    <div v-if="items.temperature > 15 && items.temperature < 25" class="sky">
+                        <div class="sun"></div>
+                        <div class="cloud">
+                            <div class="circle-small"></div>
+                            <div class="circle-tall"></div>
+                            <div class="circle-medium"></div>
+                        </div>
+                    </div>
+                    <div v-if="items.temperature > 25" class="sky">
+                        <div class="sun"></div>
+                    </div>
+                     <div v-if="items.temperature < 15" class="sky">
+                        <div class="cloud">
+                            <div class="circle-small"></div>
+                            <div class="circle-tall"></div>
+                            <div class="circle-medium"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td v-for="items in weatherData" :key=items>{{items.startTime.slice(0,10)}}</td>
             </tr>
             <tr>
                 <td v-for="items in weatherData" :key=items>{{items.temperature}}°</td>
@@ -33,7 +45,10 @@ export default {
 		return {
 			weatherData: weather,
 		}
-	},
+    },
+    created(){
+        this.weatherData = this.weatherData.slice(0,13);
+    },
 }
 </script>
 
@@ -41,30 +56,18 @@ export default {
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
 html,
 body {
-    background-color: #F3F3F3;
+    background-color: #141d33;
     font-family: 'Roboto', sans-serif;
 }
 
 .card {
-    margin: 0 auto;
-    margin-top: 5%;
-    padding: 5px 30px;
-    width: 290px;
-    height: 470px;
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    height: 25%;
     border-radius: 3px;
-    background-color: #fff;
+    background-color: #141d33;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
-    -webkit-animation: open 2s cubic-bezier(.39, 0, .38, 1);
-}
-
-@-webkit-keyframes open {
-    from {
-        padding: 0 30px;
-        height: 0;
-    }
-    to {
-        height: 470px;
-    }
 }
 
 h1,
@@ -78,15 +81,13 @@ h1 {
     float: right;
     color: #666;
     font-weight: 300;
-    font-size: 6.59375em;
+    font-size: 4.59375em;
     line-height: .2em;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .2s;
 }
 
 h2 {
     font-weight: 300;
     font-size: 2.25em;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1);
 }
 
 h3 {
@@ -95,7 +96,6 @@ h3 {
     color: #777;
     font-weight: 400;
     font-size: 1em;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .1s;
 }
 
 span {
@@ -114,29 +114,26 @@ span span {
 
 .sky {
     position: relative;
-    margin-top: 108px;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: #03A9F4;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .2s;
 }
 
 .sun {
     position: relative;
     top: -3px;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #FFEB3B;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .5s;
 }
 
 .cloud {
     position: absolute;
-    top: 60px;
-    left: 30px;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .7s;
+    top: 45px;
+    left: 10px;
+    margin-left: 10px;
 }
 
 .cloud:before,
@@ -147,18 +144,21 @@ span span {
 }
 
 .cloud:before {
-    margin-left: -10px;
-    width: 51px;
-    height: 18px;
+    border-radius: 35%;
+    padding-top: 28px;
+    margin-right: 10px;
+    top: -11px;
+    width: 63px;
+    height: 25px;
     background: #fff;
 }
 
 .cloud:after {
     position: absolute;
-    top: -10px;
-    left: -22px;
-    width: 28px;
-    height: 28px;
+    top: -5px;
+    left: -5px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: #fff;
     box-shadow: 50px -6px 0 6px #fff, 25px -19px 0 10px #fff;
@@ -171,14 +171,6 @@ table {
     text-align: center;
 }
 
-tr:nth-child(1) td:nth-child(1),
-tr:nth-child(1) td:nth-child(2),
-tr:nth-child(1) td:nth-child(3),
-tr:nth-child(1) td:nth-child(4),
-tr:nth-child(1) td:nth-child(5) {
-    padding-bottom: 32px;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .7s;
-}
 
 tr:nth-child(2) td:nth-child(1),
 tr:nth-child(2) td:nth-child(2),
@@ -186,7 +178,6 @@ tr:nth-child(2) td:nth-child(3),
 tr:nth-child(2) td:nth-child(4),
 tr:nth-child(2) td:nth-child(5) {
     padding-bottom: 7px;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .9s;
 }
 
 tr:nth-child(3) td:nth-child(1),
@@ -195,7 +186,6 @@ tr:nth-child(3) td:nth-child(3),
 tr:nth-child(3) td:nth-child(4),
 tr:nth-child(3) td:nth-child(5) {
     padding-bottom: 7px;
-    -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1) .9s;
 }
 
 tr:nth-child(2),
