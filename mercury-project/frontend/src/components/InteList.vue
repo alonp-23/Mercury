@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-card class="mx-auto" :max-width=width id="list_card">
-    <v-card-title class="white--text" id="title">
+    <v-toolbar-title class="white--text" id="title">
       ציר מודיעיני
       <v-spacer></v-spacer>      
     </v-toolbar-title>   
@@ -135,6 +135,6 @@ export default {
         margin: 6px;
     }
     #title{
-      background-color: #141d33
+      background-color: #282828
     }
 </style>
