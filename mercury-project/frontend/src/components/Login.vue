@@ -14,6 +14,9 @@
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password" v-model="password" class="input" data-type="password">
 				</div>
+				<div v-if="this.showWrongCredentials == true">
+					<label for="wrong" class="wrong-login">Your Login info was wrong</label>
+				</div>
 				<div class="group">
 					<input type="submit" @click="requestLogin" class="button" value="Sign In">
 				</div>
@@ -28,12 +31,14 @@
 
 <script>
 import axios from 'axios'
+import router from '@/router/index.js'
 
 export default {
 	data(){
 		return {
-			username,
-			password,
+			username: "",
+			password: "",
+			showWrongCredentials: false,
 		}
 	},
     computed:{
@@ -46,8 +51,13 @@ export default {
 				username: this.username,
 				password: this.password
 			},{'Content-Type': 'application/json;charset=UTF-8',
-      "Access-Control-Allow-Origin": "*"}).then((res) => {
-				console.log(res);
+		"Access-Control-Allow-Origin": "*"}).then((res) => {
+				if(res.status == 200){
+					router.push('Home')
+				}
+			}).catch((err)=>{
+				console.log("Caught");
+				this.showWrongCredentials = true;
 			})
 		}
 	}
@@ -65,6 +75,10 @@ body{
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
 a{color:inherit;text-decoration:none}
+
+.wrong-login{
+	color: crimson;
+}
 
 .login-wrap{
 	width:100%;
