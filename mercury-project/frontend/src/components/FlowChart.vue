@@ -13,7 +13,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: [40, 39, 20, 40, 39, 80, 40]
+      default:() => [40, 39, 20, 40, 39, 80, 40]
     },
     width: {
       default: 400

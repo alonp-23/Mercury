@@ -6,12 +6,13 @@
       </v-card-content>
     </v-card>
     <v-card elevation="2" outlined :max-width="width" height="200px">
-      <h1 class="m7">חשודים <br>{{ wantedNo }}</h1>
+      <h1 class="m7">חשודים <br />{{ wantedNo }}</h1>
     </v-card>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import FlowChart from "@/components/FlowChart";
 export default {
   components: {
@@ -25,7 +26,28 @@ export default {
       type: Number
     },
     height: {
-        default: 400
+      default: 400
+    }
+  },
+  data(){
+    data=[]
+  },
+  mounted(){
+
+  },
+  methods: {
+    async getStartedById() {
+      const suspects = await axios
+        .get(
+          `http://intelligence-api-git-2-intelapp1.apps.openforce.openforce.biz/api/suspects/wanted`
+        )
+        .then(response => {
+          return response.data;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+        this.data=suspects.filter(suspect=>data.includes(suspect.personId))
     }
   }
 };

@@ -5,15 +5,18 @@
                 סטטוס
             <v-spacer></v-spacer>      
             </v-card-title> 
-            <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
+            <PieChart :options="chartOptions"></PieChart>
         </v-card>
     </div>    
 </template>
 
 <script>
-import PieChart from "./PieChart.js";
+import PieChart from "./PieChart.vue";
 export default {    
     name: 'pieChartCard',
+    mounted() {
+      console.log(this.suspects);
+    },
     components:{
         PieChart
     },
@@ -22,31 +25,16 @@ export default {
           default: 400
       },
       suspects: {
-          type: Number,
-          default: 21
+          type: Number
       },
       wanted: {
-          type: Number,
-          default: 21
+          type: Number
       },
     },
     data() {
     return {
       chartOptions: {
         hoverBorderWidth: 20
-      },
-      chartData: {
-        indexLabel: "#percent%",
-        hoverBackgroundColor: "red",
-        hoverBorderWidth: 10,
-        labels: ["חשודים", "מבוקשים"],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: ["#141d33", "#283965"],
-            data: [parseInt(this.suspects.toString()), parseInt(this.wanted.toString())]
-          }
-        ]
       }
     };
   }
