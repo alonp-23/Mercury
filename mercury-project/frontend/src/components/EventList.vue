@@ -17,9 +17,10 @@
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
-             <v-btn disabled
+             <v-btn
               icon
-              color="white">
+              color="white"
+              @click.stop="openFilterDialog('time')">
               <v-icon>mdi-calendar-month</v-icon>
             </v-btn>
 
@@ -42,7 +43,7 @@
                 סינון אירועים
               </v-card-title>
 
-              <v-select
+              <v-select v-if="filterDialog.filterBy === 'type' || filterDialog.filterBy === 'county'"
                 v-model="filterDialog.selectedItem"
                 :items="filterDialog.filterItems"
                 filled
@@ -50,14 +51,17 @@
                 label="ערך מבוקש"
               ></v-select>
 
+              <v-row v-else justify="center mt-5">
+                <v-date-picker v-model="filterDialog.selectedItem"></v-date-picker>
+              </v-row>
+
             <v-card-actions>
                   <v-btn
                     class="ml-2 mt-5"
                     outlined
                     rounded
                     small
-                    @click="filterEvents(filterDialog.filterBy)"
-                  >
+                    @click="filterEvents(filterDialog.filterBy)">
                     סנן
                   </v-btn>
             </v-card-actions>
@@ -76,7 +80,7 @@
       <v-list-item 
       class="event-in-list" 
       v-for="(eventItem, index) in filteredEvents" 
-      :key="eventItem.eventId"
+      :key="eventItem.id"
       :class="{ 'light-color': (index % 2 === 0), 'dark-color': (index % 2 !== 0)}"
       @click.stop="openDialog(eventItem)">
         <v-list-item-content>
@@ -105,10 +109,13 @@
               <v-card-title class="text-t1 grey lighten-2">
                 פירוט האירוע
               </v-card-title>
-              <v-card-text class="text-h6 font-weight-bold mt-5">
+              <v-card-text class="text-h5 font-weight-bold mt-5">
                 {{ dialog.content.eventType}} ב{{ dialog.content.eventCounty}}
               </v-card-text>
-              <v-card-text class="text-subtitle-1 mt-5">
+              <v-card-text class="text-h6 font-weight-medium mt-5">
+                האירוע התרחש ב{{ dialog.content.eventTime}} ע"י {{ dialog.content.criminalName}}
+              </v-card-text>
+              <v-card-text class="text-subtitle-1">
                 {{ dialog.content.eventDescription }}
               </v-card-text>
             </v-card>
@@ -132,7 +139,7 @@ export default {
           eventCounties: ['הכל','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
           events:[
               {
-                eventId: 1,
+                id: 1,
                 eventTime: '12:34',
                 criminalName: 'רוני דניאל',
                 eventType: 'גניבה',
@@ -142,7 +149,7 @@ export default {
                 long: ''
               },
               {
-                eventId: 2,
+                id: 2,
                 eventTime: '12:37',
                 criminalName: 'ארנולד וייס',
                 eventType: 'רצח',
@@ -152,7 +159,7 @@ export default {
                 long: ''          
               },
               {
-                eventId: 3,               
+                id: 3,               
                 eventTime: '12:34',
                 criminalName: 'אנה לוי',
                 eventType: 'שוחד',
@@ -214,6 +221,7 @@ export default {
           break;
           case 'county': this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem)
           break;
+          case 'time': console.log(this.filterDialog.selectedItem)
         }
       }
     }

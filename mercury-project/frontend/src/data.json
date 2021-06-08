@@ -1,0 +1,43 @@
+
+[
+    {
+        "id": 1,
+        "userName": "גלי גרשטיין",
+        "eventTime": "2003-02-02T00:00:00.000Z",
+        "reportTime": "2003-02-02T00:00:00.000Z",
+        "eventName": "גניבת רכב",
+        "criminal": "רוני דניאל",
+        "eventType": "גניבה",
+        "eventDescription": "גנב רכב שחנה מחוץ לביתו",
+        "eventCounty": "ברוקלין",
+        "lat": "",
+        "long": ""
+    },
+    {
+        "id": 2,
+        "userName": "גלי גרשטיין",
+        "eventTime": "2003-02-02T00:00:00.000Z",
+        "reportTime": "2003-02-02T00:00:00.000Z",
+        "eventName": "רצח על חנייה",
+        "criminalName": "ארנולד וייס",
+        "eventType": "רצח",
+        "eventDescription": "רצח אדם שתפס את חנייתו",
+        "eventCounty": "מנהטן",
+        "lat": "",
+        "long": ""
+    },
+    {
+        "id": 3,
+        "userName": "גלי גרשטיין",
+        "eventTime": "2003-02-02T00:00:00.000Z",
+        "reportTime": "2003-02-02T00:00:00.000Z",
+        "eventName": "ניסיון שוחד שופט",
+        "criminalName": "אנה לוי",
+        "eventType": "שוחד",
+        "eventDescription": "יסתה לשחד שופט כשנשפטה על העלמת מס",
+        "eventCounty": "ברוקלין",
+        "lat": "",
+        "long": ""
+    }
+]
+ 
