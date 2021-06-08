@@ -23,12 +23,12 @@
       <template v-slot:default="{ item }">          
         <v-list-item id="list_item" class="rounded-xl ma4" >
           <v-list-item-avatar>
-                <v-img :src="avatar(item)"></v-img>
+                <v-img :src="avatar(item.person.personImageURL)"></v-img>
             </v-list-item-avatar>
 
           <v-list-item-content>
-                <v-list-item-title v-text="full_name(item.first_name,item.last_name)" ></v-list-item-title>
-                <v-list-item-subtitle id="item_content" v-text="item.id"></v-list-item-subtitle>
+                <v-list-item-title v-text="full_name(item.person.firstName,item.person.lastName)" ></v-list-item-title>
+                <v-list-item-subtitle id="item_content" v-text="item.personId"></v-list-item-subtitle>
             </v-list-item-content>
 
           <v-dialog v-model="dialog" width="500">      
@@ -37,26 +37,26 @@
                         v-bind="attrs"
                         v-on="on">
                         <v-btn icon>
-                            <v-icon color="white" >mdi-arrow-left</v-icon>
+                            <v-icon color="white">mdi-arrow-left</v-icon>
                         </v-btn>
                     </v-list-item-action>
                 </template>
                 <v-card>
 
                     <v-card-title class="headline grey lighten-2">
-                    {{full_name(item.first_name,item.last_name)}}
+                    {{full_name(item.person.firstName,item.person.lastName)}}
                     </v-card-title>
 
                     <v-img 
                         contain
-                        :src="avatar(item)"
+                        :src="avatar(item.person.personImageURL)"
                         max-height="150" 
                         class="ma-3"/>          
 
                     <v-card-text>          
-                    תעודת זהות: {{item.id}} <br>
-                    כתובת: {{item.address}} <br>
-                    טלפון: {{item.phone_number}}
+                    תעודת זהות: {{item.personId}} <br>
+                    כתובת: {{item.person.address}} <br>
+                    טלפון: {{item.person.phoneNumber}}
                     </v-card-text>
 
                     <v-divider></v-divider>
@@ -90,17 +90,14 @@ export default {
       },
       height: {
           default: 500
+      },
+      pplOfIntrest: {
+        type: Array,
+        required: true
       }
   },
   data: ()=> {
-    return {
-      pplOfIntrest: [{first_name: "ישראל", last_name:"ישראלי", id: 456346, 
-                    person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
-                    is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
-                    {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-                    is_wanted: true, phone_number:143234, address:"דרדר 51, מצפה נשר"},
-                    {first_name: "דובים", last_name:"ביער" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-      is_wanted: true, phone_number:241324, address:"דרדר 51, מצפה נשר"}],
+    return {      
       dialog: false,
       show_wanted:false,      
     }
@@ -111,7 +108,7 @@ export default {
     }      
   },
   methods: {
-      full_name: function(first_name,last_name){return `${first_name} ${last_name}`},
+      full_name: function(firstName,lastName){return `${firstName} ${lastName}`},
       avatar: function(person){return person.person_img_url},
      
   }  

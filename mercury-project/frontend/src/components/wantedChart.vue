@@ -1,9 +1,8 @@
 <template>
   <div>
-    <v-card :max-width="width" id="card">
-      <v-card-content class="graphBox">        
-        <FlowChart id="graph" class="crimesGraph"></FlowChart>      
-    
+    <v-card :max-width="width" id="card" color="">
+      <v-card-content class="graphBox">
+        <FlowChart id="graph" class="crimesGraph"></FlowChart>
       </v-card-content>
     </v-card>
   </div>
@@ -16,13 +15,14 @@ export default {
     FlowChart
   },
   props: {
-      width: {
-          default: 400
-      },
+    width: {
+      default: 400
     },
+    wantedNo: {
+      type: Number
+    }
+  }
 };
 </script>
 
- <style  scoped>
- 
- </style>
+<style scoped></style>

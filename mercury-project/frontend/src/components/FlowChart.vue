@@ -4,7 +4,7 @@ import chartjsPluginAnnotation from "chartjs-plugin-annotation";
 
 const { reactiveProp } = mixins;
 
-var backgroundColor = "rgba(30, 139, 195, 0.5)";
+var backgroundColor = "rgb(20, 29, 51,0.7)";
 export default {
   extends: Line,
   data() {
@@ -37,14 +37,16 @@ export default {
         scales: {
           yAxes: [
             {
+              display: false,
               ticks: {
+                desplay: false,
                 beginAtZero: true
               },
               gridLines: {
-                display: true
+                display: false
               },
               scaleLabel: {
-                display: true
+                display: false
               }
             }
           ],
@@ -52,18 +54,9 @@ export default {
             {
               gridLines: {
                 display: false
-              },
-              scaleLabel: {
-                display: true
               }
             }
           ]
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: "Custom Chart Title"
-          }
         }
       }
     );
