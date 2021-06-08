@@ -80,6 +80,14 @@ a{color:inherit;text-decoration:none}
 	color: crimson;
 }
 
+.input:active{
+	outline: none;
+}
+
+.input:focus{
+	outline: none;
+}
+
 .login-wrap{
 	width:100%;
 	margin:auto;
