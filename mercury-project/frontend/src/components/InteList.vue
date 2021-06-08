@@ -21,7 +21,7 @@
       id = "scroll"
     >
       <template v-slot:default="{ item }">          
-        <v-list-item id="list_item" class="rounded-xl ma4" >
+        <v-list-item id="list_item" class="rounded-xl mb-4" >
           <v-list-item-avatar>
                 <v-img :src="avatar(item)"></v-img>
             </v-list-item-avatar>
@@ -132,7 +132,7 @@ export default {
         border-radius: 5%;
     }
     #list_item{
-        background-color: #141d33;                   
+        background-color: #141d33;
     }
     #item_content{
         color:white;
