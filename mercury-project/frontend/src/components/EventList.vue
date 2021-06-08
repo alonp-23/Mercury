@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="450">
+  <v-card class="events-side-bar" width=450 height=90%>
 
     <v-toolbar dark dense>
       <v-container>
@@ -7,11 +7,7 @@
 
 
       <v-toolbar-title class="mt-2 ml-2">אירועים</v-toolbar-title>
-      <v-toolbar-title class="text-subtitle-2 mt-3 ml-3">{{dateToDisplay}}</v-toolbar-title>
-      <v-toolbar-title class="text-subtitle-2 mt-3">{{this.filterDialog.selectedItem}}</v-toolbar-title>
-      <!-- <v-col>
-      <v-toolbar-title class="mt-2">{{this.filterDialog.selectedDate}}</v-toolbar-title>
-      </v-col> -->
+      <v-toolbar-title class="text-subtitle-2 mt-3 ml-3 mr-3">{{dateToDisplay}}</v-toolbar-title>
 
            <v-btn
               icon
@@ -33,6 +29,8 @@
               @click.stop="openFilterDialog('type')">
               <v-icon>mdi-filter</v-icon>
             </v-btn>
+
+      <v-toolbar-title class="text-subtitle-2 mt-3 mr-3">{{this.filterDialog.selectedItem}}</v-toolbar-title>
 
             <!---------- FILTER DIALOG ---------->
         <div class="text-center">
@@ -90,12 +88,12 @@
             <v-row>  
 
               <v-col>
-              <v-list-item-title  class="white--text">{{eventItem.eventName}}</v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{eventItem.criminal}}</v-list-item-subtitle>
+              <v-list-item-title  class="white--text font-weight-bold">{{eventItem.eventName}}</v-list-item-title>
+              <v-list-item-subtitle class="white--text mt-1">{{eventItem.criminal}}</v-list-item-subtitle>
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text">{{convertDateToDayTime(eventItem.eventTime)}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text mr-15">{{convertDateToDayTime(eventItem.eventTime)}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
@@ -108,8 +106,9 @@
             width="400">
 
             <v-card>
-              <v-card-title class="text-t1 grey lighten-2">
-                פירוט האירוע
+              <v-card-title class="grey lighten-2 event-info-card-title">
+                <p class="text-h5 font-weight-bold mt-3">פירוט האירוע</p>
+                <img src='../icon.png' height=40 width=40>
               </v-card-title>
               <v-card-text class="text-h5 font-weight-bold mt-3">
                 {{ dialog.content.eventName}} ב{{ dialog.content.eventCounty}}
@@ -135,7 +134,6 @@
 <script>
 import eventsData from '../data/events.json'
 
-
 export default {
   name: 'EventList',
   data() {
@@ -146,6 +144,7 @@ export default {
           filteredEvents: null,
           dialog: {
             showDialog: false,
+            dialogIcon: '../icon.png',
             content: {
               criminal: '',
               eventTime: '',
@@ -231,7 +230,16 @@ export default {
 <style scoped>
 
 v-toolbar {
-    align-content: center
+    align-content: center;
+}
+
+.event-info-card-title {
+  justify-content: space-between;
+}
+
+.events-side-bar.theme--light.v-card {
+    background: rgba(124,127,141,0.7);
+    border-radius: 15px;
 }
 
 .v-list {
@@ -239,10 +247,10 @@ v-toolbar {
 }
 
 .dark-color {
-    background-color: #141d33	;
+    background-color: #141d33;
 }
 
 .light-color {
-    background-color:#1d2b4b
+    background-color :#1d2b4b;
 }
 </style>
