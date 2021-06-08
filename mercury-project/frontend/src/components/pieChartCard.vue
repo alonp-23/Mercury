@@ -36,6 +36,7 @@ export default {
         hoverBorderWidth: 20
       },
       chartData: {
+        indexLabel: "#percent%",
         hoverBackgroundColor: "red",
         hoverBorderWidth: 10,
         labels: ["חשודים", "מבוקשים"],

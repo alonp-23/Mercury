@@ -104,7 +104,7 @@ export default {
   },
   computed: {    
     pplList: function () {
-      return this.pplOfIntrest.filter(person=> person.is_wanted && this.show_wanted || !person.is_wanted && !this.show_wanted)
+      return this.pplOfIntrest.filter(person=> person.wanted && this.show_wanted || !person.wanted && !this.show_wanted)
     }      
   },
   methods: {

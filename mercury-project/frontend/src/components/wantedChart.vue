@@ -5,6 +5,9 @@
         <FlowChart id="graph" class="crimesGraph"></FlowChart>
       </v-card-content>
     </v-card>
+    <v-card elevation="2" outlined :max-width="width" height="200px">
+      <h1 class="m7">חשודים <br>{{ wantedNo }}</h1>
+    </v-card>
   </div>
 </template>
 
@@ -20,9 +23,16 @@ export default {
     },
     wantedNo: {
       type: Number
+    },
+    height: {
+        default: 400
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>

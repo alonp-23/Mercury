@@ -24,7 +24,7 @@ export default {
       {
         labels: this.createLableArray(this.data),
         datasets: [
-          {
+          {            
             label: "Bar Chart",
             backgroundColor: backgroundColor,
             data: this.data
