@@ -114,7 +114,7 @@ app.listen(port, () => {
     }
   
     
-    const sendData = () => {
+    const sendData = (route) => {
       var weatherJson = require('./weather');
       var holidaysILJson = require('./holidaysIL');
       var holidaysUSJson = require('./holidaysUS');
@@ -122,8 +122,35 @@ app.listen(port, () => {
 
       axios({
         method: 'post',
-        url: '19.0.0.4/',
+        url: '19.0.0.4/5',
         data: weatherJson
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      
+      axios({
+        method: 'post',
+        url: '19.0.0.4/6',
+        data: holidaysILJson
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      
+      axios({
+        method: 'post',
+        url: '19.0.0.4/7',
+        data: holidaysUSJson
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      
+      axios({
+        method: 'post',
+        url: '19.0.0.4/8',
+        data: holidaysJOJson
         })
         .catch(error => {
             console.log(error);
