@@ -13,10 +13,10 @@
 					</div>
 					<div class="intelBox">
 						<div class="kpis">
-							<div class="kpiBox">חשודים: 1</div>
-							<div class="kpiBox">מבוקשים: 2</div>
+							<div class="kpiBox">חשודים: {{ pplOfIntrest.filter(item => !item.wanted).length }}</div>
+							<div class="kpiBox">מבוקשים: {{pplOfIntrest.filter(item => item.wanted).length}}</div>
 						</div>
-						<inte-list class="intelList"></inte-list>
+						<inte-list :pplOfIntrest="this.pplOfIntrest" class="intelList"></inte-list>
 					</div>
 				</div>
 				<div class="leftSide">
@@ -43,11 +43,13 @@ import BarChart from '@/components/BarChart';
 import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
 import WeatherBox from "@/components/WeatherCube.vue";
+import axios from "axios";
 
 export default {
 	name: 'StatisticsPage',
 	data() {
 		return {
+			pplOfIntrest: [],
 		};
 	},
   components: {
@@ -55,7 +57,18 @@ export default {
 	EventList,
 	InteList,
 	WeatherBox
-  }
+	},
+	async mounted() {
+		this.pplOfIntrest = await axios
+			.get(`http://intelligence-api-git-2-intelapp1.apps.openforce.openforce.biz/api/suspects`)
+			.then(response => {
+				return response.data;
+			})
+			.catch(e => {
+				alert(e);
+			});
+			console.log(this.pplOfIntrest); 
+	}
 }
 </script>
 
