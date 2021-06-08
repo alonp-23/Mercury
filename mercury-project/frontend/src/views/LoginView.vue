@@ -1,18 +1,18 @@
 <template>
 <div>
-  <Weather/>
+  <Login/>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Weather from '@/components/WeatherCube.vue';
+import Login from '@/components/Login.vue';
 
 export default {
-  name: 'Home',
+  name: 'LoginView',
   components: {
-    Weather,
-  },
+    Login,
+  }
 };
 </script>
 

@@ -47,7 +47,7 @@ app.use(function(err, req, res, next) {
 });
 
 const server = app.listen(8080, () => {
-    console.log(`Express running → PORT ${server.address().port}`);
+  console.log(`Express running → PORT ${server.address().port}`);
 });
 
 module.exports = app;
