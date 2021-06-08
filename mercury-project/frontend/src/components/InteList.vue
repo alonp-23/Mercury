@@ -82,6 +82,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'InteList',
   props: {
@@ -94,13 +96,6 @@ export default {
   },
   data: ()=> {
     return {
-      pplOfIntrest: [{first_name: "ישראל", last_name:"ישראלי", id: 456346, 
-      person_img_url: "https://ps.w.org/ultimate-member/assets/icon-256x256.png?rev=2143339", 
-      is_wanted: false, phone_number:1234567, address:"דרדר 51, מצפה נשר"},
-      {first_name: "שאול", last_name:"שאולה" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-      is_wanted: true, phone_number:143234, address:"דרדר 51, מצפה נשר"},
-      {first_name: "דובים", last_name:"ביער" , id: 3452345, person_img_url: "https://www.pngarts.com/files/11/Avatar-Free-PNG-Image.png", 
-      is_wanted: true, phone_number:241324, address:"דרדר 51, מצפה נשר"}],
       dialog: false,
       show_wanted:false,      
     }
@@ -108,14 +103,20 @@ export default {
   computed: {    
     pplList: function () {
       return this.pplOfIntrest.filter(person=> person.is_wanted && this.show_wanted || !person.is_wanted && !this.show_wanted)
-    }      
+    },
+    ...mapState(["pplOfIntrest"])  
+  },
+  mounted() {
+    this.initPplArr();
   },
   methods: {
       full_name: function(first_name,last_name){return `${first_name} ${last_name}`},
       avatar: function(person){return person.person_img_url},
       genRandomIndex (length) {
         return Math.ceil(Math.random() * (length - 1))
-      }
+      },
+      ...mapMutations(["initPplArr"]),
+      
   }  
 };
 </script>

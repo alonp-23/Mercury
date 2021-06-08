@@ -1,17 +1,24 @@
 <template>
   <div class="about">
-    
-    <pieChartCard :suspects="21" wanted="21"/>
+    <iteList/>
+    <pieChartCard/>
   </div>
 </template>
 
 <script>
 import pieChartCard from '@/components/pieChartCard.vue';
-
+import iteList from '@/components/InteList.vue'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Home',
   components: {
-    pieChartCard
+    pieChartCard,iteList
+  },
+  methods:{
+      ...mapMutations(["initPplArr"]),
+  },
+  mounted() {
+    this.initPplArr();
   },
 };
 </script>
