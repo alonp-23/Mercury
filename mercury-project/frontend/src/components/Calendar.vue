@@ -1,7 +1,9 @@
 <template>
-  <v-calendar
-    :attributes='attributes'
-    />
+    <v-card>
+        <v-calendar
+            :attributes='attributes'
+            />
+    </v-card>
 </template>
 
 <script>
@@ -78,5 +80,4 @@ import holidaysJO from '../assets/holidaysJO.json'
 </script>
 
 <style scoped>
-
 </style>

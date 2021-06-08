@@ -95,7 +95,7 @@ body {
 .card {
     position: fixed;
     bottom: 10px;
-    width: 35%;
+    width: 25%;
     height: 40%;
     border-radius: 5%;
     background-color: #141d33;
