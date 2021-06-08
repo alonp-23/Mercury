@@ -5,35 +5,54 @@
 </template>
 
 <script>
+import holidaysUS from '../assets/holidaysUS.json'
+import holidaysIL from '../assets/holidaysIL.json'
+
     export default {
-      data() {
-        const todos = [
-          {
-            description: 'Take Noah to basketball practice.',
-            isComplete: false,
-            dates: { weekdays: 6 }, // Every Friday
-            color: 'red',
-          },
-        ];
-        return {
-          incId: todos.length,
-          todos,
-        };
-      },
+      data:() => ({
+        usHolidays:[{}],
+        ilHolidays:[{}]
+        
+      }),
+      mounted () {
+        this.usHolidays = holidaysUS.map(holiday => {
+            var date = new Date(holiday.date);
+            date.setDate(date.getDate() + 1);
+            holiday.date = date.toISOString().substr(0, 10)
+            return holiday;
+       }) ,
+       this.ilHolidays = holidaysIL.map(holiday => {
+            var date = new Date(holiday.date);
+            date.setDate(date.getDate() + 1);
+            holiday.date = date.toISOString().substr(0, 10)
+            return holiday;
+       }) 
+
+    },
       computed: {
         attributes() {
           return [
-            // Attributes for todos
-            ...this.todos.map(todo => ({
-              dates: todo.dates,
+            ...this.usHolidays.map(holiday => ({
+              dates: holiday.date,
               dot: {
-                color: todo.color,
-                class: todo.isComplete ? 'opacity-75' : '',
+                color: "red",
+                class: '',
               },
               popover: {
-                label: todo.description,
+                label: holiday.name,
               },
-              customData: todo,
+              customData: holiday,
+            })),
+            ...this.ilHolidays.map(holiday => ({
+              dates: holiday.date,
+              dot: {
+                color: "blue",
+                class: '',
+              },
+              popover: {
+                label: holiday.name,
+              },
+              customData: holiday,
             })),
           ];
         },
