@@ -51,23 +51,35 @@
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: true
+								beginAtZero: true,
+								fontColor: 'rgba(255,255,255,1)'
               },
               gridLines: {
-                display: true
+								display: true,
+								color: 'rgba(255,255,255,1)',
+								zeroLineColor: 'rgba(255,255,255,1)'
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Crime Rate'
+								labelString: 'Crime Rate',
+								fontColor: 'rgba(255,255,255,1)'
+
 							}
             }],
             xAxes: [{
+							ticks: {
+								fontColor: 'rgba(255,255,255,1)'
+							},
               gridLines: {
-                display: false
+								display: false,
+								color: 'rgba(255,255,255,1)',
+								zeroLineColor: 'rgba(255,255,255,1)'
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Date'
+								labelString: 'Date',
+								fontColor: 'rgba(255,255,255,1)'
+
 							},
             }]
 					},
