@@ -1,22 +1,18 @@
 <template>
-  <v-card width="700">
+  <v-card max-width="450">
 
     <v-toolbar dark dense>
-      <v-container width="400">
+      <v-container>
         <v-row>
 
-      <v-col>
-      <v-toolbar-title class="mt-2">אירועים</v-toolbar-title>
-      </v-col>
 
-      <v-col>
-      <v-toolbar-title class="text-subtitle-2 mt-3">{{dateToDisplay}} {{this.filterDialog.selectedItem}}</v-toolbar-title>
-            </v-col>
+      <v-toolbar-title class="mt-2 ml-2">אירועים</v-toolbar-title>
+      <v-toolbar-title class="text-subtitle-2 mt-3 ml-3">{{dateToDisplay}}</v-toolbar-title>
+      <v-toolbar-title class="text-subtitle-2 mt-3">{{this.filterDialog.selectedItem}}</v-toolbar-title>
       <!-- <v-col>
       <v-toolbar-title class="mt-2">{{this.filterDialog.selectedDate}}</v-toolbar-title>
       </v-col> -->
 
-        <v-col>
            <v-btn
               icon
               color="white"
@@ -76,7 +72,6 @@
           </v-dialog>
         </div>
 
-      </v-col>
 
       </v-row>
       </v-container>
@@ -116,10 +111,10 @@
               <v-card-title class="text-t1 grey lighten-2">
                 פירוט האירוע
               </v-card-title>
-              <v-card-text class="text-h5 font-weight-bold mt-5">
+              <v-card-text class="text-h5 font-weight-bold mt-3">
                 {{ dialog.content.eventName}} ב{{ dialog.content.eventCounty}}
               </v-card-text>
-              <v-card-text class="text-h6 font-weight-medium mt-5">
+              <v-card-text class="text-h6 font-weight-medium">
                 האירוע התרחש ב{{ convertDateToDayTime(dialog.content.eventTime) }} ע"י {{ dialog.content.criminal}}
               </v-card-text>
               <v-card-text class="text-subtitle-1">

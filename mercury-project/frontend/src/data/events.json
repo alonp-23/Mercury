@@ -50,6 +50,19 @@
         "eventCounty": "ברונקס",
         "lat": "",
         "long": ""
+    },
+    {
+        "id": 5,
+        "userName": "גלי גרשטיין",
+        "eventTime": "2021-06-07T18:00:00.000Z",
+        "reportTime": "2021-06-07T18:00:00.000Z",
+        "eventName": "גניבת רכוש מעסק",
+        "criminal": "דינה זיו",
+        "eventType": "גניבה",
+        "eventDescription": "גנבה מכונת גלידה אמריקאית ממקדונלדס",
+        "eventCounty": "סטייטן איילנד",
+        "lat": "",
+        "long": ""
     }
 ]
  
