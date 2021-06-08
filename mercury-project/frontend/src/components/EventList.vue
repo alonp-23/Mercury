@@ -1,5 +1,5 @@
 <template>
-  <v-card class="events-side-bar" width=450 height=90%>
+  <v-card class="events-side-bar" width=500 height=90%>
 
     <v-toolbar dark dense>
       <v-container>
@@ -16,18 +16,25 @@
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
-             <v-btn
+            <v-btn
               icon
               color="white"
               @click.stop="openFilterDialog('time')">
               <v-icon>mdi-calendar-month</v-icon>
             </v-btn>
 
-             <v-btn
+            <v-btn
               icon
               color="white"
               @click.stop="openFilterDialog('type')">
               <v-icon>mdi-filter</v-icon>
+            </v-btn>
+
+            <v-btn disabled
+              icon
+              color="white"
+              @click.stop="openFilterDialog('type')">
+              <v-icon>mdi-map-legend</v-icon>
             </v-btn>
 
       <v-toolbar-title class="text-subtitle-2 mt-3 mr-3">{{this.filterDialog.selectedItem}}</v-toolbar-title>
@@ -52,7 +59,7 @@
                 label="ערך מבוקש"
               ></v-select>
 
-              <v-row v-else justify="center mt-5">
+              <v-row v-else class="center mt-5 mr-14">
                 <v-date-picker v-model="filterDialog.selectedDate"></v-date-picker>
               </v-row>
 
@@ -88,12 +95,12 @@
             <v-row>  
 
               <v-col>
-              <v-list-item-title  class="white--text font-weight-bold">{{eventItem.eventName}}</v-list-item-title>
+              <v-list-item-title  class="white--text font-weight-bold">{{eventItem.event_name}}</v-list-item-title>
               <v-list-item-subtitle class="white--text mt-1">{{eventItem.criminal}}</v-list-item-subtitle>
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text mr-15">{{convertDateToDayTime(eventItem.eventTime)}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="white--text mr-15">{{convertDateToDayTime(eventItem.event_time)}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
@@ -133,6 +140,7 @@
     
 <script>
 import eventsData from '../data/events.json'
+import axios from 'axios'
 
 export default {
   name: 'EventList',
@@ -167,9 +175,11 @@ export default {
   beforeMount() {
     this.filterDialog.selectedDate = this.getCurrentISOString().replace(/T.*/,'');
   },
+  async created() {
+    this.events = await this.fetchEvents()
+  },
   mounted() {
-    this.events = eventsData;
-    this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate);
+    this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate);
   },
   computed: {
     dateToDisplay() {
@@ -177,6 +187,12 @@ export default {
     }
   },
   methods: {
+    fetchEvents() {
+      return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports')
+      .then(res => { 
+        return res.data
+      })
+    },
     openFilterDialog(filterBy) {
       this.filterDialog.showDialog = true
       this.filterDialog.filterBy = filterBy
@@ -190,24 +206,27 @@ export default {
     openDialog(eventItem) {
       this.dialog.showDialog = true,
       this.dialog.content.criminal= eventItem.criminal;
-      this.dialog.content.eventName = eventItem.eventName;
-      this.dialog.content.eventType = eventItem.eventType;
-      this.dialog.content.eventTime = eventItem.eventTime;
-      this.dialog.content.eventDescription = eventItem.eventDescription;
-      this.dialog.content.eventCounty = eventItem.eventCounty;
+      this.dialog.content.eventName = eventItem.event_name;
+      this.dialog.content.eventType = eventItem.event_type;
+      this.dialog.content.eventTime = eventItem.event_time;
+      this.dialog.content.eventDescription = eventItem.event_description;
+      this.dialog.content.eventCounty = eventItem.event_county;
     },
     filterEvents(filterBy) {
       this.filterDialog.showDialog = false
       if(this.filterDialog.selectedItem === 'כל האירועים') {
-        this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
+        this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
       } else {
         switch(filterBy) {
-          case 'type': this.filteredEvents = this.events.filter((event) => event.eventType === this.filterDialog.selectedItem && (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
+          case 'type': this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem &&
+           (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
-          case 'county': this.filteredEvents = this.events.filter((event) => event.eventCounty === this.filterDialog.selectedItem && (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
+          case 'county': this.filteredEvents = this.events.filter((event) => event.event_county === this.filterDialog.selectedItem &&
+           (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
           case 'time': {
-            this.filteredEvents = this.events.filter((event) => (event.eventTime).replace(/T.*/,'') === this.filterDialog.selectedDate)
+            this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+            console.log(this.filteredEvents)
             this.filterDialog.selectedItem = 'כל האירועים'
           }
         }
@@ -244,6 +263,7 @@ v-toolbar {
 
 .v-list {
     padding: 0;
+    overflow-y:auto;
 }
 
 .dark-color {
