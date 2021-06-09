@@ -122,7 +122,7 @@
 			this.addPlugin(chartjsPluginAnnotation);
 			let wantedDate = '2021-06-09';
 			const crimesPerDayArr = await axios
-				.get(`http://localhost:3000/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
+				.get(`http://backend-tmzde3.apps.openforce.openforce.biz/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
 				.then(response => {
 				return response.data;
 				})
