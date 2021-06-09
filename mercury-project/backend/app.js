@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const server = app.listen(8080, () => {
+const server = app.listen(3000, () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
 
