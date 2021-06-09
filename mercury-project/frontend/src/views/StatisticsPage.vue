@@ -143,6 +143,7 @@ export default {
 		direction: ltr;
 	}
 	.intelBox {
+		margin-left: 2%;
 		width: 40vh;
 		height: 100%;
 		border-radius: 3%;
@@ -167,6 +168,8 @@ export default {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		color: white;
+
 	}
 
 	.intelList {
@@ -234,6 +237,8 @@ export default {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		color: white;
+
 	}
 
 	.inputBox {

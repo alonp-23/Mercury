@@ -1,10 +1,12 @@
 <template>
   <div>
     <v-card class="mx-auto" :max-width="width" id="list_card">
-      <v-card-title class="white--text" id="title">
+      <div class="titleBox">
+        <v-toolbar-title class="white--text" id="title">
         ציר מודיעיני
         <v-spacer></v-spacer>
-      </v-card-title>
+      </v-toolbar-title>
+      </div>
       <v-divider></v-divider>
       <v-chip class="mr-2 ma-3" @click="show_wanted = false" label>
         <v-icon left v-if="!show_wanted">mdi-checkbox-marked-circle</v-icon>
@@ -14,7 +16,7 @@
         <v-icon left v-if="show_wanted">mdi-checkbox-marked-circle</v-icon>
         מבוקשים
       </v-chip>
-      <v-virtual-scroll :items="pplList" :item-height="50" :height="height" id="scroll">
+      <v-virtual-scroll :items="pplList" :item-height="70" :height="height" id="scroll">
         <template v-slot:default="{ item }">
           <v-list-item id="list_item" class="rounded-xl ma4">
             <v-list-item-avatar>
@@ -130,6 +132,7 @@ export default {
     }
     #title{
       margin-right: 5%;
+      background: #282828;
     }
 
     #dialog_card_title {

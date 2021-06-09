@@ -1,5 +1,5 @@
 <template>
-  <v-card class="events-side-bar wrapper" width=23vw height=90%>
+  <v-card class="events-side-bar wrapper" width=23vw height=800px>
 
     <v-toolbar height="100%" dark dense>
       <v-container>

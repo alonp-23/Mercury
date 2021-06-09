@@ -126,7 +126,7 @@ button {
     bottom: 10px;
     width:  100%;
     height: 35%;
-    background-color: #141d33;
+    background-color: rgba(124, 127, 141);
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
 
@@ -151,6 +151,7 @@ h2 {
     margin-bottom: 2%;
     font-weight: 300;
     font-size: 2.25em;
+    color: #FFF
 }
 
 h3 {
@@ -159,6 +160,14 @@ h3 {
     color: #777;
     font-weight: 400;
     font-size: 1em;
+}
+
+tr{
+    color: #FFF
+}
+
+button{
+    color: #FFF;
 }
 
 span {
