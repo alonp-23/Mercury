@@ -28,15 +28,17 @@
               <v-list-item-subtitle id="item_content" v-text="item.personId"></v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-btn icon @click.stop="openDialog(item)">
+            <v-btn icon @click="openDialog(item)">
               <v-icon color="white">mdi-arrow-left</v-icon>
             </v-btn>
 
-            <v-dialog v-model="dialog">
-              <v-card>
-                <v-card-title class="headline lighten-2" id="dialog_card_title">
-                  {{ full_name(dialogPerson.person.firstName, dialogPerson.person.lastName) }}                  
-                </v-card-title>
+            
+          </v-list-item>
+        </template>
+      </v-virtual-scroll>
+      <v-dialog v-model="dialog">
+              <v-card >
+                <v-card-title class="headline lighten-2" id="dialog_card_title"> </v-card-title>
 
                 <profilePage v-bind:personId="dialogPerson.personId.toString()" />
                 <v-divider></v-divider>
@@ -49,9 +51,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-list-item>
-        </template>
-      </v-virtual-scroll>
     </v-card>
   </div>
 </template>
@@ -81,16 +80,7 @@ export default {
       show_wanted: false,
       dialogPerson: {
         personId: 456346,
-        person: {
-          firstName: "ישראל",
-          lastName: "ישראלי",
-          personImageURL:
-            "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
-
-          wanted: false,
-          phone_number: 1234567,
-          address: "דרדר 51, מצפה נשר"
-        }
+        person: {}
       }
     };
   },
@@ -108,9 +98,9 @@ export default {
     openDialog(person) {
       this.dialog = true;
       this.dialogPerson = person;
-      console.log(this.dialogPerson.person.firstName, this.dialogPerson.person.lastName, )
+      console.log(this.dialogPerson.person.firstName, this.dialogPerson.person.lastName);
     }
-  },
+  }
 };
 </script>
 <style>
@@ -137,7 +127,7 @@ div {
 #title {
   background-color: #141d33;
 }
-#dialog_card_title{
+#dialog_card_title {
   background-color: #141d33;
 }
 </style>

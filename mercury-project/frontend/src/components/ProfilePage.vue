@@ -1,8 +1,8 @@
 <template>
-  <v-container id="container">
+  <v-container>
     <v-row>
       <person-details
-        :personId="this.personId"
+        v-bind:personId="this.personId"
         @change-wanted-state="changeWantedState"
         bgColor="#141d33"
         :wantedButtonStatus="wantedButton"
@@ -19,10 +19,10 @@
         ></titled-info>
       </v-col>
       <v-col cols="2">
-        <driver-license :personId="this.personId"></driver-license>
+        <driver-license v-bind:personId="this.personId"></driver-license>
       </v-col>
       <v-col cols="4">
-        <reports :personId="this.personId"></reports>
+        <reports v-bind:personId="this.personId"></reports>
       </v-col>
       <v-col cols="2"> </v-col>
     </v-row>
@@ -31,6 +31,7 @@
 
 <script>
 import PersonDetails from "../components/PersonDetails.vue";
+import HeatMap from "../components/HeatMap.vue";
 import TitledInfo from "../components/TitledInfo.vue";
 import Reports from "../components/reports.vue";
 import driverLicense from "../components/driverLicense.vue";
@@ -42,7 +43,8 @@ export default {
     PersonDetails,
     TitledInfo,
     Reports,
-    driverLicense
+    driverLicense,
+    HeatMap
   },
   methods: {
     changeWantedState: function() {
@@ -50,7 +52,10 @@ export default {
     }
   },
   async mounted() {
-    console.log("id " + this.personId);
+    const response = await api.profile().getNumOfPostsById(this.personId);
+    this.posts = response.data;
+  },
+  async updated() {
     const response = await api.profile().getNumOfPostsById(this.personId);
     this.posts = response.data;
   },
@@ -58,22 +63,14 @@ export default {
     return {
       posts: 0,
       wantedButton: false
-    }
+    };
   },
-  props: {
-    personId: {
-      type: String,
-      required: true
-    }
-  }
+  props: ["personId"]
 };
 </script>
 
 <style scoped>
 .row {
   padding: 10px;
-}
-#container{
-    
 }
 </style>

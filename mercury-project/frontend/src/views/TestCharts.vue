@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <!-- <div class="container">
+     <div class="container">
       <wantedChard
         width="500"
         height="500"
@@ -10,7 +10,7 @@
       <v-card class="box">
         <FlowChart />
       </v-card>
-    </div> -->
+    </div> 
 
     <iteList :pplOfIntrest="this.pplOfIntrest" />
 
@@ -25,6 +25,7 @@ import iteList from "@/components/InteList.vue";
 import wantedChard from "@/components/WantedCard.vue";
 import suspectsChard from "@/components/SuspectsCard.vue";
 import FlowChart from "@/components/FlowChart.vue";
+import HeatMap from "@/components/HeatMap.vue";
 export default {
   name: "Home",
   components: {

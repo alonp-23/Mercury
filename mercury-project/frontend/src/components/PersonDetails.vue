@@ -1,5 +1,5 @@
 <template>
-  <v-card color="#141d33" dark class="mx-auto rounded-card" width="56vw" outlined>
+  <v-card color="#141d33" dark class="mx-auto rounded-card" width="90vw" outlined>
     <v-container>
       <v-row>
         <v-col>
@@ -10,17 +10,7 @@
               </v-row>
               <v-row>
                 <div class="text-center mx-auto">
-                  <v-btn
-                    v-if="wantedButtonStatus"
-                    outlined
-                    rounded
-                    text
-                    x-large
-                    icon
-                    @click="updateWantedState"
-                  >
-                    <v-icon :color="state_color" :class="lock_icon"></v-icon>
-                  </v-btn>
+                  
                 </div>
               </v-row>
             </v-container>
@@ -80,8 +70,11 @@ export default {
     const response = await api.profile().getProfileById(this.personId);
     this.suspectDetails = response.data;
   },
-  props: ["personId"],
-  prop: {
+  async updated() {
+    const response = await api.profile().getProfileById(this.personId);
+    this.suspectDetails = response.data;
+  },
+  props: {
     bgColor: {
       type: String,
       required: true
