@@ -1,14 +1,17 @@
 <template>
-  <v-card class="events-side-bar" width=500 height=90%>
+  <v-card class="events-side-bar wrapper" width=23vw height=90%>
 
-    <v-toolbar dark dense>
+    <v-toolbar height="100%" dark dense>
       <v-container>
         <v-row>
 
 
-      <v-toolbar-title class="mt-2 ml-2">אירועים</v-toolbar-title>
-      <v-toolbar-title class="text-subtitle-2 mt-3 ml-3 mr-3">{{dateToDisplay}}</v-toolbar-title>
+      <v-col class="ml-0 pl-0">
+      <v-toolbar-title class="mt-2">אירועים</v-toolbar-title>
+      <v-toolbar-title class="text-subtitle-2 mt-2 ml-3">{{dateToDisplay}}</v-toolbar-title>
+      </v-col>
 
+      <v-col class="mr-0 pr-0">
            <v-btn
               icon
               color="white"
@@ -30,21 +33,21 @@
               <v-icon>mdi-filter</v-icon>
             </v-btn>
 
-            <v-btn disabled
+            <v-btn
               icon
               color="white"
-              @click.stop="openFilterDialog('type')">
+              @click.stop="openFilterDialog('map')">
               <v-icon>mdi-map-legend</v-icon>
             </v-btn>
 
-      <v-toolbar-title class="text-subtitle-2 mt-3 mr-3">{{this.filterDialog.selectedItem}}</v-toolbar-title>
+      <v-toolbar-title class="text-subtitle-2 mr-15">{{this.filterDialog.selectedItem}}</v-toolbar-title>
+      </v-col>
 
             <!---------- FILTER DIALOG ---------->
         <div class="text-center">
           <v-dialog
             v-model="filterDialog.showDialog"
-            width="400"
-            >
+            width=40vw>
 
             <v-card>
               <v-card-title class="text-t1 grey lighten-2">
@@ -59,12 +62,20 @@
                 label="ערך מבוקש"
               ></v-select>
 
+              <Iframe 
+                v-else-if="filterDialog.filterBy === 'map'"
+                class="mt-10 mr-10"
+                width=700vw
+                height=500vh
+                src=http://map3-service-tmzmap3.apps.openforce.openforce.biz/#/brain>
+              </Iframe>
+
               <v-row v-else class="center mt-5 mr-14">
                 <v-date-picker v-model="filterDialog.selectedDate"></v-date-picker>
               </v-row>
 
             <v-card-actions>
-                  <v-btn
+                  <v-btn v-if="filterDialog.filterBy !== 'map'"
                     class="ml-2 mt-5"
                     outlined
                     rounded
@@ -87,8 +98,8 @@
 
       <v-virtual-scroll
         :items="events"
-        height="20%"
-        item-height="90">
+        item-height="10%"
+        height="90%">
       <template v-slot:default="{ index, eventItem }">
 
 
@@ -147,6 +158,24 @@
 
       <!-- </v-list-item-group>
     </v-list> -->
+    <div class="fixed-wrapper">
+    <v-list-item class="fixed">
+              <v-btn
+              class="ml-10"
+              icon
+              color="black"
+              @click.stop="openFilterDialog('map')">
+              <v-icon large>mdi-arrow-down-bold</v-icon>
+            </v-btn>
+
+            <v-btn
+              icon
+              color="black"
+              @click.stop="openFilterDialog('map')">
+              <v-icon large>mdi-arrow-up-bold</v-icon>
+            </v-btn>
+    </v-list-item>
+    </div>
   </v-card>
 </template>
     
@@ -283,4 +312,27 @@ v-toolbar {
 .light-color {
     background-color :#1d2b4b;
 }
+
+/* Main site body */
+.wrapper {
+    position: relative; /* Ensure absolute positioned child elements are relative to this*/
+}
+
+/* Absolute positioned wrapper for the element you want to fix position */
+.fixed-wrapper {
+    width: 220px;
+    position: absolute;
+    left: -10px;
+    /* Move this out to the left of the site body, leaving a 20px gutter */
+}
+
+/* The element you want to fix the position of */
+.fixed {
+    width: 100px;
+    position: fixed;
+    bottom: 10vh;
+    right: 7vw;
+    /* Do not set top / left! */
+}
+
 </style>
