@@ -1,15 +1,24 @@
 <template>
   <div class="about">
+    <div class="container">
+      <wantedChard width="500" height="500"
+        :wantedNo="this.pplOfIntrest.filter(person => person.wanted).length"
+        class="box stack-top"
+      />
+      <v-card  class="box">
+        <FlowChart/>
+      </v-card>
+    </div>
+
     <iteList :pplOfIntrest="this.pplOfIntrest" />
     <pieChartCard
       :suspects="this.pplOfIntrest.filter(person => !person.wanted).length"
       :wanted="this.pplOfIntrest.filter(person => person.wanted).length"
     />
-    <wantedChard :wantedNo="this.pplOfIntrest.filter(person => person.wanted).length" />
+
     <suspectsChard :suspectNo="this.pplOfIntrest.filter(person => !person.wanted).length" />
-    <v-card max-width="500">
-      <FlowChart :data="this.pplOfIntrest.filter(person => person.wanted).map(person=>person.personId)" />
-    </v-card>
+
+    
   </div>
 </template>
 
@@ -61,3 +70,24 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 20px;
+}
+.box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8; /* for demo purpose  */
+}
+.stack-top {
+  z-index: 9;
+  margin: 20px; /* for demo purpose  */
+}
+</style>

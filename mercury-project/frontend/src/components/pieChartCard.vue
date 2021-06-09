@@ -15,7 +15,6 @@ import PieChart from "./PieChart.vue";
 export default {    
     name: 'pieChartCard',
     mounted() {
-      console.log(this.suspects);
     },
     components:{
         PieChart
