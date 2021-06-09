@@ -26,7 +26,7 @@
             color="primary"
             @click="reveal = false"
           >
-            <v-icon>mdi-calendar-month</v-icon>
+            Calendar
 
           </button>
         </v-card-actions>
@@ -38,8 +38,7 @@
 
 <script>
   import Calendar from '@/components/Calendar'
-  import Weather from '@/components/WeatherCube'
-
+  import Weather from '@/components/WeatherCube1'
 
   export default {
     data: () => ({
@@ -47,7 +46,7 @@
     }),
     components: {
       Calendar,
-      Weather
+      Weather,
     },
   }
 </script>

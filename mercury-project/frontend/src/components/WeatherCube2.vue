@@ -77,8 +77,8 @@ export default {
 		}
     },
     created(){
-        this.weatherDataTop = weather.slice(0,7);
-        this.weatherDataBottom = weather.slice(8,15);
+        this.weatherDataTop = weather.slice(7,11);
+        this.weatherDataBottom = weather.slice(11,14);
 
     },
 }
