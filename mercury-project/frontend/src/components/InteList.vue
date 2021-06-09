@@ -89,7 +89,7 @@ export default {
           default: 500
       },
       height: {
-          default: 600
+          default: 615
       },
       pplOfIntrest: {
         type: Array,

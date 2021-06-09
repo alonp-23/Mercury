@@ -13,12 +13,13 @@ export default {
 	name: 'changeWantedCrime',
 	data() {
 		return {
-			input: '',
+			input: undefined,
 		};
 	},
 	watch: {
 		input() {
-			this.$emit();
+			console.log('eawefsfewea');
+			this.$emit('changed-value', input);
 		}
 	}
 }

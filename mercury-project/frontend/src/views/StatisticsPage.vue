@@ -26,7 +26,8 @@
 								<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
 							</div>
 							<div class="inputBox">
-								<change-input class="graphInput"></change-input>
+								<input class="inputField" placeholder="שנה כמות פשע צפוייה"/>
+								<!-- <change-input @changedValue="console.log('1234124')" class="graphInput"></change-input> -->
 							</div>
 						</div>
 						<bar-chart :tooHighValue="wantedCrime" id="graph" class="crimesGraph"></bar-chart>
@@ -69,6 +70,12 @@ export default {
 	WeatherBox,
 	PieChart,
 	changeInput
+	},
+	methods: {
+		changeValue(value) {
+			console.log('wwwwwwwwwwwwwwwwwwwww');
+			this.wantedCrime = value;
+		}
 	},
 	async mounted() {
 		this.pplOfIntrest = await axios
@@ -204,7 +211,7 @@ export default {
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-between;
-		height: 350px;
+		height: 370px;
 		width: 1000px;
 		border-radius: 25px;
 	}
@@ -221,7 +228,19 @@ export default {
 	}
 
 	.inputBox {
-		width: 30%;
+		display: flex;
+		justify-content: flex-start;
+		width: 20%;
+		background: rgba(124, 127, 141, 0.7);
+		border-radius: 25px;
+		padding-right: 2%;
+		padding-top: 1%;
+		margin-left: 5%;
+	}
+
+	.inputField::placeholder {
+		margin-bottom: 3%;
+		color: white;
 	}
 
 	.graphInput {
@@ -230,7 +249,7 @@ export default {
 	}
 
 	.graphTitle {
-		margin-right: 3%;
+		margin-right: 20%;
 	}
 
 	.statsPage {
