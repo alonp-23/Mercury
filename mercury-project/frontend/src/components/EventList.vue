@@ -44,13 +44,13 @@
       </v-col>
 
             <!---------- FILTER DIALOG ---------->
-        <div class="text-center">
+        <div class="text-center" width=40vw>
           <v-dialog
             v-model="filterDialog.showDialog"
             width=40vw>
 
-            <v-card>
-              <v-card-title class="text-t1 grey lighten-2">
+            <v-card width=100%>
+              <v-card-title class="text-t1 white--text event-filter-card-title">
                 סינון אירועים
               </v-card-title>
 
@@ -66,23 +66,27 @@
                 v-else-if="filterDialog.filterBy === 'map'"
                 class="mt-10 mr-10"
                 width=700vw
-                height=500vh
+                height=700vh
                 src=http://map3-service-tmzmap3.apps.openforce.openforce.biz/#/brain>
               </Iframe>
 
-              <v-row v-else class="center mt-5 mr-14">
-                <v-date-picker v-model="filterDialog.selectedDate"></v-date-picker>
+              <v-row v-else class="center mt-5 mr-16">
+                <v-date-picker 
+                width="30vw" 
+                v-model="filterDialog.selectedDate"
+                color="#1d2b4b"></v-date-picker>
               </v-row>
 
-            <v-card-actions>
-                  <v-btn v-if="filterDialog.filterBy !== 'map'"
-                    class="ml-2 mt-5"
-                    outlined
+            <v-card-actions class="justify-center">
+                  <v-btn
+                    v-if="filterDialog.filterBy !== 'map'"
+                    class="white--text ml-2 mt-5"
                     rounded
-                    small
+                    big
+                    color="#1d2b4b"
                     @click="filterEvents(filterDialog.filterBy)">
                     סנן
-                  </v-btn>
+                  </v-btn>                 
             </v-card-actions>
             </v-card>
           </v-dialog>
@@ -95,7 +99,6 @@
 
     <v-list two-line>
       <v-list-item-group>
-<!---------- v-for="(eventItem, index) in eventsPages[currPage]"  :elevation="hover ? 24 : 6" ---------->
     <template v-for="(eventItem, index) in eventsPages[currPage]">
       <v-hover v-slot:default="{ hover }">
       <v-list-item 
@@ -197,7 +200,7 @@ export default {
   name: 'EventList',
   data() {
       return {
-          eventTypes: ['כל האירועים','גניבה','רצח','שוחד'],
+          eventTypes: ['כל האירועים','גניבה','רצח','דקירה', 'ירי'],
           eventRegions: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
           events: [],
           filteredEvents: [],
@@ -328,11 +331,15 @@ export default {
 <style scoped>
 
 v-toolbar {
-    align-content: center;
+  align-content: center;
 }
 
 .event-info-card-title {
   justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.87);
+}
+
+.event-filter-card-title {
   background-color: rgba(0, 0, 0, 0.87);
 }
 
