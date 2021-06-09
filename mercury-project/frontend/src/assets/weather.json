@@ -1,62 +1,62 @@
 [
     {
-        "startTime": "2021-06-07T10:00:00Z",
-        "temperature": 32.39
-    },
-    {
-        "startTime": "2021-06-08T10:00:00Z",
-        "temperature": 27.16
-    },
-    {
         "startTime": "2021-06-09T10:00:00Z",
-        "temperature": 28.73
+        "temperature": 30.94
     },
     {
         "startTime": "2021-06-10T10:00:00Z",
-        "temperature": 23.57
+        "temperature": 25.82
     },
     {
         "startTime": "2021-06-11T10:00:00Z",
-        "temperature": 13.44
+        "temperature": 21.09
     },
     {
         "startTime": "2021-06-12T10:00:00Z",
-        "temperature": 18.98
+        "temperature": 24.19
     },
     {
         "startTime": "2021-06-13T10:00:00Z",
-        "temperature": 21.44
+        "temperature": 25.3
     },
     {
         "startTime": "2021-06-14T10:00:00Z",
-        "temperature": 24.09
+        "temperature": 28.81
     },
     {
         "startTime": "2021-06-15T10:00:00Z",
-        "temperature": 23.44
+        "temperature": 23.95
     },
     {
         "startTime": "2021-06-16T10:00:00Z",
-        "temperature": 24.65
+        "temperature": 23.8
     },
     {
         "startTime": "2021-06-17T10:00:00Z",
-        "temperature": 24.72
+        "temperature": 21.59
     },
     {
         "startTime": "2021-06-18T10:00:00Z",
-        "temperature": 21.46
+        "temperature": 27.12
     },
     {
         "startTime": "2021-06-19T10:00:00Z",
-        "temperature": 28.65
+        "temperature": 29.82
     },
     {
         "startTime": "2021-06-20T10:00:00Z",
-        "temperature": 33.05
+        "temperature": 30.2
     },
     {
         "startTime": "2021-06-21T10:00:00Z",
-        "temperature": 31.81
+        "temperature": 28.86
+    },
+    {
+        "startTime": "2021-06-22T10:00:00Z",
+        "temperature": 26.15
+    },
+    {
+        "startTime": "2021-06-23T10:00:00Z",
+        "temperature": 25.37
     }
 ]
