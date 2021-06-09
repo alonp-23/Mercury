@@ -7,7 +7,7 @@ const allEvents = async () => {
         return response.data;
     })
     .catch(e => {
-        alert(e);
+        console.log(e);
 		});
 };
 
@@ -18,7 +18,7 @@ const filterLastWeek = async (date) => {
         return response.data;
     })
     .catch(e => {
-        alert(e);
+        console.log(e);
     });
 
     let wantedDate = new Date(date);

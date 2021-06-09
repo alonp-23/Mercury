@@ -63,16 +63,16 @@ export default {
     ProfilePage
   },
   props: {
-    width: {
-      default: 500
-    },
-    height: {
-      default: 500
-    },
-    pplOfIntrest: {
-      type: Array,
-      required: true
-    }
+      width: {
+          default: 500
+      },
+      height: {
+          default: 615
+      },
+      pplOfIntrest: {
+        type: Array,
+        required: true
+      }
   },
   data: () => {
     return {
@@ -103,31 +103,39 @@ export default {
   }
 };
 </script>
-<style>
-div {
-  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-  color: white;
-}
-.intelTitle {
-  background: #282828;
-}
-#list_card {
-  background-color: rgba(124, 127, 141, 0.7);
-  border-radius: 5%;
-}
-#list_item {
-  background-color: #141d33;
-}
-#item_content {
-  color: white;
-}
-#scroll {
-  margin: 6px;
-}
-#title {
-  background-color: #141d33;
-}
-#dialog_card_title {
-  background-color: #141d33;
-}
+
+
+<style scoped>
+    div{
+        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+        color:white;    
+    }
+    .intelTitle{
+      background: #282828; 
+    }
+    #list_card{
+        background-color: rgba(124, 127, 141, 0.7);
+        border-radius: 25px;
+    }
+    #list_item{
+        background-color: #141d33;
+    }
+    #item_content{
+        color:white;
+    }
+    #scroll{
+        margin: 6px;
+        padding-bottom: 200px;
+
+    }
+    #title{
+      margin-right: 5%;
+    }
+
+    #dialog_card_title {
+      background-color: #141d33;
+    }
+    .titleBox {
+      background-color: #282828;
+    }
 </style>

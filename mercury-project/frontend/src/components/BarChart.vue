@@ -9,7 +9,7 @@
 	var borderColor = 'rgba(29, 43, 75, 0.8)';
 	var goodAmount = 'rgba(29, 43, 75, 0.8)';
 	var tooHighColor = 'rgba(74, 23, 23, 0.8)';
-	// var tooHighValue = 1;
+	var tooHighValue = 1;
   export default {
 		extends: Bar, Line,
 		props: {
@@ -21,7 +21,7 @@
     data() {
       return {
         chartData: {
-          labels: ["1/6", "2/6", "3/6", "4/6", "5/6", "6/6", "7/6"
+          labels: ["3/6", "4/6", "5/6", "6/6", "7/6", "8/6", "9/6"
           ],
           datasets: [{
             label: 'Bar Chart',
@@ -69,7 +69,7 @@
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Crime Rate',
+								labelString: 'אירועי פשיעה',
 								fontColor: 'rgba(255,255,255,1)',
 								fontSize: 15
 
@@ -86,7 +86,7 @@
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Date',
+								labelString: 'תאריך',
 								fontColor: 'rgba(255,255,255,1)',
 								fontSize: 15
 
@@ -120,7 +120,7 @@
     },
     async mounted() {
 			this.addPlugin(chartjsPluginAnnotation);
-			let wantedDate = '2021-06-20';
+			let wantedDate = '2021-06-09';
 			const crimesPerDayArr = await axios
 				.get(`http://localhost:3000/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
 				.then(response => {

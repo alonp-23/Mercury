@@ -26,7 +26,8 @@
 								<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
 							</div>
 							<div class="inputBox">
-								<change-input class="graphInput"></change-input>
+								<input class="inputField" placeholder="שנה כמות פשע צפוייה"/>
+								<!-- <change-input @changedValue="console.log('1234124')" class="graphInput"></change-input> -->
 							</div>
 						</div>
 						<bar-chart :tooHighValue="wantedCrime" id="graph" class="crimesGraph"></bar-chart>
@@ -36,7 +37,8 @@
 							<pie-chart class="pieChart" :wanted="pplOfIntrest.filter(item => item.wanted).length" :suspects="pplOfIntrest.filter(item => !item.wanted).length"></pie-chart>
 						</div>
 						<div class="dateBox">
-							<!-- <weather-box dir="ltr"></weather-box> -->
+							<weather-box class="weather">
+								</weather-box> 
 						</div>
 					</div>
 				</div>
@@ -49,7 +51,7 @@
 import BarChart from '@/components/BarChart';
 import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
-import WeatherBox from "@/components/WeatherCube.vue";
+import WeatherBox from "@/components/WeatherCalendar.vue";
 import PieChart from "@/components/pieChartCard.vue";
 import changeInput from "@/components/ChangeStandardCrime.vue";
 import axios from "axios";
@@ -69,6 +71,12 @@ export default {
 	WeatherBox,
 	PieChart,
 	changeInput
+	},
+	methods: {
+		changeValue(value) {
+			console.log('wwwwwwwwwwwwwwwwwwwww');
+			this.wantedCrime = value;
+		}
 	},
 	async mounted() {
 		this.pplOfIntrest = await axios
@@ -91,6 +99,7 @@ export default {
 	color:#6a6f8c;
 	background:url(../assets/stats-background.jpg);
 	font:600 16px/18px 'Open Sans',sans-serif;
+	overflow: hidden;
 	}
 
 	.header {
@@ -129,6 +138,10 @@ export default {
 		background-color: #6a6f8c;
 	}
 
+	.weather{
+		width: 100%;
+		direction: ltr;
+	}
 	.intelBox {
 		width: 40vh;
 		height: 100%;
@@ -179,13 +192,16 @@ export default {
 
 	.bottomLeft {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		height: 80%;
 		margin-top: 2%;
 	}
 
 	.dateBox {
-
+		width: 100%;
+		margin-right: 100px;
+		margin-top: 20px;
+		max-height: 95%;
 	}
 
 	.pieBox {
@@ -204,7 +220,7 @@ export default {
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-between;
-		height: 350px;
+		height: 370px;
 		width: 1000px;
 		border-radius: 25px;
 	}
@@ -221,7 +237,19 @@ export default {
 	}
 
 	.inputBox {
-		width: 30%;
+		display: flex;
+		justify-content: flex-start;
+		width: 20%;
+		background: rgba(124, 127, 141, 0.7);
+		border-radius: 25px;
+		padding-right: 2%;
+		padding-top: 1%;
+		margin-left: 5%;
+	}
+
+	.inputField::placeholder {
+		margin-bottom: 3%;
+		color: white;
 	}
 
 	.graphInput {
@@ -230,7 +258,7 @@ export default {
 	}
 
 	.graphTitle {
-		margin-right: 3%;
+		margin-right: 20%;
 	}
 
 	.statsPage {
