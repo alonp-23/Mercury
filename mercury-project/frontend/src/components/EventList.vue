@@ -93,20 +93,20 @@
       </v-container>
     </v-toolbar>
 
-    <!-- <v-list two-line>
-      <v-list-item-group> -->
+    <v-list two-line>
+      <v-list-item-group>
 
-      <v-virtual-scroll
+      <!-- <v-virtual-scroll
         :items="events"
         item-height="10%"
         height="90%">
-      <template v-slot:default="{ index, eventItem }">
+      <template v-slot:default="{ index, eventItem }"> -->
 
 
       <v-list-item 
       height=10%
       class="event-in-list" 
-      v-for="(eventItem, index) in filteredEvents" 
+      v-for="(eventItem, index) in eventsPages[currPage]" 
       :key="eventItem.id"
       :class="{ 'light-color': (index % 2 === 0), 'dark-color': (index % 2 !== 0)}"
       @click.stop="openDialog(eventItem)">
@@ -120,7 +120,7 @@
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="white--text mr-15">{{convertDateToDayTime(eventItem.event_time)}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="text-subtitle-1 white--text mr-15">{{convertDateToDayTime(eventItem.event_time)}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
@@ -153,29 +153,32 @@
         </v-list-item-content>
       </v-list-item>
 
-      </template>
-      </v-virtual-scroll>
+      <!-- </template>
+      </v-virtual-scroll> -->
 
-      <!-- </v-list-item-group>
-    </v-list> -->
-    <div class="fixed-wrapper">
-    <v-list-item class="fixed">
+          <div class="fixed-wrapper">
+            <v-list-item
+                class="fixed"
+                height="10%">
               <v-btn
               class="ml-10"
+              color="white"
               icon
-              color="black"
-              @click.stop="openFilterDialog('map')">
-              <v-icon large>mdi-arrow-down-bold</v-icon>
+              @click.stop="nextEventsToDisplay()">
+              <v-icon dark large>mdi-arrow-down-bold</v-icon>
             </v-btn>
 
             <v-btn
+              color="white"
               icon
-              color="black"
-              @click.stop="openFilterDialog('map')">
-              <v-icon large>mdi-arrow-up-bold</v-icon>
+              @click.stop="prevEventsToDisplay()">
+              <v-icon dark large>mdi-arrow-up-bold</v-icon>
             </v-btn>
-    </v-list-item>
-    </div>
+          </v-list-item>
+          </div>
+
+      </v-list-item-group>
+    </v-list>
   </v-card>
 </template>
     
@@ -190,7 +193,7 @@ export default {
           eventTypes: ['כל האירועים','גניבה','רצח','שוחד'],
           eventCounties: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
           events: [],
-          filteredEvents: null,
+          filteredEvents: [],
           dialog: {
             showDialog: false,
             dialogIcon: '../icon.png',
@@ -210,6 +213,7 @@ export default {
             selectedItem: 'כל האירועים',
             selectedDate: null
           },
+          currPage: 0
       }
         //TODO: CALIBARI WHITE TEXT
   },
@@ -217,22 +221,36 @@ export default {
     this.filterDialog.selectedDate = this.getCurrentISOString().replace(/T.*/,'');
   },
   async created() {
-    this.events = await this.fetchEvents()
+    this.events = await eventsData
   },
   mounted() {
-    this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate);
+    this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
   },
   computed: {
     dateToDisplay() {
       return this.filterDialog.selectedDate.split('-').reverse().join('/')
+    },
+    eventsPages() {
+      const pages = []
+      let i
+      let j
+      let page
+      const chunk = 8;
+
+      for (i=0, j=this.filteredEvents.length; i<j; i+=chunk) {
+          page = this.filteredEvents.slice(i,i+chunk);
+          pages.push(page)
+      }
+
+      return pages;
     }
   },
   methods: {
     fetchEvents() {
-      return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports')
-      .then(res => { 
-        return res.data
-      })
+      // return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports')
+      // .then(res => { 
+      //   return res.data
+      // })
     },
     openFilterDialog(filterBy) {
       this.filterDialog.showDialog = true
@@ -266,7 +284,6 @@ export default {
           break;
           case 'time': {
             this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
-            console.log(this.filteredEvents)
             this.filterDialog.selectedItem = 'כל האירועים'
           }
         }
@@ -281,6 +298,16 @@ export default {
     },
     convertDateToDisplay(date) {
       return date.toLocaleDateString('he-IL', {timeZone:'Asia/Jerusalem'}).replace(/\D/g,'/')
+    },
+    nextEventsToDisplay() {
+      if(this.currPage < this.eventsPages.length - 1) {
+        this.currPage = this.currPage + 1;
+      }
+    },
+    prevEventsToDisplay() {
+      if(this.currPage !== 0) {
+        this.currPage = this.currPage - 1;
+      }
     }
   }
 }
@@ -315,23 +342,24 @@ v-toolbar {
 
 /* Main site body */
 .wrapper {
-    position: relative; /* Ensure absolute positioned child elements are relative to this*/
+    position: relative;/* Ensure absolute positioned child elements are relative to this*/
 }
 
 /* Absolute positioned wrapper for the element you want to fix position */
 .fixed-wrapper {
-    width: 220px;
+    width: 23vw;
     position: absolute;
-    left: -10px;
     /* Move this out to the left of the site body, leaving a 20px gutter */
 }
 
 /* The element you want to fix the position of */
 .fixed {
-    width: 100px;
+    width: 23vw;
     position: fixed;
+    background-color: black;
     bottom: 10vh;
-    right: 7vw;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     /* Do not set top / left! */
 }
 
