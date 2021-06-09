@@ -27,9 +27,11 @@
 						<bar-chart id="graph" class="crimesGraph"></bar-chart>
 					</div>
 					<div class="bottomLeft">
-						<div class="pieBox"></div>
+						<div class="pieBox">
+							<pie-chart class="pieChart" :wanted="pplOfIntrest.filter(item => item.wanted).length" :suspects="pplOfIntrest.filter(item => !item.wanted).length"></pie-chart>
+						</div>
 						<div class="dateBox">
-							<weather-box dir="ltr"></weather-box>
+							<!-- <weather-box dir="ltr"></weather-box> -->
 						</div>
 					</div>
 				</div>
@@ -43,6 +45,7 @@ import BarChart from '@/components/BarChart';
 import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
 import WeatherBox from "@/components/WeatherCube.vue";
+import PieChart from "@/components/pieChartCard.vue";
 import axios from "axios";
 
 export default {
@@ -56,7 +59,8 @@ export default {
 	BarChart,
 	EventList,
 	InteList,
-	WeatherBox
+	WeatherBox,
+	PieChart
 	},
 	async mounted() {
 		this.pplOfIntrest = await axios
@@ -84,9 +88,9 @@ export default {
 	.header {
 		background: rgba(124, 127, 141, 0.7);
 		border-radius: 25px;
-		width: 90%;
+		width: 90.9%;
 		height: 10%;
-		margin-right: 5%;
+		margin-right: 4.2%;
 		margin-top: 2%;
 	}
 
@@ -167,7 +171,7 @@ export default {
 
 	.bottomLeft {
 		display: flex;
-		justify-content: space-around;
+		justify-content: flex-start;
 	}
 
 	.dateBox {
@@ -175,7 +179,11 @@ export default {
 	}
 
 	.pieBox {
+		margin-bottom: 1%;
+	}
 
+	.pieChart {
+		/* height: 80%; */
 	}
 
 	.graphBox {

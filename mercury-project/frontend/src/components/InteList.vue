@@ -89,7 +89,7 @@ export default {
           default: 500
       },
       height: {
-          default: 500
+          default: 600
       },
       pplOfIntrest: {
         type: Array,
@@ -123,7 +123,7 @@ export default {
     }
     #list_card{
         background-color: rgba(124, 127, 141, 0.7);
-        border-radius: 5%;
+        border-radius: 25px;
     }
     #list_item{
         background-color: #141d33;
@@ -133,6 +133,8 @@ export default {
     }
     #scroll{
         margin: 6px;
+        padding-bottom: 200px;
+
     }
     #title{
       background-color: #282828
