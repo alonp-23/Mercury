@@ -2,34 +2,26 @@
     <v-card
         class="card"
         max-width="800">
-        <Calendar v-if="!reveal"></Calendar>
-        <v-card-actions>
-          <button
-            text
-            color="primary"
-            @click="reveal = true"
-          >
-            Weather
+        
+        <v-bottom-navigation
+          :value="value"
+        >
+          <button 
+            @click="reveal = true">
+            <span>Weather</span>
           </button>
-        </v-card-actions>
+          <button
+            @click="reveal = false">
+            <span>Calendar</span>
+          </button>
+        </v-bottom-navigation>
+
+        <Calendar v-if="!reveal"></Calendar>
 
         <v-expand-transition>
       <v-card
-        v-if="reveal"
-        class="transition-fast-in-fast-out v-card--reveal"
-        style="height: 100%;"
-      >
-        <Weather></Weather>
-        <v-card-actions class="pt-0">
-          <button
-            text
-            color="primary"
-            @click="reveal = false"
-          >
-            Calendar
-
-          </button>
-        </v-card-actions>
+        class="card">
+        <Weather v-if="reveal"></Weather>
       </v-card>
     </v-expand-transition>
     </v-card>
@@ -43,6 +35,7 @@
   export default {
     data: () => ({
       reveal: false,
+      value: 1
     }),
     components: {
       Calendar,
