@@ -1,5 +1,5 @@
-
 <template>
+
 <div>
   <Weather/>
 </div>
@@ -16,6 +16,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
