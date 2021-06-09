@@ -1,10 +1,10 @@
 <template>
 <div>
   <v-card class="mx-auto" :max-width=width id="list_card">
-    <v-toolbar-title class="white--text" id="title">
+    <div class="titleBox"><v-toolbar-title class="white--text" id="title">
       ציר מודיעיני
       <v-spacer></v-spacer>      
-    </v-toolbar-title>   
+    </v-toolbar-title></div>   
     <v-divider></v-divider>
      <v-chip class="mr-2 ma-3" @click="show_wanted = false" label>
             <v-icon left v-if="!show_wanted">mdi-checkbox-marked-circle</v-icon>                       
@@ -16,7 +16,7 @@
         </v-chip>  
     <v-virtual-scroll
       :items="pplList"
-      :item-height="50"      
+      :item-height="70"      
       :height=height
       id = "scroll"
     >
@@ -113,7 +113,7 @@ export default {
   }  
 };
 </script>
-<style >
+<style>
     div{
         font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
         color:white;    
@@ -137,6 +137,10 @@ export default {
 
     }
     #title{
-      background-color: #282828
+      margin-right: 5%;
+    }
+
+    .titleBox {
+      background-color: #282828;
     }
 </style>

@@ -22,9 +22,14 @@
 				<div class="leftSide">
 					<div class="graphBox">
 						<div class="graphTitleCard">
-							<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
+							<div>
+								<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
+							</div>
+							<div class="inputBox">
+								<change-input class="graphInput"></change-input>
+							</div>
 						</div>
-						<bar-chart id="graph" class="crimesGraph"></bar-chart>
+						<bar-chart :tooHighValue="wantedCrime" id="graph" class="crimesGraph"></bar-chart>
 					</div>
 					<div class="bottomLeft">
 						<div class="pieBox">
@@ -46,6 +51,7 @@ import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
 import WeatherBox from "@/components/WeatherCube.vue";
 import PieChart from "@/components/pieChartCard.vue";
+import changeInput from "@/components/ChangeStandardCrime.vue";
 import axios from "axios";
 
 export default {
@@ -53,6 +59,7 @@ export default {
 	data() {
 		return {
 			pplOfIntrest: [],
+			wantedCrime: undefined,
 		};
 	},
   components: {
@@ -60,7 +67,8 @@ export default {
 	EventList,
 	InteList,
 	WeatherBox,
-	PieChart
+	PieChart,
+	changeInput
 	},
 	async mounted() {
 		this.pplOfIntrest = await axios
@@ -69,8 +77,8 @@ export default {
 				return response.data;
 			})
 			.catch(e => {
-				alert(e);
-			});
+				alert("intel hasn't arrived");
+			}); 
 			console.log(this.pplOfIntrest); 
 	}
 }
@@ -172,6 +180,8 @@ export default {
 	.bottomLeft {
 		display: flex;
 		justify-content: flex-start;
+		height: 80%;
+		margin-top: 2%;
 	}
 
 	.dateBox {
@@ -180,10 +190,12 @@ export default {
 
 	.pieBox {
 		margin-bottom: 1%;
+		border-radius: 25px;
 	}
 
 	.pieChart {
 		/* height: 80%; */
+		border-radius: 25px;
 	}
 
 	.graphBox {
@@ -202,7 +214,19 @@ export default {
 		background: #282828;
 		border-top-left-radius: 25px;
 		border-top-right-radius: 25px;
-		padding: 1%
+		padding: 1%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.inputBox {
+		width: 30%;
+	}
+
+	.graphInput {
+		width: 100%;
+		/* margin-left: ; */
 	}
 
 	.graphTitle {
