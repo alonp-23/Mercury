@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-calendar
+        <calendar
             :attributes='attributes'
             class='calendar'
             />
