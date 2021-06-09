@@ -1,24 +1,20 @@
 <template>
   <div class="about">
-    <div class="container">
-      <wantedChard width="500" height="500"
+    <!-- <div class="container">
+      <wantedChard
+        width="500"
+        height="500"
         :wantedNo="this.pplOfIntrest.filter(person => person.wanted).length"
         class="box stack-top"
       />
-      <v-card  class="box">
-        <FlowChart/>
+      <v-card class="box">
+        <FlowChart />
       </v-card>
-    </div>
+    </div> -->
 
     <iteList :pplOfIntrest="this.pplOfIntrest" />
-    <pieChartCard
-      :suspects="this.pplOfIntrest.filter(person => !person.wanted).length"
-      :wanted="this.pplOfIntrest.filter(person => person.wanted).length"
-    />
 
     <suspectsChard :suspectNo="this.pplOfIntrest.filter(person => !person.wanted).length" />
-
-    
   </div>
 </template>
 
@@ -45,27 +41,102 @@ export default {
       show_wanted: false
     };
   },
-  async mounted() {
-    this.pplOfIntrest = await axios
-      .get(`http://intelligence-api-git-2-intelapp1.apps.openforce.openforce.biz/api/suspects`)
-      .then(response => {
-        return response.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  mounted() {
+    this.initPplArr();
   },
 
   methods: {
-    async initPplArr() {
-      await axios
+  async initPplArr() {
+      
+       await axios
         .get(`http://intelligence-api-git-2-intelapp1.apps.openforce.openforce.biz/api/suspects`)
         .then(response => {
           this.pplOfIntrest = response.data;
         })
         .catch(e => {
           console.log(e);
-        });
+        });  
+
+      /* this.pplOfIntrest = [
+        {
+          personId: 456346,
+          person: {
+            firstName: "ישראל",
+            lastName: "ישראלי",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: false,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+        {
+          personId: 456346,
+          person: {
+            firstName: "חמוד",
+            lastName: "חמודי",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: false,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+        {
+          personId: 456346,
+          person: {
+            firstName: "שאול",
+            lastName: "שאולה",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: false,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+        {
+          personId: 456346,
+          person: {
+            firstName: "ארי",
+            lastName: "אריה-צבי",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: true,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+        {
+          personId: 456346,
+          person: {
+            firstName: "טובה",
+            lastName: "חיים",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: true,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+        {
+          personId: 456346,
+          person: {
+            firstName: "ישראל",
+            lastName: "ישראלי",
+            personImageURL:
+              "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+            
+            wanted: false,
+            phoneNumber: 1234567,
+            address: "דרדר 51, מצפה נשר"
+          }
+        },
+      ]; */
     }
   }
 };
