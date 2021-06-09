@@ -98,7 +98,7 @@ body {
     width: 35%;
     height: 40%;
     border-radius: 5%;
-    background-color: #141d33;
+    background-color: rgba(124, 127, 141, 0.7);
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
 
