@@ -2,7 +2,7 @@
   <div class="driverLicense">
     <template>
   <v-card
-    color="#2A2B38"
+    color="#141d33"
     style="color:white;"
     class="mx-auto rounded-card" 
     width="270"

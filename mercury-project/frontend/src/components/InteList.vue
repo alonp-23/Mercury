@@ -34,7 +34,7 @@
 
             <v-dialog v-model="dialog">
               <v-card>
-                <v-card-title class="headline grey lighten-2">
+                <v-card-title class="headline lighten-2" id="dialog_card_title">
                   {{ full_name(dialogPerson.person.firstName, dialogPerson.person.lastName) }}                  
                 </v-card-title>
 
@@ -135,6 +135,9 @@ div {
   margin: 6px;
 }
 #title {
+  background-color: #141d33;
+}
+#dialog_card_title{
   background-color: #141d33;
 }
 </style>

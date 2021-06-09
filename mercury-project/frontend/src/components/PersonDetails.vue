@@ -1,5 +1,5 @@
 <template>
-  <v-card :color="bgColor" dark class="mx-auto rounded-card" width="56vw" outlined>
+  <v-card color="#141d33" dark class="mx-auto rounded-card" width="56vw" outlined>
     <v-container>
       <v-row>
         <v-col>

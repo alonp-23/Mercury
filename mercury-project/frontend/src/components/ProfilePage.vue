@@ -4,7 +4,7 @@
       <person-details
         :personId="this.personId"
         @change-wanted-state="changeWantedState"
-        bgColor="#2A2B38"
+        bgColor="#141d33"
         :wantedButtonStatus="wantedButton"
       ></person-details>
     </v-row>
@@ -12,7 +12,7 @@
       <v-col cols="2"> </v-col>
       <v-col cols="2">
         <titled-info
-          bgColor="#2A2B38"
+          bgColor="#141d33"
           amountColor="#FFAC04"
           :amount="posts"
           title="מספר פוסטים בשבוע אחרון"

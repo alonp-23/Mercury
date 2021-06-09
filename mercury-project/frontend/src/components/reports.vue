@@ -1,6 +1,6 @@
 <template>
   <div class="driverLicense">
-  <v-card class="mx-auto rounded-card" >
+  <v-card class="mx-auto rounded-card v-card" color="#141d33">
     <v-card-title class="justify-center">
       <h1 class="justify-center">
  צווים ודוחות
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-.v-card{
+/* .v-card{
   background-color: #2A2B38;
   color:white;
 }
@@ -86,5 +86,5 @@ export default {
 .colStyleDate{
     margin-left: 4vh;
     margin-bottom: 10vh;
-}
+} */
 </style>
