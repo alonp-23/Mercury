@@ -2,12 +2,12 @@
     {
         "id": 1,
         "user_mame": "גלי גרשטיין",
-        "event_time": "2021-06-08T00:00:00.000Z",
-        "event_name": "גניבת רכב",
-        "criminal": "רוני דניאל",
+        "event_time": "2021-06-09T00:00:00.000Z",
+        "event_name": "רצח עם",
+        "criminal": "רונן שטיין",
         "event_type": "גניבה",
-        "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "event_description": "רוצח עם ארץ לעולם לא",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -19,7 +19,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -31,7 +31,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -43,7 +43,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -55,7 +55,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -67,7 +67,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -79,7 +79,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -91,7 +91,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -103,7 +103,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -115,7 +115,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -127,7 +127,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     },
@@ -139,7 +139,7 @@
         "criminal": "רוני דניאל",
         "event_type": "גניבה",
         "event_description": "גנב רכב שחנה מחוץ לביתו",
-        "event_county": "ברוקלין",
+        "region": "ברוקלין",
         "lat": "",
         "long": ""
     }

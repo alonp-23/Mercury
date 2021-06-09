@@ -15,7 +15,7 @@
            <v-btn
               icon
               color="white"
-              @click.stop="openFilterDialog('county')">
+              @click.stop="openFilterDialog('region')">
               <v-icon>mdi-map-marker</v-icon>
             </v-btn>
 
@@ -54,7 +54,7 @@
                 סינון אירועים
               </v-card-title>
 
-              <v-select v-if="filterDialog.filterBy === 'type' || filterDialog.filterBy === 'county'"
+              <v-select v-if="filterDialog.filterBy === 'type' || filterDialog.filterBy === 'region'"
                 v-model="filterDialog.selectedItem"
                 :items="filterDialog.filterItems"
                 filled
@@ -95,21 +95,28 @@
 
     <v-list two-line>
       <v-list-item-group>
-
-      <!-- <v-virtual-scroll
-        :items="events"
-        item-height="10%"
-        height="90%">
-      <template v-slot:default="{ index, eventItem }"> -->
-
-
+<!---------- v-for="(eventItem, index) in eventsPages[currPage]"  :elevation="hover ? 24 : 6" ---------->
+    <template v-for="(eventItem, index) in eventsPages[currPage]">
+      <v-hover v-slot:default="{ hover }">
       <v-list-item 
       height=10%
-      class="event-in-list" 
-      v-for="(eventItem, index) in eventsPages[currPage]" 
+      class="event-in-list"  
+
       :key="eventItem.id"
+     
+
       :class="{ 'light-color': (index % 2 === 0), 'dark-color': (index % 2 !== 0)}"
       @click.stop="openDialog(eventItem)">
+
+
+      <template v-slot:default="{ active, toggle }">
+    <v-expand-transition>
+        <v-overlay
+          absolute
+          :value="hover">
+        </v-overlay>
+    </v-expand-transition>
+
         <v-list-item-content>
         <v-container>
             <v-row>  
@@ -120,25 +127,26 @@
               </v-col>
 
               <v-col>
-                <v-list-item-subtitle class="text-subtitle-1 white--text mr-15">{{convertDateToDayTime(eventItem.event_time)}}</v-list-item-subtitle>
+                <v-list-item-subtitle class="text-subtitle-1 white--text mr-16 mt-3">{{convertDateToDayTime(eventItem.event_time)}}</v-list-item-subtitle>
               </v-col>
 
             </v-row>
         </v-container>
+        </v-list-item-content>
 
 <!---------- DIALOG ---------->
         <div class="text-center">
           <v-dialog
             v-model="dialog.showDialog"
-            width="400">
+            width=23vw>
 
             <v-card>
-              <v-card-title class="grey lighten-2 event-info-card-title">
+              <v-card-title class="white--text event-info-card-title">
                 <p class="text-h5 font-weight-bold mt-3">פירוט האירוע</p>
                 <img src='../icon.png' height=40 width=40>
               </v-card-title>
-              <v-card-text class="text-h5 font-weight-bold mt-3">
-                {{ dialog.content.eventName}} ב{{ dialog.content.eventCounty}}
+              <v-card-text class="text-h5 font-weight-bold mt-6">
+                {{ dialog.content.eventName}} ב{{ dialog.content.eventRegion}}
               </v-card-text>
               <v-card-text class="text-h6 font-weight-medium">
                 האירוע התרחש ב{{ convertDateToDayTime(dialog.content.eventTime) }} ע"י {{ dialog.content.criminal}}
@@ -150,18 +158,16 @@
           </v-dialog>
         </div>
 
-        </v-list-item-content>
+      </template>
       </v-list-item>
-
-      <!-- </template>
-      </v-virtual-scroll> -->
+      </v-hover>
+            </template>
 
           <div class="fixed-wrapper">
             <v-list-item
-                class="fixed"
-                height="10%">
+                class="fixed">
               <v-btn
-              class="ml-10"
+              class="next-page-btn"
               color="white"
               icon
               @click.stop="nextEventsToDisplay()">
@@ -169,7 +175,7 @@
             </v-btn>
 
             <v-btn
-              color="white"
+              color="white prev-page-btn"
               icon
               @click.stop="prevEventsToDisplay()">
               <v-icon dark large>mdi-arrow-up-bold</v-icon>
@@ -179,7 +185,8 @@
 
       </v-list-item-group>
     </v-list>
-  </v-card>
+
+    </v-card>
 </template>
     
 <script>
@@ -191,7 +198,7 @@ export default {
   data() {
       return {
           eventTypes: ['כל האירועים','גניבה','רצח','שוחד'],
-          eventCounties: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
+          eventRegions: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
           events: [],
           filteredEvents: [],
           dialog: {
@@ -203,7 +210,7 @@ export default {
               eventType: '',
               eventName: '',
               eventDescription: '',
-              eventCounty: ''
+              eventRegion: ''
             }
           },
           filterDialog: {
@@ -221,9 +228,8 @@ export default {
     this.filterDialog.selectedDate = this.getCurrentISOString().replace(/T.*/,'');
   },
   async created() {
-    this.events = await eventsData
-  },
-  mounted() {
+    this.events = await this.fetchEvents()
+    // this.eventTypes = await this.fetchEventTypes()
     this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
   },
   computed: {
@@ -247,10 +253,16 @@ export default {
   },
   methods: {
     fetchEvents() {
-      // return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports')
-      // .then(res => { 
-      //   return res.data
-      // })
+      return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports')
+      .then(res => { 
+        return res.data
+      })
+    },
+    fetchEventTypes() {
+      return axios.get('http://siton-backend-securityapp3.apps.openforce.openforce.biz/reports/events')
+      .then(res => { 
+        return res.data
+      })
     },
     openFilterDialog(filterBy) {
       this.filterDialog.showDialog = true
@@ -258,7 +270,7 @@ export default {
       switch(filterBy) {
         case 'type': this.filterDialog.filterItems = this.eventTypes;
         break;
-        case 'county': this.filterDialog.filterItems = this.eventCounties;
+        case 'region': this.filterDialog.filterItems = this.eventRegions;
         break;
       }
     },
@@ -269,7 +281,7 @@ export default {
       this.dialog.content.eventType = eventItem.event_type;
       this.dialog.content.eventTime = eventItem.event_time;
       this.dialog.content.eventDescription = eventItem.event_description;
-      this.dialog.content.eventCounty = eventItem.event_county;
+      this.dialog.content.eventRegion = eventItem.region;
     },
     filterEvents(filterBy) {
       this.filterDialog.showDialog = false
@@ -279,7 +291,7 @@ export default {
         switch(filterBy) {
           case 'type': this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem && (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
-          case 'county': this.filteredEvents = this.events.filter((event) => event.event_county === this.filterDialog.selectedItem &&
+          case 'region': this.filteredEvents = this.events.filter((event) => event.region === this.filterDialog.selectedItem &&
            (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
           break;
           case 'time': {
@@ -321,6 +333,7 @@ v-toolbar {
 
 .event-info-card-title {
   justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.87);
 }
 
 .events-side-bar.theme--light.v-card {
@@ -340,6 +353,11 @@ v-toolbar {
     background-color :#1d2b4b;
 }
 
+.next-page-btn {
+  margin-right: 7vw;
+  margin-left: 2vw;
+}
+
 /* Main site body */
 .wrapper {
     position: relative;/* Ensure absolute positioned child elements are relative to this*/
@@ -355,8 +373,9 @@ v-toolbar {
 /* The element you want to fix the position of */
 .fixed {
     width: 23vw;
+    height: 8vh;
     position: fixed;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.87);
     bottom: 10vh;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
