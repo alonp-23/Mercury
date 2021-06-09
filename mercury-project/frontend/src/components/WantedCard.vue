@@ -1,6 +1,6 @@
 <template>
   <div>    
-    <v-card elevation="2" outlined :max-width="width" :max-height="height">
+    <v-card elevation="2" outlined :max-width="width" :height="height">
       <h1 class="m7">מבוקשים <br>{{ wantedNo }}</h1>
     </v-card>
   </div>

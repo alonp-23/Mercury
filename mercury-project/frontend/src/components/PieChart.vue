@@ -25,6 +25,7 @@ export default {
           }
         ]
       }
+    console.log(this.data);
     this.renderChart(data, this.options);
   },
   watch: {
