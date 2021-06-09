@@ -1,7 +1,8 @@
 <template>
     <v-card
         class="card"
-        max-width="500">
+        max-width="500"
+        >
 
         <v-bottom-navigation
           :value="value"
@@ -9,12 +10,12 @@
           <button
             id = "weatherButton" 
             @click="reveal = true">
-            <span>Weather <v-icon>mdi-weather-partly-snowy-rainy</v-icon></span>
+            <span style="color:#FFF">Weather <v-icon style="color:#FFF">mdi-weather-partly-snowy-rainy</v-icon></span>
           </button>
           <button
             id = "calendarButton" 
             @click="reveal = false">
-            <span>Calendar <v-icon>mdi-calendar-blank-multiple</v-icon></span>
+            <span style="color:#FFF">Calendar <v-icon style="color:#FFF">mdi-calendar-blank-multiple</v-icon></span>
           </button>
         </v-bottom-navigation>
 
@@ -47,11 +48,14 @@
     width: 40%;
     height: 40%;
     border-radius: 5%;
+    background-color: #282828 !important; 
+}
+.v-bottom-navigation.v-item-group.theme--light{
+  background-color: #282828 !important;
 }
 button {
   position: relative;
   margin-left: 30px;
   margin-right: 30px;
 }
-
 </style>

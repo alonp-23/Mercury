@@ -13,8 +13,26 @@
 					</div>
 					<div class="intelBox">
 						<div class="kpis">
-							<div class="kpiBox">חשודים: {{ pplOfIntrest.filter(item => !item.wanted).length }}</div>
-							<div class="kpiBox">מבוקשים: {{pplOfIntrest.filter(item => item.wanted).length}}</div>
+							<div class="kpiBox">
+                <v-col>
+                  <v-row align="center" justify="center"
+                    ><h1>
+                      {{ pplOfIntrest.filter(item => !item.wanted).length }}
+                    </h1></v-row
+                  >
+                  <v-row justify="center">חשודים </v-row>
+                </v-col>
+              </div>
+              <div class="kpiBox">
+                <v-col>
+                  <v-row align="center" justify="center"
+                    ><h1>
+                      {{ pplOfIntrest.filter(item => item.wanted).length }}
+                    </h1></v-row
+                  >
+                  <v-row justify="center">מבוקשים </v-row>
+                </v-col>
+              </div>
 						</div>
 						<inte-list :pplOfIntrest="this.pplOfIntrest" class="intelList"></inte-list>
 					</div>
@@ -26,7 +44,7 @@
 								<div class="graphTitle" for="graph">טבלת אירועים חריגים</div>
 							</div>
 							<div class="inputBox">
-								<input class="inputField" placeholder="שנה כמות פשע צפוייה"/>
+								<input class="inputField" v-model="wantedCrime" placeholder="שנה כמות פשע צפוייה"/>
 								<!-- <change-input @changedValue="console.log('1234124')" class="graphInput"></change-input> -->
 							</div>
 						</div>

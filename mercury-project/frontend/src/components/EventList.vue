@@ -1,5 +1,5 @@
 <template>
-  <v-card class="events-side-bar wrapper" width=23vw height=800px>
+  <v-card class="events-side-bar wrapper" width=23vw height=80vh>
 
     <v-toolbar height="100%" dark dense>
       <v-container>
@@ -193,7 +193,6 @@
 </template>
     
 <script>
-// import eventsData from '../data/events.json'
 import axios from 'axios'
 
 export default {
@@ -234,8 +233,8 @@ export default {
     this.events = await this.fetchEvents();
     this.eventTypes = (await this.fetchEventTypes()).map((eventType) => eventType.event_name)
     this.eventTypes.unshift('כל האירועים')
-    this.filteredEvents = this.events.filter((event) => event.event_time !== null)
-    this.filteredEvents = this.filteredEvents.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+    this.events = this.events.filter((event) => event.event_time !== null)
+    this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
   },
   computed: {
     dateToDisplay() {
@@ -246,7 +245,7 @@ export default {
       let i
       let j
       let page
-      const chunk = 6;
+      const chunk = 7;
 
       for (i=0, j=this.filteredEvents.length; i<j; i+=chunk) {
           page = this.filteredEvents.slice(i,i+chunk);
@@ -294,7 +293,11 @@ export default {
         this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
       } else {
         switch(filterBy) {
-          case 'type': this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem && (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+          case 'type': {
+            console.log(this.filterDialog.selectedItem)
+            this.filteredEvents = this.events.filter((event) => event.event_type === this.filterDialog.selectedItem && 
+            (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+          }
           break;
           case 'region': this.filteredEvents = this.events.filter((event) => event.region === this.filterDialog.selectedItem &&
            (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
@@ -389,7 +392,7 @@ div.v-select__selection.v-select__selection--comma {
     height: 8vh;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.87);
-    bottom: 10vh;
+    bottom: 3vh;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     /* Do not set top / left! */

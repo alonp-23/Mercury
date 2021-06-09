@@ -117,7 +117,14 @@
           maintainAspectRatio: false
         }
       }
-    },
+		},
+		watch: {
+			tooHighValue() {
+				console.log("entered!!");
+      	this.chartData._chart.destroy()
+      	this.renderChart(this.data, this.options);
+			}
+		},
     async mounted() {
 			this.addPlugin(chartjsPluginAnnotation);
 			let wantedDate = '2021-06-09';
