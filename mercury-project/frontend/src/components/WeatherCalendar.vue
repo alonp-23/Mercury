@@ -4,13 +4,13 @@
         max-width="800">
         <Calendar v-if="!reveal"></Calendar>
         <v-card-actions>
-          <v-btn
+          <button
             text
             color="primary"
             @click="reveal = true"
           >
             Weather
-          </v-btn>
+          </button>
         </v-card-actions>
 
         <v-expand-transition>
@@ -21,13 +21,14 @@
       >
         <Weather></Weather>
         <v-card-actions class="pt-0">
-          <v-btn
+          <button
             text
             color="primary"
             @click="reveal = false"
           >
-            Calendar
-          </v-btn>
+            <v-icon>mdi-calendar-month</v-icon>
+
+          </button>
         </v-card-actions>
       </v-card>
     </v-expand-transition>
@@ -59,7 +60,7 @@
     height: 40%;
     border-radius: 5%;
 }
-v-bth {
+button {
   position: relative;
 }
 </style>
