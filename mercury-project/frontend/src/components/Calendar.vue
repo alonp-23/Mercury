@@ -85,7 +85,7 @@ import holidaysJO from '../assets/holidaysJO.json'
 
 <style scoped>
 .calendar {
-  width: 470px;
-  height: 380px; 
+  width: 100%;
+  height: 300%; 
 }
 </style>

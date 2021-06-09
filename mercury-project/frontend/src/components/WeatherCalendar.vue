@@ -1,7 +1,7 @@
 <template>
     <v-card
         class="card"
-        max-width="800">
+        max-width="500">
         
         <v-bottom-navigation
           :value="value"
@@ -9,23 +9,17 @@
           <button
             id = "weatherButton" 
             @click="reveal = true">
-            <span><v-icon>mdi-weather-partly-snowy-rainy</v-icon></span>
+            <span>Weather <v-icon>mdi-weather-partly-snowy-rainy</v-icon></span>
           </button>
           <button
             id = "calendarButton" 
             @click="reveal = false">
-            <span><v-icon>mdi-calendar-blank-multiple</v-icon></span>
+            <span>Calendar <v-icon>mdi-calendar-blank-multiple</v-icon></span>
           </button>
         </v-bottom-navigation>
 
         <Calendar v-if="!reveal"></Calendar>
-
-        <v-expand-transition>
-      <v-card
-        class="card">
         <Weather v-if="reveal"></Weather>
-      </v-card>
-    </v-expand-transition>
     </v-card>
   
 </template>
@@ -49,12 +43,14 @@
 <style scoped>
 .card {
     position: fixed;
-    bottom: 10px;
+    bottom: 20px;
     width: 40%;
     height: 40%;
     border-radius: 5%;
 }
 button {
   position: relative;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
 <div>
     <div class="card" v-if="!reveal">
-
         <h2>New York</h2>
         <table>
             <tr>
@@ -61,14 +60,14 @@
             <tr>
                 <td v-for="items in weatherDataBottom" :key=items>{{items.temperature}}°</td>
             </tr>  
-
         </table>
+
         <button
-                text
-                color="primary"
-                @click="reveal = true"
-                >
-                next week
+            text
+            color="primary"
+            @click="reveal = true"
+            >
+            next week
         </button>
     </div>
 
@@ -76,7 +75,6 @@
         <secondWeather></secondWeather>
         <button
             text
-            v-if="reveal"
             color="primary"
             @click="reveal = false"
             >
@@ -120,14 +118,14 @@ body {
 
 button {
   position: relative;
+  margin-left: 80%;
 }
 
 .card {
     position: fixed;
     bottom: 10px;
-    width: 25%;
-    height: 40%;
-    border-radius: 5%;
+    width:  26.3%;
+    height: 35%;
     background-color: #141d33;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
@@ -149,6 +147,8 @@ h1 {
 
 h2 {
     margin-left: 5%;
+    margin-top: 3%;
+    margin-bottom: 2%;
     font-weight: 300;
     font-size: 2.25em;
 }
