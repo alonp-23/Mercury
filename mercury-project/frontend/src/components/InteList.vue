@@ -113,7 +113,7 @@ export default {
   }  
 };
 </script>
-<style>
+<style scoped>
     div{
         font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
         color:white;    
