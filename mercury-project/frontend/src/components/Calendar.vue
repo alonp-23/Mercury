@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import holidaysIL from '../assets/holidaysIL.json'
   export default {
     data: () => ({
       focus: '',
@@ -66,7 +67,7 @@
       selectedOpen: false,
       events: [],
       colors: ['#5f0909','#1e5f09', '#4e0c52'],
-      names: ["Eid al-Fitr holiday", 'June Solstice', 'Eid al-Adha'],
+      ilHolidays:[{}],
     }),
     mounted () {
       this.$refs.calendar.checkChange()
@@ -88,31 +89,38 @@
       next () {
         this.$refs.calendar.next()
       },
-      updateRange ({ start, end }) {
+      convertTZ(date, tzString) {
+          return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+      },
+      updateRange () {
+        this.ilHolidays = holidaysIL.map(holiday => {
+            var date = new Date(holiday.date);
+            date.setDate(date.getDate() + 1);
+            date.setFullYear(2021);
+            holiday.date = date.toISOString().substr(0, 10)
+            return holiday;
+       })
+
         const events = []
 
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = 30
-
-        for (let i = 0; i < eventCount; i++) {
+        
+        for (let i = 0; i < this.ilHolidays.length; i++) {
           const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
+          var holiday = this.ilHolidays[i]
+          //var date = new Date(holiday.date)
+          //date = date.toUTCString()+"+0300 (Israel Daylight Time)"
+          //date = date.substr(0, 3) + date.substr(7, 5) + date.substr(5, 2) + date.substr(11)
           events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
+            name: holiday.name,
+            start: holiday.date,
+            end: holiday.date,
             color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: allDay,
+            timed: !allDay,
           })
         }
-
-        this.events = events
+//Sun Jun 20 2021 05:45:00 GMT+0300 (Israel Daylight Time)
+// Thu, 07 Jan 2021 00:00:00 GMT+0300 (Israel Daylight Time)
+        this.events = events;
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
