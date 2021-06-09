@@ -44,7 +44,7 @@
 import BarChart from '@/components/BarChart';
 import EventList from "@/components/EventList.vue";
 import InteList from "@/components/InteList.vue";
-import WeatherBox from "@/components/WeatherCube.vue";
+import WeatherBox from "@/components/WeatherCube1.vue";
 import PieChart from "@/components/pieChartCard.vue";
 import axios from "axios";
 

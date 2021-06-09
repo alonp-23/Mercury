@@ -77,8 +77,8 @@ export default {
 		}
     },
     created(){
-        this.weatherDataTop = weather.slice(0,7);
-        this.weatherDataBottom = weather.slice(8,15);
+        this.weatherDataTop = weather.slice(7,11);
+        this.weatherDataBottom = weather.slice(11,14);
 
     },
 }
@@ -95,10 +95,10 @@ body {
 .card {
     position: fixed;
     bottom: 10px;
-    width: 35%;
+    width: 25%;
     height: 40%;
     border-radius: 5%;
-    background-color: rgba(124, 127, 141, 0.7);
+    background-color: #141d33;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
 
