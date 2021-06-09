@@ -26,7 +26,7 @@ router.post('/holidaysJO', function(req, res, next) {
   writeToJson('holidaysJO.json', req.body);
 });
 
-writeToJson(filename, content){
+function writeToJson(filename, content){
    // convert JSON object to string
   const data = JSON.stringify(content);
 

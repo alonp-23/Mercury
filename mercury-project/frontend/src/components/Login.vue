@@ -2,23 +2,23 @@
   <div class="login-wrap">
 	<div class="login-html">
          <div class = "topLogo"></div>
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">התחברות</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
 		<div class="login-form">
 			<div class="sign-in-htm">
 				<div class="group">
-					<label for="user" class="label">Username</label>
+					<label for="user" class="label">שם משתמש</label>
 					<input id="user" type="text" v-model="username" class="input">
 				</div>
 				<div class="group">
-					<label for="pass" class="label">Password</label>
+					<label for="pass" class="label">סיסמה</label>
 					<input id="pass" type="password" v-model="password" class="input" data-type="password">
 				</div>
 				<div v-if="this.showWrongCredentials == true">
 					<label for="wrong" class="wrong-login">Your Login info was wrong</label>
 				</div>
 				<div class="group">
-					<input type="submit" @click="requestLogin" class="button" value="Sign In">
+					<input type="submit" @click="requestLogin" class="button" value="כניסה">
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
@@ -129,6 +129,9 @@ a{color:inherit;text-decoration:none}
 	margin-right:15px;
 	padding-bottom:5px;
 	margin:0 15px 10px 0;
+	width: 498px;
+	direction: rtl;
+	position: relative;
 	display:inline-block;
 	border-bottom:2px solid transparent;
 }
@@ -166,13 +169,16 @@ a{color:inherit;text-decoration:none}
 }
 .login-form .group .label{
 	color:#aaa;
-	font-size:12px;
+	direction: rtl;
+	width: 498px;
+	font-size:18px;
 }
 .login-form .group .button{
-	background:#1161ee;
+  background:#1161ee;
   text-align: center;
+  font-size: 21px;
   text-style: bold;
-  width: 30%;
+  width: 31%;
 }
 .login-form .group label .icon{
 	width:15px;
@@ -227,9 +233,9 @@ a{color:inherit;text-decoration:none}
 }
 
 .topLogo{
-    width: 30%;
-    height: 10%;
-    margin-bottom: 5%;
+    width: 169%;
+    height: 12.5%;
+    margin-bottom: 2%;
     position: relative;
 	position: center;
     background:url(../assets/Logo.png) no-repeat center;
@@ -237,7 +243,7 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
     width: 100%;
-    height: 100%;
+    height: 95%;
 	text-align:center;
     background:url(../assets/NYPDShieldLarge.png) no-repeat center;
     background-size: contain;

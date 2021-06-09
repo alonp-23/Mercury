@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card class="mx-auto pieCard" :max-width=width elevation="2" >
+        <v-card class="mx-auto pieCard" style="border-radius: 30px" :max-width=width elevation="2" >
             <v-card-title class="white--text" id="title">
                 סטטוס
             <v-spacer></v-spacer>      
@@ -51,6 +51,9 @@ export default {
     #title{
       background-color: #282828;
       color:rgba(124, 127, 141, 1);
+      margin-right: 0%;
+      border-top-left-radius: 25px;
+		  border-top-right-radius: 25px;
     }
     div {
         font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
@@ -66,5 +69,6 @@ export default {
     }
 
     .pieCard {
+      border-radius: 25px;
     }
 </style>
