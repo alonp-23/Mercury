@@ -193,7 +193,7 @@
 </template>
     
 <script>
-import eventsData from '../data/events.json'
+// import eventsData from '../data/events.json'
 import axios from 'axios'
 
 export default {
