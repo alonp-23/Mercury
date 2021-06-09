@@ -1,6 +1,7 @@
 <script>
 	import { Bar, Line, mixins } from 'vue-chartjs'
 	import chartjsPluginAnnotation from "chartjs-plugin-annotation";
+	import axios from "axios";
 
 	const { reactiveProp } = mixins;
 
@@ -8,13 +9,19 @@
 	var borderColor = 'rgba(29, 43, 75, 0.8)';
 	var goodAmount = 'rgba(29, 43, 75, 0.8)';
 	var tooHighColor = 'rgba(74, 23, 23, 0.8)';
-	var tooHighValue = 7;
+	var tooHighValue = 1;
   export default {
 		extends: Bar, Line,
+		props: {
+			 tooHighValue: {
+				 type: Number,
+				 default: 1
+			 }
+		},
     data() {
       return {
         chartData: {
-          labels: ["1/6", "2/6", "3/6", "4/6", "5/6", "6/6", "7/6"
+          labels: ["3/6", "4/6", "5/6", "6/6", "7/6", "8/6", "9/6"
           ],
           datasets: [{
             label: 'Bar Chart',
@@ -35,7 +42,7 @@
           {
             type: 'line',
             label: 'Line Dataset',
-            data: [7,7,7,7,7,7,7,7],
+            data: new Array(8).fill(tooHighValue),
 						borderDash: [15],
 						//fill: false,
 						backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -57,12 +64,14 @@
               gridLines: {
 								display: true,
 								color: 'rgba(255,255,255,1)',
-								zeroLineColor: 'rgba(255,255,255,1)'
+								zeroLineColor: 'rgba(255,255,255,1)',
+								lineWidth: 0.5
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Crime Rate',
-								fontColor: 'rgba(255,255,255,1)'
+								labelString: 'אירועי פשיעה',
+								fontColor: 'rgba(255,255,255,1)',
+								fontSize: 15
 
 							}
             }],
@@ -77,8 +86,9 @@
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Date',
-								fontColor: 'rgba(255,255,255,1)'
+								labelString: 'תאריך',
+								fontColor: 'rgba(255,255,255,1)',
+								fontSize: 15
 
 							},
             }]
@@ -108,8 +118,20 @@
         }
       }
     },
-    mounted() {
+    async mounted() {
 			this.addPlugin(chartjsPluginAnnotation);
+			let wantedDate = '2021-06-09';
+			const crimesPerDayArr = await axios
+				.get(`http://localhost:3000/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
+				.then(response => {
+				return response.data;
+				})
+				.catch(e => {
+				console.log("error getting irregular events");
+				});
+			console.log(crimesPerDayArr);
+			this.chartData.datasets[0].data = crimesPerDayArr;
+			console.log(this.chartData.datasets[0].data);
 			for (let index = 0; index < this.chartData.datasets[0].data.length; index ++) {
 					if (this.chartData.datasets[0].data[index] > tooHighValue) {
 						this.chartData.datasets[0].backgroundColor[index] = tooHighColor;

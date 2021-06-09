@@ -7,7 +7,7 @@ const allEvents = async () => {
         return response.data;
     })
     .catch(e => {
-        alert(e);
+        console.log(e);
 		});
 };
 
@@ -18,20 +18,32 @@ const filterLastWeek = async (date) => {
         return response.data;
     })
     .catch(e => {
-        alert(e);
+        console.log(e);
     });
 
     let wantedDate = new Date(date);
 
-    let irregularEventsWeekAmount = irregularEvents.filter(event => {
-        let date = new Date(event.report_time);
-        let dayDiff = Math.abs(wantedDate - date);
-        let days = dayDiff / (1000 * 3600 * 24);
-
-        return days <= 7;
+    let irregularEventsWeek = irregularEvents.filter(event => {
+        let date = new Date(event.event_time);
+        
+        return difBetweenDate(wantedDate, date) < 7;
     });
 
-    return irregularEventsWeekAmount;
+    let irregularEventsWeekAmount = new Array(7).fill(0);
+    irregularEventsWeek.forEach(event => {
+        irregularEventsWeekAmount[6-difBetweenDate(wantedDate, new Date(event.event_time))] += 1;
+    });
+
+    return irregularEventsWeekAmount
+};
+
+const difBetweenDate = (date, beforeDate) => {
+    let dayDiff = Math.abs(date - beforeDate);
+    return dayDiff / (1000 * 3600 * 24);
+}
+
+const countEventsPerDate = (eventsThisDay) => {
+
 };
 
 module.exports = {
