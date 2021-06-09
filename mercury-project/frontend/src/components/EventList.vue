@@ -200,7 +200,7 @@ export default {
   name: 'EventList',
   data() {
       return {
-          eventTypes: ['כל האירועים','גניבה','רצח','דקירה', 'ירי'],
+          eventTypes: [],
           eventRegions: ['כל האירועים','ברונקס','מנהטן','קווינס','ברוקלין','סטייטן איילנד'],
           events: [],
           filteredEvents: [],
@@ -231,9 +231,11 @@ export default {
     this.filterDialog.selectedDate = this.getCurrentISOString().replace(/T.*/,'');
   },
   async created() {
-    this.events = await this.fetchEvents()
-    // this.eventTypes = await this.fetchEventTypes()
-    this.filteredEvents = this.events.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
+    this.events = await this.fetchEvents();
+    this.eventTypes = (await this.fetchEventTypes()).map((eventType) => eventType.event_name)
+    this.eventTypes.unshift('כל האירועים')
+    this.filteredEvents = this.events.filter((event) => event.event_time !== null)
+    this.filteredEvents = this.filteredEvents.filter((event) => (event.event_time).replace(/T.*/,'') === this.filterDialog.selectedDate)
   },
   computed: {
     dateToDisplay() {
@@ -244,7 +246,7 @@ export default {
       let i
       let j
       let page
-      const chunk = 8;
+      const chunk = 6;
 
       for (i=0, j=this.filteredEvents.length; i<j; i+=chunk) {
           page = this.filteredEvents.slice(i,i+chunk);
@@ -334,6 +336,10 @@ v-toolbar {
   align-content: center;
 }
 
+div.v-select__selection.v-select__selection--comma {
+  color: black;
+}
+
 .event-info-card-title {
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.87);
@@ -357,7 +363,7 @@ v-toolbar {
 }
 
 .light-color {
-    background-color :#1d2b4b;
+    background-color: #1d2b4b;
 }
 
 .next-page-btn {
@@ -387,6 +393,10 @@ v-toolbar {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     /* Do not set top / left! */
+}
+
+.div {
+  color: black !important;
 }
 
 </style>

@@ -71,7 +71,6 @@ export default {
 			.catch(e => {
 				alert(e);
 			});
-			console.log(this.pplOfIntrest); 
 	}
 }
 </script>
