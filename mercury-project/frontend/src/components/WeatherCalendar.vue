@@ -14,7 +14,7 @@
           <button
             id = "calendarButton" 
             @click="reveal = false">
-            <span></span>
+            <span><v-icon>mdi-calendar-blank-multiple</v-icon></span>
           </button>
         </v-bottom-navigation>
 
