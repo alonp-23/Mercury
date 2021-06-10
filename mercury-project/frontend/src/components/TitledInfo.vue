@@ -5,7 +5,7 @@
     dark
     class="mx-auto rounded-card"
     width="200"
-    height="200"
+    height="270"
     outlined>
         <v-container>
             <v-row>

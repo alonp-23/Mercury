@@ -1,6 +1,6 @@
 <template>
   <div class="driverLicense">
-    <v-card class="mx-auto rounded-card v-card" color="#141d33" max-height="900">
+    <v-card class="mx-auto rounded-card v-card" color="#141d33" max-height="900" id="card">
       <v-card-title class="justify-center">
         <h1 class="justify-center">
           צווים ודוחות
@@ -31,7 +31,7 @@
             </h3>
           </v-col>
         </v-row>
-        <v-row v-if="(reportsList.length)">
+        <v-row v-if="(!reportsList.length)">
           <h4>
             אין צווים תקפים
           </h4>
@@ -89,5 +89,9 @@ export default {
 .colStyleDate {
   margin-left: 4vh;
   margin-bottom: 10vh;
+}
+#card{
+  color:white;
+  background-color: #141d33
 }
 </style>
