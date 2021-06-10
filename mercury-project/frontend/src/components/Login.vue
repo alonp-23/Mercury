@@ -14,8 +14,8 @@
 					<label for="pass" class="label">סיסמה</label>
 					<input id="pass" type="password" v-model="password" class="input" data-type="password">
 				</div>
-				<div v-if="this.showWrongCredentials == true">
-					<label for="wrong" class="wrong-login">Your Login info was wrong</label>
+				<div v-if="this.showWrongCredentials == true" style="direction: rtl">
+					<label for="wrong" class="wrong-login">התבלבלת כפרה, זאת לא הסיסמה הנכונה...</label>
 				</div>
 				<div class="group">
 					<input type="submit" @click="requestLogin" class="button" value="כניסה">
@@ -173,6 +173,9 @@ a{color:inherit;text-decoration:none}
 	width: 498px;
 	font-size:18px;
 }
+.login-form .group .input{
+	direction: rtl;
+}
 .login-form .group .button{
   background:#1161ee;
   text-align: center;
@@ -243,7 +246,7 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
     width: 100%;
-    height: 95%;
+    height: 92.5%;
 	text-align:center;
     background:url(../assets/NYPDShieldLarge.png) no-repeat center;
     background-size: contain;
