@@ -2,7 +2,7 @@
   <div class="driverLicense">
     <template>
   <v-card
-    color="#2A2B38"
+    color="#141d33"
     style="color:white;"
     class="mx-auto rounded-card" 
     width="270"
@@ -13,12 +13,12 @@
       </h2>
       </v-card-title>
       <v-row>
-      <h4 class="status" >
+      <h4 class="status mr-5" >
         סטטוס {{license.status}}     
       </h4>
       </v-row>
-      <v-row>
-      <b class="date text-center" >
+      <v-row class="mr-1">
+      <b class="date text-center mr-7" >
       <br>
       תאריך
       </b>
@@ -100,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+div{
+  font-family: "Heebo", sans-serif !important;
+}
 .status{
     margin-top: 1vh;
     margin-left: 23vh ;

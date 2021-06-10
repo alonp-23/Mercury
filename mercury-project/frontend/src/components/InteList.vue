@@ -38,8 +38,8 @@
           </v-list-item>
         </template>
       </v-virtual-scroll>
-      <v-dialog v-model="dialog">
-              <v-card >
+      <v-dialog v-model="dialog" >
+              <v-card id="dialogCard">
                 <v-card-title class="headline lighten-2" id="dialog_card_title"> </v-card-title>
 
                 <profilePage v-bind:personId="dialogPerson.personId.toString()" />
@@ -47,7 +47,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false">
+                  <v-btn color="white" text @click="dialog = false" id="closeBtn">
                     סגור
                   </v-btn>
                 </v-card-actions>
@@ -65,16 +65,16 @@ export default {
     ProfilePage
   },
   props: {
-      width: {
-          default: 500
-      },
-      height: {
-          default: 615
-      },
-      pplOfIntrest: {
-        type: Array,
-        required: true
-      }
+    width: {
+      default: 500
+    },
+    height: {
+      default: 615
+    },
+    pplOfIntrest: {
+      type: Array,
+      required: true
+    }
   },
   data: () => {
     return {
@@ -100,45 +100,46 @@ export default {
     openDialog(person) {
       this.dialog = true;
       this.dialogPerson = person;
-      console.log(this.dialogPerson.person.firstName, this.dialogPerson.person.lastName);
     }
   }
 };
 </script>
-
-
 <style scoped>
-    div{
-        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-        color:white;    
-    }
-    .intelTitle{
-      background: #282828; 
-    }
-    #list_card{
-        background-color: rgba(124, 127, 141, 0.7);
-        border-radius: 25px;
-    }
-    #list_item{
-        background-color: #141d33;
-    }
-    #item_content{
-        color:white;
-    }
-    #scroll{
-        margin: 6px;
-        padding-bottom: 200px;
-
-    }
-    #title{
-      margin-right: 5%;
-      background: #282828;
-    }
-
-    #dialog_card_title {
-      background-color: #141d33;
-    }
-    .titleBox {
-      background-color: #282828;
-    }
+div {
+  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+  color: white;
+}
+.intelTitle {
+  background: #282828;
+}
+#list_card {
+  background-color: rgba(124, 127, 141, 0.7);
+  border-radius: 25px;
+}
+#list_item {
+  background-color: #141d33;
+}
+#item_content {
+  color: white;
+}
+#scroll {
+  margin: 6px;
+}
+#title {
+  margin-right: 5%;
+  background: #282828;
+}
+#dialog_card_title {
+  background-color: #141d33;
+}
+#dialogCard{
+  background-color: rgb(124, 127, 141, 0.8) 
+}
+#closeBtn{
+  background-color: #141d33;
+  font-size: large;
+}
+.titleBox {
+  background: #282828;
+}
 </style>
