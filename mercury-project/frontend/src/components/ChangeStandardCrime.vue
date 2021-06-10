@@ -29,4 +29,12 @@ export default {
 	.inputLine{
 		padding-top: 0;
 	}
+
+	.inputLine:active{
+	outline: none;
+}
+
+.inputLine:focus{
+	outline: none;
+}
 </style>
