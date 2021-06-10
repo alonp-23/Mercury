@@ -13,26 +13,31 @@
 					</div>
 					<div class="intelBox">
 						<div class="kpis">
-							<div class="kpiBox">
-                <v-col>
-                  <v-row align="center" justify="center"
-                    ><h1>
-                      {{ pplOfIntrest.filter(item => !item.wanted).length }}
-                    </h1></v-row
-                  >
-                  <v-row justify="center">חשודים </v-row>
-                </v-col>
-              </div>
-              <div class="kpiBox">
-                <v-col>
-                  <v-row align="center" justify="center"
-                    ><h1>
-                      {{ pplOfIntrest.filter(item => item.wanted).length }}
-                    </h1></v-row
-                  >
-                  <v-row justify="center">מבוקשים </v-row>
-                </v-col>
-              </div>
+							<div class="kpiBoxCase">
+								<div class="kpiBox wantedKpi">
+									<v-col>
+										<v-row align="center" justify="center"
+											><h1>
+											{{ pplOfIntrest.filter(item => !item.wanted).length }}
+											</h1></v-row
+										>
+										<v-row class="wantedTitle" justify="center">חשודים </v-row>
+									</v-col>
+								</div>
+							</div>
+							
+							<div class="kpiBoxCase">
+								<div class="kpiBox suspectedKpi">
+									<v-col>
+										<v-row align="center" justify="center"
+											><h1>
+											{{ pplOfIntrest.filter(item => item.wanted).length }}
+											</h1></v-row
+										>
+										<v-row class="suspectedTitle" justify="center">מבוקשים </v-row>
+									</v-col>
+								</div>
+							</div>
 						</div>
 						<inte-list :pplOfIntrest="this.pplOfIntrest" class="intelList"></inte-list>
 					</div>
@@ -197,7 +202,6 @@ export default {
 
 	.eventBox {
 		/* height: 100vh; */
-		margin-left: 0%;
 	}
 
 	.eventList {
@@ -227,15 +231,41 @@ export default {
 	}
 
 	.kpiBox {
-		background: rgba(124, 127, 141, 0.7);
+		/* background-color: rgba(124, 127, 141, 0.7); */
 		width: 160px;
 		height: 70px;
 		border-radius: 15px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: white;
+		color: black;
+	}
 
+	.wantedKpi {
+		background:url(../assets/wantedGraph.png);
+		opacity: 0.5;
+		background-size: 120%;
+		margin-bottom: -2%;
+	}
+
+	.wantedTitle {
+		opacity: 1 !important; 
+	}
+
+	.suspectedKpi {
+		background:url(../assets/suspectGraph.png);
+		opacity: 0.5;
+		background-size: 120%;
+		margin-bottom: -2%;
+	}
+
+	.suspectedTitle {
+		opacity: 1 !important; 
+	}
+
+	.kpiBoxCase {
+		background-color: rgba(124, 127, 141, 0.7);
+		border-radius: 15px;
 	}
 
 	.intelList {
