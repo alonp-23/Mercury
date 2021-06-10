@@ -1,10 +1,12 @@
 <template>
   <div>
     <v-card class="mx-auto" :max-width="width" id="list_card">
-      <v-card-title class="white--text" id="title">
+      <div class="titleBox">
+        <v-toolbar-title class="white--text" id="title">
         ציר מודיעיני
         <v-spacer></v-spacer>
-      </v-card-title>
+      </v-toolbar-title>
+      </div>
       <v-divider></v-divider>
       <v-chip class="mr-2 ma-3" @click="show_wanted = false" label>
         <v-icon left v-if="!show_wanted">mdi-checkbox-marked-circle</v-icon>
@@ -14,7 +16,7 @@
         <v-icon left v-if="show_wanted">mdi-checkbox-marked-circle</v-icon>
         מבוקשים
       </v-chip>
-      <v-virtual-scroll :items="pplList" :item-height="50" :height="height" id="scroll">
+      <v-virtual-scroll :items="pplList" :item-height="70" :height="height" id="scroll">
         <template v-slot:default="{ item }">
           <v-list-item id="list_item" class="rounded-xl ma4">
             <v-list-item-avatar>
@@ -67,7 +69,7 @@ export default {
       default: 500
     },
     height: {
-      default: 500
+      default: 615
     },
     pplOfIntrest: {
       type: Array,
@@ -112,7 +114,7 @@ div {
 }
 #list_card {
   background-color: rgba(124, 127, 141, 0.7);
-  border-radius: 5%;
+  border-radius: 25px;
 }
 #list_item {
   background-color: #141d33;
@@ -124,7 +126,8 @@ div {
   margin: 6px;
 }
 #title {
-  background-color: #141d33;
+  margin-right: 5%;
+  background: #282828;
 }
 #dialog_card_title {
   background-color: #141d33;
@@ -135,5 +138,8 @@ div {
 #closeBtn{
   background-color: #141d33;
   font-size: large;
+}
+.titleBox {
+  background: #282828;
 }
 </style>
