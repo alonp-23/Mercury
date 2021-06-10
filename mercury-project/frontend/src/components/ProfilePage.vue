@@ -1,30 +1,45 @@
 <template>
   <v-container>
-    <v-row>
-      <person-details
-        v-bind:personId="this.personId"
-        @change-wanted-state="changeWantedState"
-        bgColor="#141d33"
-        :wantedButtonStatus="wantedButton"
-      ></person-details>
-    </v-row>
-    <v-row class="mt-3">
-      <v-col cols="2"> </v-col>
-      <v-col cols="2">
-        <titled-info
+    <v-row justify="center">
+      <v-col cols="8">
+        <person-details
+          v-bind:personId="this.personId"
+          @change-wanted-state="changeWantedState"
           bgColor="#141d33"
-          amountColor="#FFAC04"
-          :amount="posts"
-          title="מספר פוסטים בשבוע אחרון"
-        ></titled-info>
+          :wantedButtonStatus="wantedButton"
+        ></person-details>
       </v-col>
-      <v-col cols="2">
-        <driver-license v-bind:personId="this.personId"></driver-license>
-      </v-col>
+    </v-row>
+    <v-row class="mt-4" justify="center">
       <v-col cols="4">
-        <reports v-bind:personId="this.personId"></reports>
+        <v-row justify="center">
+          <v-col >
+            <titled-info
+              bgColor="#141d33"
+              amountColor="#FFAC04"
+              :amount="posts"
+              title="מספר פוסטים בשבוע אחרון"
+            ></titled-info>
+          </v-col>
+          <v-col class="pr-0 pl-20">
+            <driver-license v-bind:personId="this.personId"></driver-license>
+          </v-col>
+        </v-row>
+        <v-row class="mt-4" justify="center"> 
+          <v-col cols="12">
+            <v-card width="500px" class="mr-9">
+              <reports v-bind:personId="this.personId"></reports>
+            </v-card>
+          
+          </v-col>
+        </v-row>
       </v-col>
-      <v-col cols="2"> </v-col>
+
+      <v-col cols="4">
+        <v-card max-width="500" class="mt-2">
+          <heat-map :personId="this.personId" />
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -71,5 +86,8 @@ export default {
 <style scoped>
 .row {
   padding: 10px;
+}
+#heatMap{
+  background-color: white
 }
 </style>
