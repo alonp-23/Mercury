@@ -124,7 +124,7 @@
     async mounted() {
 			this.addPlugin(chartjsPluginAnnotation);
 			let currentTime = new Date();
-			let wantedDate = `${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()}`;
+			let wantedDate = '2021-06-09'//`${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()}`;
 			console.log(wantedDate);
 			crimesPerDayArr = await axios
 				.get(`http://backend-tmzde3.apps.openforce.openforce.biz/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
