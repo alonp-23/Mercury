@@ -123,9 +123,9 @@ button {
 
 .card {
     position: relative;
-    bottom: 10px;
+    bottom: 12px;
     width:  100%;
-    height: 35%;
+    height: 340px;
     background-color: rgba(124, 127, 141);
     box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
@@ -148,6 +148,7 @@ h1 {
 h2 {
     margin-left: 5%;
     margin-top: 3%;
+    padding-top: 10px;
     margin-bottom: 2%;
     font-weight: 300;
     font-size: 2.25em;
@@ -163,7 +164,11 @@ h3 {
 }
 
 tr{
-    color: #FFF
+    color: #FFF;
+}
+
+td{
+    color: #FFF;
 }
 
 button{
@@ -241,28 +246,6 @@ table {
     top: 10px;
     width: 100%;
     text-align: center;
-}
-
-
-tr:nth-child(2) td:nth-child(1),
-tr:nth-child(2) td:nth-child(2),
-tr:nth-child(2) td:nth-child(3),
-tr:nth-child(2) td:nth-child(4),
-tr:nth-child(2) td:nth-child(5) {
-    padding-bottom: 7px;
-}
-
-tr:nth-child(3) td:nth-child(1),
-tr:nth-child(3) td:nth-child(2),
-tr:nth-child(3) td:nth-child(3),
-tr:nth-child(3) td:nth-child(4),
-tr:nth-child(3) td:nth-child(5) {
-    padding-bottom: 7px;
-}
-
-tr:nth-child(2),
-tr:nth-child(3) {
-    font-size: .9em;
 }
 
 tr:nth-child(3) {
