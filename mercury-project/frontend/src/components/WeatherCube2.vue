@@ -98,7 +98,6 @@ body {
     width: 100%;
     height: 35%;
     background-color: rgba(124, 127, 141);
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, .2);
 }
 
 h1,
@@ -120,6 +119,7 @@ h2 {
     margin-left: 5%;
     margin-top: 3%;
     margin-bottom: 2%;
+    padding-top: 10px;
     font-weight: 300;
     font-size: 2.25em;
     color: #FFF
@@ -142,8 +142,13 @@ span {
 span span {
     margin-left: 0;
 }
+
 tr{
-    color: #FFF
+    color: #FFF;
+}
+
+td{
+    color: #FFF;
 }
 .dot {
     font-size: .9em;
@@ -208,29 +213,4 @@ table {
     text-align: center;
 }
 
-
-tr:nth-child(2) td:nth-child(1),
-tr:nth-child(2) td:nth-child(2),
-tr:nth-child(2) td:nth-child(3),
-tr:nth-child(2) td:nth-child(4),
-tr:nth-child(2) td:nth-child(5) {
-    padding-bottom: 7px;
-}
-
-tr:nth-child(3) td:nth-child(1),
-tr:nth-child(3) td:nth-child(2),
-tr:nth-child(3) td:nth-child(3),
-tr:nth-child(3) td:nth-child(4),
-tr:nth-child(3) td:nth-child(5) {
-    padding-bottom: 7px;
-}
-
-tr:nth-child(2),
-tr:nth-child(3) {
-    font-size: .9em;
-}
-
-tr:nth-child(3) {
-    color: #999;
-}
 </style>

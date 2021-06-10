@@ -52,6 +52,7 @@
 }
 .v-bottom-navigation.v-item-group.theme--light{
   background-color: #282828 !important;
+  
 }
 button {
   position: relative;

@@ -1,10 +1,8 @@
 <template>
-    <v-card>
         <calendar
             :attributes='attributes'
             class='calendar'
             />
-    </v-card>
 </template>
 
 <script>
@@ -88,7 +86,7 @@ import holidaysJO from '../assets/holidaysJO.json'
 <style scoped>
 .calendar {
   width: 100%;
-  height: 300%; 
-  background-color: rgba(124, 127, 141, 0.7)
+  height: 340px; 
+  background-color: rgba(124, 127, 141, 0.9);
 }
 </style>
