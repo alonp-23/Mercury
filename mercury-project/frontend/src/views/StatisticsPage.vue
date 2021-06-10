@@ -48,7 +48,7 @@
 								<!-- <change-input @changedValue="console.log('1234124')" class="graphInput"></change-input> -->
 							</div>
 						</div>
-						<bar-chart :tooHighValue="wantedCrime" id="graph" class="crimesGraph"></bar-chart>
+						<bar-chart :chart-data="chartData" :tooHighValue="Number(wantedCrime)" id="graph" class="crimesGraph"></bar-chart>
 					</div>
 					<div class="bottomLeft">
 						<div class="pieBox">
@@ -72,15 +72,63 @@ import InteList from "@/components/InteList.vue";
 import WeatherBox from "@/components/WeatherCalendar.vue";
 import PieChart from "@/components/pieChartCard.vue";
 import changeInput from "@/components/ChangeStandardCrime.vue";
+
 import axios from "axios";
+
+var backgroundColor = 'rgba(30, 139, 195, 0.5)';
+var borderColor = 'rgba(29, 43, 75, 0.8)';
+var goodAmount = 'rgba(29, 43, 75, 0.8)';
+var tooHighColor = 'rgba(74, 23, 23, 0.8)';
+var tooHighValue = 1;
 
 export default {
 	name: 'StatisticsPage',
 	data() {
 		return {
 			pplOfIntrest: [],
-			wantedCrime: undefined,
+			wantedCrime: 1,
+			tooHighValue: 1,
+			
 		};
+	},
+	computed: {
+		chartData() {
+		return {
+				labels: ["4/6", "5/6", "6/6", "7/6", "8/6", "9/6", "10/6"
+          ],
+          datasets: [{
+            label: 'Bar Chart',
+            borderWidth: 1,
+            backgroundColor: [
+              backgroundColor,
+              backgroundColor,
+              backgroundColor,
+              backgroundColor,
+              backgroundColor,
+              backgroundColor,
+              backgroundColor,
+            ],
+            pointBorderColor: '#2554FF',
+						data: [12, 19, 3, 5, 2, 3, 20],
+						order: 2,
+          },
+          {
+            type: 'line',
+            label: 'Line Dataset',
+            data: new Array(8).fill(this.wantedCrime || tooHighValue),
+						borderDash: [15],
+						//fill: false,
+						backgroundColor: 'rgba(0, 0, 0, 0)',
+						borderColor: 'rgba(0, 230, 64, 1)',
+						tension: 0.1,
+						pointBorderColor: 'rgba(0, 0, 0, 0)',
+						pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+						order: 1
+          }
+        ]
+			}
+		}
+	
 	},
   components: {
 	BarChart,
@@ -270,9 +318,21 @@ export default {
 		margin-left: 5%;
 	}
 
+	.inputField {
+		margin-bottom: 4%;
+	}
+
 	.inputField::placeholder {
 		margin-bottom: 3%;
 		color: white;
+	}
+
+	.inputField:active{
+		outline: none;
+	}
+
+	.inputField:focus{
+		outline: none;
 	}
 
 	.graphInput {

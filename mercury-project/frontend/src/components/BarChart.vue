@@ -10,8 +10,11 @@
 	var goodAmount = 'rgba(29, 43, 75, 0.8)';
 	var tooHighColor = 'rgba(74, 23, 23, 0.8)';
 	var tooHighValue = 1;
+	var crimesPerDayArr;
+
   export default {
 		extends: Bar, Line,
+		mixins: [reactiveProp],
 		props: {
 			 tooHighValue: {
 				 type: Number,
@@ -20,39 +23,39 @@
 		},
     data() {
       return {
-        chartData: {
-          labels: ["3/6", "4/6", "5/6", "6/6", "7/6", "8/6", "9/6"
-          ],
-          datasets: [{
-            label: 'Bar Chart',
-            borderWidth: 1,
-            backgroundColor: [
-              backgroundColor,
-              backgroundColor,
-              backgroundColor,
-              backgroundColor,
-              backgroundColor,
-              backgroundColor,
-              backgroundColor,
-            ],
-            pointBorderColor: '#2554FF',
-						data: [12, 19, 3, 5, 2, 3, 20],
-						order: 2,
-          },
-          {
-            type: 'line',
-            label: 'Line Dataset',
-            data: new Array(8).fill(tooHighValue),
-						borderDash: [15],
-						//fill: false,
-						backgroundColor: 'rgba(0, 0, 0, 0)',
-						borderColor: 'rgba(0, 230, 64, 1)',
-						tension: 0.1,
-						pointBorderColor: 'rgba(0, 0, 0, 0)',
-						pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-						order: 1
-          }
-        ]
+        chartData1: {
+        //   labels: ["3/6", "4/6", "5/6", "6/6", "7/6", "8/6", "9/6"
+        //   ],
+        //   datasets: [{
+        //     label: 'Bar Chart',
+        //     borderWidth: 1,
+        //     backgroundColor: [
+        //       backgroundColor,
+        //       backgroundColor,
+        //       backgroundColor,
+        //       backgroundColor,
+        //       backgroundColor,
+        //       backgroundColor,
+        //       backgroundColor,
+        //     ],
+        //     pointBorderColor: '#2554FF',
+				// 		data: [12, 19, 3, 5, 2, 3, 20],
+				// 		order: 2,
+        //   },
+        //   {
+        //     type: 'line',
+        //     label: 'Line Dataset',
+        //     data: new Array(8).fill(tooHighValue),
+				// 		borderDash: [15],
+				// 		//fill: false,
+				// 		backgroundColor: 'rgba(0, 0, 0, 0)',
+				// 		borderColor: 'rgba(0, 230, 64, 1)',
+				// 		tension: 0.1,
+				// 		pointBorderColor: 'rgba(0, 0, 0, 0)',
+				// 		pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+				// 		order: 1
+        //   }
+        // ]
         },
         options: {
           scales: {
@@ -118,17 +121,12 @@
         }
       }
 		},
-		watch: {
-			tooHighValue() {
-				console.log("entered!!");
-      	this.chartData._chart.destroy()
-      	this.renderChart(this.data, this.options);
-			}
-		},
     async mounted() {
 			this.addPlugin(chartjsPluginAnnotation);
-			let wantedDate = '2021-06-09';
-			const crimesPerDayArr = await axios
+			let currentTime = new Date();
+			let wantedDate = `${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()}`;
+			console.log(wantedDate);
+			crimesPerDayArr = await axios
 				.get(`http://backend-tmzde3.apps.openforce.openforce.biz/events/week/${wantedDate}`) //http://backend-tmzde3.apps.openforce.openforce.biz
 				.then(response => {
 				return response.data;
@@ -140,7 +138,7 @@
 			this.chartData.datasets[0].data = crimesPerDayArr;
 			console.log(this.chartData.datasets[0].data);
 			for (let index = 0; index < this.chartData.datasets[0].data.length; index ++) {
-					if (this.chartData.datasets[0].data[index] > tooHighValue) {
+					if (this.chartData.datasets[0].data[index] > this.tooHighValue) {
 						this.chartData.datasets[0].backgroundColor[index] = tooHighColor;
 					} else {
 						this.chartData.datasets[0].backgroundColor[index] = backgroundColor;
@@ -148,5 +146,21 @@
 				}
 			this.renderChart(this.chartData, this.options);
 		}, //TODO: function that requests the value of z-score, data, userchoice
+		watch: {
+			tooHighValue() {
+				console.log('watch');
+				this.chartData.datasets[0].data = crimesPerDayArr;
+				console.log(this.chartData.datasets[0].data);
+				for (let index = 0; index < this.chartData.datasets[0].data.length; index ++) {
+					if (this.chartData.datasets[0].data[index] > this.tooHighValue) {
+						this.chartData.datasets[0].backgroundColor[index] = tooHighColor;
+					} else {
+						this.chartData.datasets[0].backgroundColor[index] = backgroundColor;
+					};
+				}
+			this.renderChart(this.chartData, this.options);
+	
+			}
+		}
   }
 </script>
